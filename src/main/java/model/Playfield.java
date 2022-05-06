@@ -15,7 +15,6 @@ public class Playfield {
 
     /**
      * Konstruktor
-     * Gibt das Spielfeld aus
      */
     public Playfield() {
         feld = new int[reihen][spalten];
