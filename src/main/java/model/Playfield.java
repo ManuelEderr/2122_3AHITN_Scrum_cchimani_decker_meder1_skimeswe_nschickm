@@ -27,12 +27,9 @@ public class Playfield {
     }
 
 
-
-    /*
-    public void placeShip(Ship ship){
+    public void placeShip(Ship ship) {
 
     }
 
-     */
 
 }
