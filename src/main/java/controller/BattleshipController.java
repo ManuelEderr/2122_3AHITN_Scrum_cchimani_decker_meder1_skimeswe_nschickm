@@ -1,9 +1,9 @@
-package com.example._2022_3ahitn_scrum_cchimani_decker_meder1_skimeswe_nschickm;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class BattleshipController {
     @FXML
     private Label welcomeText;
 
