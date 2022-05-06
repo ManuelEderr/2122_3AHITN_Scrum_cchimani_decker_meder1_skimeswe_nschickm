@@ -9,10 +9,8 @@ public class PlayfieldController {
     @FXML
     private Button test1;
 
-
     @FXML
     private Label test;
-
 
     public void clcktest(ActionEvent event) {
         test.setText("Weee");
