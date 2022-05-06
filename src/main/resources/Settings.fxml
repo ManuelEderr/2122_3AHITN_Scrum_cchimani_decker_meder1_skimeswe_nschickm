@@ -5,8 +5,5 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsController">
-   <children>
-      <Button fx:id="asd" layoutX="124.0" layoutY="109.0" mnemonicParsing="false" onAction="#chimani" text="Button" />
-      <Label fx:id="id" layoutX="227.0" layoutY="192.0" text="Label" />
-   </children>
+
 </AnchorPane>
