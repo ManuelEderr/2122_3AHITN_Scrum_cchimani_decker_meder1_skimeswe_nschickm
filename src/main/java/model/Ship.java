@@ -87,7 +87,7 @@ public class Ship {
     }
 
     //Ueberprueft ob von einem getroffenen Schiff noch eine Koordinate nicht getroffen wurde
-    // also ob noch etwas von einem getroffenen Schiff uebrig ist
+    // ob noch etwas von einem getroffenen Schiff uebrig ist
     public boolean shipLeft() {
         return coords.isEmpty();
     }
