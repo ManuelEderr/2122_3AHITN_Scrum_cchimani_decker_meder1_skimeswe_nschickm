@@ -16,10 +16,16 @@ public class Player {
         this.name = name;
     }
 
+    /**
+     * @return -> gibt den Namen zurück
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return -> gibt den Punktestand zurück
+     */
     public int getScore() {
         return score;
     }
