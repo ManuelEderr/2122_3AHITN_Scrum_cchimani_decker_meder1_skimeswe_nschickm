@@ -76,7 +76,7 @@ public class Ship {
     }
 
 
-    //Ueberprueft ob ein Schiff getroffen wird
+    //Ueberprueft ob ein Schiff getroffen wird fnef
     public void shipHit(Coordinate coord) {
         for (int i = 0; i < coords.size(); i++) {
          if(coords.get(i) == coord){
