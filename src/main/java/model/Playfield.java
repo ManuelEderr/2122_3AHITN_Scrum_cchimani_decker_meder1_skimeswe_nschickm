@@ -46,15 +46,12 @@ public class Playfield {
             Coordinate field = iterator.next();
             if (field.x >= MAX_X || field.y >= MAX_Y) {
                 rv = false;
-
             }
             if (feld[field.x][field.y] != 0) {
                 rv = false;
             }
-
         }
         return rv;
-
 
     }
 
@@ -85,9 +82,22 @@ public class Playfield {
         if (feld[coordinate.x][coordinate.y] == 1 || feld[coordinate.x][coordinate.y] == 3) {
             System.out.println("bereits getroffen");
         } else if (feld[coordinate.x][coordinate.y] == 0) {
-            System.out.println("Wasser");
+            feld[coordinate.x][coordinate.y] = 1;
+            //System.out.println("Wasser");
 
-        } else if (feld[coordinate.x][coordinate.y] == 2) {
+        } else {
+            feld[coordinate.x][coordinate.y] = 3;
+
+
+            for (Ship ship : flotte) {
+                if (ship.hasCoordinates(coordinate)) {
+                    ship.shipHit(coordinate);
+
+                }
+            }
+
+            for (int i = 0; i < flotte.size(); i++) {
+            }
 
         }
 
@@ -95,7 +105,3 @@ public class Playfield {
     }
 
 }
-
-//fenf
-
-//

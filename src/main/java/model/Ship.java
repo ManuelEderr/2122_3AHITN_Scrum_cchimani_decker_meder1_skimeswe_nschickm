@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author nschickm
@@ -93,6 +94,9 @@ public class Ship {
     }
 
     public boolean hasCoordinates(Coordinate theCoord){
+
+
+
         for (Coordinate coord : coords){
             if (coord == theCoord){
              //   System.out.printf("");
