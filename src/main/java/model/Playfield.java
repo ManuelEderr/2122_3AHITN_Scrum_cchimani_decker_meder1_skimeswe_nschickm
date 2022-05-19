@@ -41,7 +41,7 @@ public class Playfield {
      */
     public boolean checkShip(Ship ship) {
         boolean rv = true;
-        Iterator<Coordinate> iterator = ship.coord.iterator();
+        Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
             Coordinate field = iterator.next();
             if (field.x >= MAX_X || field.y >= MAX_Y) {
@@ -59,7 +59,7 @@ public class Playfield {
     }
 
     public void placeShip(Ship ship) {
-        Iterator<Coordinate> iterator = ship.coord.iterator();
+        Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
             Coordinate place = iterator.next();
             if (feld[place.x][place.y] != 0) {
