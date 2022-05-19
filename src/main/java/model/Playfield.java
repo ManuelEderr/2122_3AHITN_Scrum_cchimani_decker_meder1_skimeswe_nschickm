@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Playfield {
 
@@ -33,9 +34,17 @@ public class Playfield {
         }
     }
 
+    /**
+     * Diese Methode prüft, ob sich auf der gewählten Position ein Schiff befindet.
+     * @param ship
+     */
     public void checkShip(Ship ship) {
-
-    }
+       // Iterator<Coordinate> iterator = ship.coords.iterator();
+      //  while (iterator.hasNext()) {
+         //   Coordinate field = iterator.next();
+          //  if ()
+        }
+    //}
 
     public void placeShip(Ship ship) {
 
