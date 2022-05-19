@@ -25,7 +25,7 @@ public class Ship {
     private static Coordinate coord5 = null;
     private String shipname = "";
 
-    ArrayList<Coordinate> coords = new ArrayList<>();
+    ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
 
     //Schiff mit der größe 2
     public void ship(Coordinate coord1, Coordinate coord2, String name) {
@@ -79,7 +79,10 @@ public class Ship {
     //Ueberprueft ob ein Schiff getroffen wird
     public void shipHit(Coordinate coord) {
         for (int i = 0; i < coords.size(); i++) {
-
+         if(coords.get(i) == coord){
+             //Schiff wurde getroffen, Koordinate wird aus der ArrayList geloescht
+             coords.remove(i);
+         }
         }
     }
 
@@ -88,6 +91,17 @@ public class Ship {
     public boolean shipLeft() {
         return coords.isEmpty();
     }
+
+    public boolean hasCoordinates(Coordinate theCoord){
+        for (Coordinate coord : coords){
+            if (coord == theCoord){
+             //   System.out.printf("");
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     // gibt den Namen des Schiffes zurueck
     public String getShipname() {
