@@ -6,6 +6,11 @@ public class Playfield {
 
     private static final int reihen = 10;
     private static final int spalten = 10;
+    public static final int EMPTY = 0;
+    public static final int FIELDWITHSHIP = 1;
+    public static final int HITSHIP = 2;
+    public static final int HITWATER = 3;
+
     public int[][] feld;
 
 
@@ -15,25 +20,21 @@ public class Playfield {
 
     /**
      * Konstruktor
-     * Gibt das Spielfeld aus
      */
     public Playfield() {
         feld = new int[reihen][spalten];
 
         for (int j = 0; j < MAXL; j++) {
             for (int i = 0; i < MAXB; i++) {
-                feld[j][i] = 0;
+                feld[j][i] = EMPTY;
             }
         }
     }
 
 
-
-    /*
-    public void placeShip(Ship ship){
+    public void placeShip(Ship ship) {
 
     }
 
-     */
 
 }
