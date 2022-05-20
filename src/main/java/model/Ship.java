@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @author nschickm
@@ -77,29 +76,32 @@ public class Ship {
     }
 
 
-    //Ueberprueft ob ein Schiff getroffen wird fnef
+    //Ueberprueft ob ein Schiff getroffen wird
     public void shipHit(Coordinate coord) {
         for (int i = 0; i < coords.size(); i++) {
-         if(coords.get(i) == coord){
-             //Schiff wurde getroffen, Koordinate wird aus der ArrayList geloescht
-             coords.remove(i);
-         }
+            if (coords.get(i) == coord) {
+                //Schiff wurde getroffen, Koordinate wird aus der ArrayList geloescht
+                coords.remove(i);
+            }
         }
     }
 
     //Ueberprueft ob von einem getroffenen Schiff noch eine Koordinate nicht getroffen wurde
-    // also ob noch etwas von einem getroffenen Schiff uebrig ist
+    //ob noch etwas von einem getroffenen Schiff uebrig ist
     public boolean shipLeft() {
         return coords.isEmpty();
     }
 
-    public boolean hasCoordinates(Coordinate theCoord){
+    //Ueberprueft ob ein Schiff auf den mit gegebenen Zeichen steht
+    //true -> Schiff steht darauf
+    //false ->Schiff steht nicht darauf
+    public boolean hasCoordinates(Coordinate theCoord) {
 
-
-
-        for (Coordinate coord : coords){
-            if (coord == theCoord){
-             //   System.out.printf("");
+    //    for (Coordinate coord : coords) {
+        for (int i = 0; i < coords.size(); i++) {
+            Coordinate coord = coords.get(i);
+            if (coord == theCoord) {
+                //   System.out.printf("");
                 return true;
             }
         }
@@ -113,3 +115,4 @@ public class Ship {
         return shipname;
     }
 }
+
