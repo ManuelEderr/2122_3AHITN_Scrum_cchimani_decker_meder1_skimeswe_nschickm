@@ -88,18 +88,6 @@ public class Playfield {
         } else {
             feld[coordinate.x][coordinate.y] = 3;
 
-
-            for (Ship ship : flotte) {
-                if (ship.hasCoordinates(coordinate)) {
-                    ship.shipHit(coordinate);
-
-                }
-            }
-
-            for (int i = 0; i < flotte.size(); i++) {
-
-            }
-
         }
 
         return 1;
