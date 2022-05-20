@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PlayfieldController {
+    static String[] s = new String[2];
+    static int readCharacters = 0;
+    static boolean result=true;
     public GridPane boardView;
     public VBox vboxPlayfield;
     public AnchorPane apane2;
