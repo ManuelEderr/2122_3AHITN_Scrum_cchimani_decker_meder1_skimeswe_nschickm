@@ -138,7 +138,6 @@ public class Ship {
      * false -> Schiff steht nicht darauf
      */
     public boolean hasCoordinates(Coordinate theCoord) {
-        //    for (Coordinate coord : coords) {
         for (int i = 0; i < coords.size(); i++) {
             Coordinate coord = coords.get(i);
             if (coord == theCoord) {
