@@ -12,11 +12,10 @@ import java.util.ArrayList;
  * <p>
  * Die Ship Klasse speichert Start- und Endwert
  * <p>
- * Wittner:
- * Schiff ist Laenge, Position und Ausrichtung
+ * Es wird jede Koordinate eines Schiffes gespeichert,
+ * sobald ein Schiff getroffen wird, wird die getroffene Koordinate geloescht
  */
 public class Ship {
-
 
     private static Coordinate coord1 = null;
     private static Coordinate coord2 = null;
@@ -27,7 +26,14 @@ public class Ship {
 
     ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
 
-    //Schiff mit der größe 2
+
+    /**
+     * Schiff mit der größe 2
+     *
+     * @param coord1 Koordinate 1
+     * @param coord2 Koordinate 2
+     * @param name   Name des Schiffes
+     */
     public void ship(Coordinate coord1, Coordinate coord2, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
@@ -36,7 +42,14 @@ public class Ship {
         shipname = name;
     }
 
-    //Schiff mit der größe 3
+    /**
+     * Schiff mit der größe 3
+     *
+     * @param coord1 Koordinate 1
+     * @param coord2 Koordinate 2
+     * @param coord3 Koordinate 3
+     * @param name   Name des Schiffes
+     */
     public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
@@ -47,7 +60,15 @@ public class Ship {
         shipname = name;
     }
 
-    //Schiff mit der größe 4
+    /**
+     * Schiff mit der größe 4
+     *
+     * @param coord1 Koordinate 1
+     * @param coord2 Koordinate 2
+     * @param coord3 Koordinate 3
+     * @param coord4 Koordinate 4
+     * @param name   Name des Schiffes
+     */
     public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
@@ -60,7 +81,16 @@ public class Ship {
         shipname = name;
     }
 
-    //Schiff mit der größe 5
+    /**
+     * Schiff mit der größe 5
+     *
+     * @param coord1 Koordinate 1
+     * @param coord2 Koordinate 2
+     * @param coord3 Koordinate 3
+     * @param coord4 Koordinate 4
+     * @param coord5 Koordinate 5
+     * @param name   Name des Schiffes
+     */
     public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, Coordinate coord5, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
@@ -76,7 +106,11 @@ public class Ship {
     }
 
 
-    //Ueberprueft ob ein Schiff getroffen wird
+    /**
+     * Ueberprueft ob ein Schiff getroffen wird
+     *
+     * @param coord auf diese Koordinate wird geschossen und geprueft ob hier Schiff ist
+     */
     public void shipHit(Coordinate coord) {
         for (int i = 0; i < coords.size(); i++) {
             if (coords.get(i) == coord) {
@@ -86,22 +120,29 @@ public class Ship {
         }
     }
 
-    //Ueberprueft ob von einem getroffenen Schiff noch eine Koordinate nicht getroffen wurde
-    //ob noch etwas von einem getroffenen Schiff uebrig ist
-    public boolean shipLeft() {
+    /**
+     * Ueberprueft ob von einem getroffenen Schiff noch eine Koordinate nicht getroffen wurde
+     *
+     * @return true -> wenn das Schiff komplett zerstoert wurde
+     * false -> wenn das Schiff nicht komplett zerstoert wurde
+     */
+    public boolean areShipsLeft() {
         return coords.isEmpty();
     }
 
-    //Ueberprueft ob ein Schiff auf den mit gegebenen Zeichen steht
-    //true -> Schiff steht darauf
-    //false ->Schiff steht nicht darauf
+    /**
+     * Ueberprueft ob ein Schiff auf den mitgegebenen Zeichen steht
+     *
+     * @param theCoord diese Koordinate wird ueberprueft
+     * @return true -> Schiff steht darauf
+     * false -> Schiff steht nicht darauf
+     */
     public boolean hasCoordinates(Coordinate theCoord) {
-
-    //    for (Coordinate coord : coords) {
+        //    for (Coordinate coord : coords) {
         for (int i = 0; i < coords.size(); i++) {
             Coordinate coord = coords.get(i);
             if (coord == theCoord) {
-                //   System.out.printf("");
+                //   System.out.printf("Auf dieser Koordinate befindet sich ein Schiff");
                 return true;
             }
         }
@@ -109,7 +150,10 @@ public class Ship {
     }
 
 
-    // gibt den Namen des Schiffes zurueck
+    /**
+     * gibt den Namen des Schiffes zurueck
+     * @return der Name des Schiffes
+     */
     public String getShipname() {
         //  System.out.println(shipname);
         return shipname;
