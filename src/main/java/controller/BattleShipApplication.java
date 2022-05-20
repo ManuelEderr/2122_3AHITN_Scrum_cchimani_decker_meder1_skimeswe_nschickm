@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.ThreadClass1;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,12 +28,12 @@ public class BattleShipApplication extends Application {
             public void handle(KeyEvent keyEvent) {
 
 
-                if(readCharacters < 2&&PlayfieldController.result) {
-                    String str=keyEvent.getCode().toString();
-                    if(str.contains("DIGIT")){
+                if (readCharacters < 2 && PlayfieldController.result) {
+                    String str = keyEvent.getCode().toString();
+                    if (str.contains("DIGIT")) {
                         str = str.substring(5);
                     }
-                    String ver="[A-J]|[0-9]";
+                    String ver = "[A-J]|[0-9]";
                     Pattern pt = Pattern.compile(ver);
                     Matcher mt = pt.matcher(str);
 
@@ -42,7 +43,7 @@ public class BattleShipApplication extends Application {
                     s[readCharacters] = str;
                     System.out.println(s[readCharacters]);
                     readCharacters++;
-                }else{
+                } else {
                     System.out.println("Ungültiges Zeichen");
                 }
 
@@ -52,9 +53,15 @@ public class BattleShipApplication extends Application {
         stage.setTitle("Schiffe versenken");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
+
+        ThreadClass1 thread = new ThreadClass1("legendarymusic.mp3");
+        Thread thread2 = new Thread(thread);
+        thread2.start();
         launch();
+
     }
 }
