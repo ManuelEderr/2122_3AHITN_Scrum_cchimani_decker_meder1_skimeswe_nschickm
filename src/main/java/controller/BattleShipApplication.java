@@ -12,7 +12,7 @@ public class BattleShipApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Settings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hallo!");
+        stage.setTitle("Schiffe versenken");
         stage.setScene(scene);
         stage.show();
     }
