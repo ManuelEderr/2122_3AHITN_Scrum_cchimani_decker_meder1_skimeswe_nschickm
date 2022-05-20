@@ -7,10 +7,10 @@ import javafx.scene.image.Image;
  * Speichert den Namen und den Punktestand eines Spielers.
  */
 public class Player {
-    String name;
-    int score = 0;
-    Image background;
-    Image ship;
+    private String name;
+    private int score = 0;
+    private Image background;
+    private Image ship;
 
     /**
      * Im Konstruktor wird er Name des Spielers angelegt.
@@ -21,6 +21,14 @@ public class Player {
         this.name = name;
         this.background = background;
         this.ship = ship;
+    }
+
+    public Image getBackground() {
+        return background;
+    }
+
+    public Image getShip() {
+        return ship;
     }
 
     /**
