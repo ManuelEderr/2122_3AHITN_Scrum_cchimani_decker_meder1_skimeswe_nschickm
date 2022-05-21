@@ -22,13 +22,14 @@ public class Playfield {
 
     /**
      * Konstruktor
+     * Feld mit Reihen und Spalten wird angelegt
+     * Gesamtes Spielfeld wird mit 0er gefüllt. (EMPTHY)
      */
     public Playfield() {
         feld = new int[reihen][spalten];
 
         for (int j = 0; j < MAX_Y; j++) {
             for (int i = 0; i < MAX_X; i++) {
-                //Das gesamte Spielfeld wird mit 0er gefüllt. (EMPTY)
                 feld[j][i] = EMPTY;
             }
         }
@@ -83,7 +84,7 @@ public class Playfield {
             System.out.println("bereits getroffen");
         } else if (feld[coordinate.x][coordinate.y] == 0) {
             feld[coordinate.x][coordinate.y] = 1;
-            //System.out.println("Wasser");
+            System.out.println("Wasser");
 
         } else {
             feld[coordinate.x][coordinate.y] = 3;

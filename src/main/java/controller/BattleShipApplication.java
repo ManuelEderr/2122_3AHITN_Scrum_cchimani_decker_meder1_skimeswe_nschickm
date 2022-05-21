@@ -5,9 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.ThreadClass1;
 
 import java.io.IOException;
@@ -61,7 +59,7 @@ public class BattleShipApplication extends Application {
 
     public static void main(String[] args) {
 
-        ThreadClass1 thread = new ThreadClass1("legendarymusic.mp3");
+        ThreadClass1 thread = new ThreadClass1("musicfiles\\legendarymusic.mp3");
         Thread thread2 = new Thread(thread);
         thread2.start();
         launch();
