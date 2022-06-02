@@ -51,7 +51,7 @@ public class SettingsController {
                 player1 = new Player(name, background, ship);
             } else if (player2 == null) {
                 player2 = new Player(name, background, ship);
-                // playfieldController = new PlayfieldController(player1, player2);
+                 playfieldController = new PlayfieldController(player1, player2);
             }
 
         }
