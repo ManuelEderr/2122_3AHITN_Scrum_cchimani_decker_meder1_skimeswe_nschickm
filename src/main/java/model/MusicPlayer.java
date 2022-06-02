@@ -20,7 +20,7 @@ public class MusicPlayer {
     public void playFile(String filename) {
         try {
             preparePlayer(filename);
-            player.play(500);
+            player.play();
         } catch (JavaLayerException e) {
             System.out.println("Error");
         } finally {
