@@ -49,10 +49,6 @@ public class PlayfieldController {
 
     public void initialize() throws IOException {
 
-        Image background1 = new Image("/anchor.png", 100, 100, true, true);
-        Image background2 = new Image("/treasure.png", 100, 100, true, true);
-        apane2.getChildren().add(new ImageView(background1));
-        apne3.getChildren().add(new ImageView(background2));
         enterSettings.setText("Settings");
 
 
