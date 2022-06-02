@@ -48,7 +48,7 @@ public class Playfield {
             if (field.x >= MAX_X || field.y >= MAX_Y) {
                 rv = false;
             }
-            if (feld[field.x][field.y] != 0) {
+            if (feld[field.x][field.y] != 0) { //Falls sich etwas anderes als Wasser auf der Position befindet.
                 rv = false;
             }
         }
@@ -69,6 +69,10 @@ public class Playfield {
         flotte.add(ship);
     }
 
+    /**
+     * @param coordinate Die zu überprüfende Koordinate
+     * @return Falls die Koordinate EMPTY oder SCHIFF aufweist, returnt diese Funktion true, ansonsten false
+     */
     public boolean checkHit(Coordinate coordinate) {
         boolean rv = false;
         int position = feld[coordinate.x][coordinate.y];
@@ -79,6 +83,11 @@ public class Playfield {
 
     }
 
+    /**
+     * Ein Schuss wird platziert.
+     * @param coordinate
+     * @return
+     */
     public int placeHit(Coordinate coordinate) {
         if (feld[coordinate.x][coordinate.y] == 1 || feld[coordinate.x][coordinate.y] == 3) {
             System.out.println("bereits getroffen");
