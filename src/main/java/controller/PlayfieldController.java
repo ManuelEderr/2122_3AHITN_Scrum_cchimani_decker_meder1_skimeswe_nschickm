@@ -18,7 +18,7 @@ import model.Player;
 import java.io.IOException;
 import java.net.URL;
 
-public class PlayfieldController extends Application {
+public class PlayfieldController {
     static String[] s = new String[2];
     static int readCharacters = 0;
     static boolean result = true;
@@ -28,7 +28,6 @@ public class PlayfieldController extends Application {
     public AnchorPane apne3;
     public Button enterSettings;
 
-    private static Scene scene;
 
     Player spieler1;
     Player spieler2;
@@ -41,6 +40,13 @@ public class PlayfieldController extends Application {
          */
     }
 
+    public PlayfieldController() {
+        /*
+        konstruktor für das FXML zum Laden
+         */
+    }
+
+
     public void initialize() throws IOException {
 
         Image background1 = new Image("/anchor.png", 100, 100, true, true);
@@ -51,7 +57,6 @@ public class PlayfieldController extends Application {
 
 
     }
-
 
     public void settings(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -68,13 +73,5 @@ public class PlayfieldController extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Playfield.fxml"));
-        Scene scene1 = new Scene(fxmlLoader.load());
-
-        stage.setScene(scene1);
     }
 }

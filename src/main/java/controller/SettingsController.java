@@ -57,18 +57,18 @@ public class SettingsController {
                 && namelabel.getText() != null) {
             String name = namelabel.getText().replaceAll("\n", "");
 
-            Image background = backgroundlist.get((int) backgroundchoicebox.getValue());
-            Image ship = shiplist.get((int) shipchoicebox.getValue());
+            Image background = backgroundlist.get((int) backgroundchoicebox.getValue() - 1);
+            Image ship = shiplist.get((int) shipchoicebox.getValue() - 1);
 
             if (player1 == null) {
                 player1 = new Player(name, background, ship);
             } else if (player2 == null) {
                 player2 = new Player(name, background, ship);
-                playfieldController = new PlayfieldController(player1, player2);
+                change_scene();
             }
 
         }
-        change_scene();
+
     }
 
     @FXML
@@ -117,6 +117,7 @@ public class SettingsController {
 
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
+
         URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
         fxmlLoader.setLocation(u);
         Scene scene = new Scene(fxmlLoader.load());
