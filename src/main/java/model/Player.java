@@ -27,6 +27,7 @@ public class Player {
 
     }
 
+
     public Image getBackground() {
         return background;
     }
