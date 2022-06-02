@@ -19,9 +19,8 @@ import static controller.PlayfieldController.s;
 public class BattleShipApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Playfield.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Settings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 

@@ -5,19 +5,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Player;
+import model.Settings;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
 public class SettingsController {
 
+    public Button fnf;
     ObservableList<Integer> list = FXCollections.observableArrayList(1, 2, 3);
     ArrayList<Image> backgroundlist;
     ArrayList<Image> shiplist;
@@ -35,15 +46,17 @@ public class SettingsController {
     @FXML
     private ChoiceBox shipchoicebox;
 
+
     private Player player1;
     private Player player2;
 
     @FXML
-    void okbnclicked(ActionEvent event) {
+    void okbnclicked(ActionEvent event) throws IOException {
         if (backgroundchoicebox.getValue() != null
                 && shipchoicebox.getValue() != null
                 && namelabel.getText() != null) {
             String name = namelabel.getText().replaceAll("\n", "");
+
             Image background = backgroundlist.get((int) backgroundchoicebox.getValue());
             Image ship = shiplist.get((int) shipchoicebox.getValue());
 
@@ -51,10 +64,11 @@ public class SettingsController {
                 player1 = new Player(name, background, ship);
             } else if (player2 == null) {
                 player2 = new Player(name, background, ship);
-                 playfieldController = new PlayfieldController(player1, player2);
+                playfieldController = new PlayfieldController(player1, player2);
             }
 
         }
+        change_scene();
     }
 
     @FXML
@@ -93,5 +107,24 @@ public class SettingsController {
         shiplist.add(ship1);
         shiplist.add(ship2);
         shiplist.add(ship3);
+    }
+
+    public void change_scene() throws IOException {
+        Stage stage = new Stage();
+
+        Stage stageclose = (Stage) fnf.getScene().getWindow();
+        stageclose.close();
+
+
+        final FXMLLoader fxmlLoader = new FXMLLoader();
+        URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
+        fxmlLoader.setLocation(u);
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Battleship");
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }

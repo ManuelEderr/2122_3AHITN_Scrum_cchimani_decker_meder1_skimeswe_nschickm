@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ import model.Player;
 import java.io.IOException;
 import java.net.URL;
 
-public class PlayfieldController {
+public class PlayfieldController extends Application {
     static String[] s = new String[2];
     static int readCharacters = 0;
     static boolean result = true;
@@ -40,7 +41,8 @@ public class PlayfieldController {
          */
     }
 
-    public void initialize() {
+    public void initialize() throws IOException {
+
         Image background1 = new Image("/anchor.png", 100, 100, true, true);
         Image background2 = new Image("/treasure.png", 100, 100, true, true);
         apane2.getChildren().add(new ImageView(background1));
@@ -66,5 +68,13 @@ public class PlayfieldController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Playfield.fxml"));
+        Scene scene1 = new Scene(fxmlLoader.load());
+
+        stage.setScene(scene1);
     }
 }

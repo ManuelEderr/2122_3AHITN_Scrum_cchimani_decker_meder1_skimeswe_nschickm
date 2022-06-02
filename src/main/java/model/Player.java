@@ -23,6 +23,10 @@ public class Player {
         this.ship = ship;
     }
 
+    public Player() {
+
+    }
+
     public Image getBackground() {
         return background;
     }
