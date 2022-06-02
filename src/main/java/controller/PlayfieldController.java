@@ -35,6 +35,9 @@ public class PlayfieldController {
     public PlayfieldController(Player spieler1, Player spieler2) {
         this.spieler1 = spieler1;
         this.spieler2 = spieler2;
+        /*
+        konstruktor
+         */
     }
 
     public void initialize() {
