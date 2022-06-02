@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Player;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,14 @@ public class PlayfieldController {
     public Button enterSettings;
 
     private static Scene scene;
+
+    Player spieler1;
+    Player spieler2;
+
+    public PlayfieldController(Player spieler1, Player spieler2) {
+        this.spieler1 = spieler1;
+        this.spieler2 = spieler2;
+    }
 
     public void initialize() {
         Image background1 = new Image("/anchor.png", 100, 100, true, true);
