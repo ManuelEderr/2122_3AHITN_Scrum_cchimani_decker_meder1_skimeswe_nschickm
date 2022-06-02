@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Coordinate;
 import model.ThreadClass1;
 
 import java.io.IOException;
@@ -16,8 +17,8 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static controller.PlayfieldController.readCharacters;
-import static controller.PlayfieldController.s;
+import static controller.PlayfieldController.*;
+
 
 public class BattleShipApplication extends Application {
 
@@ -29,10 +30,10 @@ public class BattleShipApplication extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            String s[]=new String[2];
 
             @Override
             public void handle(KeyEvent keyEvent) {
-
 
                 if (readCharacters < 2 && PlayfieldController.result) {
                     String str = keyEvent.getCode().toString();
@@ -46,9 +47,47 @@ public class BattleShipApplication extends Application {
                     PlayfieldController.result = mt.matches();
                     System.out.println(PlayfieldController.result);
 
+
+
                     s[readCharacters] = str;
                     System.out.println(s[readCharacters]);
                     readCharacters++;
+                    if (s[0]=="A"){
+                        a[0].x=1;
+                    }
+                    if (s[0]=="B"){
+                        a[0].x=2;
+                    }
+                    if (s[0]=="C"){
+                        a[0].x=3;
+                    }
+                    if (s[0]=="D"){
+                        a[0].x=4;
+                    }
+                    if (s[0]=="E"){
+                        a[0].x=5;
+                    }
+                    if (s[0]=="F"){
+                        a[0].x=6;
+                    }
+                    if (s[0]=="G"){
+                        a[0].x=7;
+                    } if (s[0]=="H"){
+                        a[0].x=8;
+                    } if (s[0]=="I"){
+                        a[0].x=9;
+                    } if (s[0]=="J"){
+                        a[0].x=10;
+                    }
+
+                    if(s[1]!=null){
+                        a[0].y= Integer.valueOf(s[1]);
+                    }
+                    if(s[3]!=null){
+                        a[0].rotate= Integer.valueOf(s[3]);
+
+                    }
+
                 } else {
                     System.out.println("Ungültiges Zeichen");
                 }

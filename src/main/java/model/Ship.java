@@ -34,7 +34,7 @@ public class Ship {
      * @param coord2 Koordinate 2
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         coords.add(coord1);
@@ -50,7 +50,7 @@ public class Ship {
      * @param coord3 Koordinate 3
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;
@@ -69,7 +69,7 @@ public class Ship {
      * @param coord4 Koordinate 4
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;
@@ -81,17 +81,18 @@ public class Ship {
         shipname = name;
     }
 
+
     /**
      * Schiff mit der größe 5
      *
-     * @param coord1 Koordinate 1
-     * @param coord2 Koordinate 2
-     * @param coord3 Koordinate 3
-     * @param coord4 Koordinate 4
-     * @param coord5 Koordinate 5
-     * @param name   Name des Schiffes
+     * @param coordinate  Koordinate 1
+     * @param coordinate1 Koordinate 2
+     * @param coordinate2 Koordinate 3
+     * @param coordinate3 Koordinate 4
+     * @param coordinate4 Koordinate 5
+     * @param mAni        Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, Coordinate coord5, String name) {
+    public Ship(Coordinate coordinate, Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3, Coordinate coordinate4, String mAni) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;
@@ -102,7 +103,7 @@ public class Ship {
         coords.add(coord3);
         coords.add(coord4);
         coords.add(coord5);
-        shipname = name;
+        shipname = mAni;
     }
 
 
@@ -111,7 +112,7 @@ public class Ship {
      *
      * @param coord auf diese Koordinate wird geschossen und geprueft ob hier Schiff ist
      */
-    public void shipHit(Coordinate coord) {
+    public void ShipHit(Coordinate coord) {
         for (int i = 0; i < coords.size(); i++) {
             if (coords.get(i) == coord) {
                 //Schiff wurde getroffen, Koordinate wird aus der ArrayList geloescht
@@ -151,6 +152,7 @@ public class Ship {
 
     /**
      * gibt den Namen des Schiffes zurueck
+     *
      * @return der Name des Schiffes
      */
     public String getShipname() {

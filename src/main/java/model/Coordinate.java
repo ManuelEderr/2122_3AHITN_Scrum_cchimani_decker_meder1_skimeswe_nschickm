@@ -3,8 +3,11 @@ package model;
 import java.util.Objects;
 
 public class Coordinate {
-    public Integer x;
-    public Integer y;
+     public Integer x;
+     public Integer y;
+     public Integer rotate;
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -16,15 +16,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Coordinate;
 import model.MusicPlayer;
 import model.Player;
+import model.Ship;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class PlayfieldController {
-    static String[] s = new String[2];
+    static Coordinate[] a = new Coordinate[10];
     static int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
@@ -71,6 +73,25 @@ public class PlayfieldController {
             currentPlayer.setText(spieler2.getName());
             curry = spieler1;
         }
+    }
+    public void schiffsetzen(){
+        int l=5;
+        Ship ship;
+
+        if (a[0].rotate==0){
+            for (int i = a[0].x+1; i < a[0].x+6; i++) {
+                for (int j = 1; j < l; j++) {
+                    a[j].x=i;
+                    a[j].y=a[0].y;
+                }
+
+            }
+
+            ship = new Ship(a[0],a[1],a[2],a[3],a[4],"MAni");
+        }
+
+
+
     }
 
     public void settings(ActionEvent actionEvent) throws IOException {
