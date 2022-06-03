@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -75,7 +77,7 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
         //currentPlayer.setText();
 
- //       boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
+        //       boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
         //boardView1.getChildren().add(new ImageView(spieler2.getBackground()));
 
 
@@ -138,12 +140,30 @@ public class PlayfieldController {
         WritableImage snapshot = vboxPlayfield.snapshot(new SnapshotParameters(), null);
         ImageView imageViewAdjusted = new ImageView(snapshot);
         // Jeder hat einen anderen Pfad
-      //  File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
+        File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
 
-      //  ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
+        ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
 
+    /**
+     * Ein PopUp Fenster oeffnet sich und erklärt das Spiel
+     *
+     * @param actionEvent
+     */
     public void helper(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Help Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" +
+                "A battleship is 5 boxes long, count: 1.\n" +
+                "A cruiser is 4 boxes long, count: 2.\n" +
+                "A destroyer is 3 squares long, count: 3.\n" +
+                "A submarine is 2 boxes long, count: 4.\n" +
+                "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
+                "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man).");
+
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
     }
 }
