@@ -11,4 +11,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm" options="" />
+    </option>
+  </component>
 </project>

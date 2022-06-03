@@ -213,6 +213,7 @@
             </children>
         </HBox>
         <Button fx:id="enterSettings" mnemonicParsing="false" onAction="#settings" text="Settings" />
+        <Button fx:id="snapshotBttn" mnemonicParsing="false" onAction="#snapen" text="Snapshot" />
     </children>
 
 
