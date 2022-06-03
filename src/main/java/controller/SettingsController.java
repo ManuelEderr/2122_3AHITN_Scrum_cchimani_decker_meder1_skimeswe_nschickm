@@ -86,6 +86,7 @@ public class SettingsController {
         Image background2 = new Image("/Hintergrund_2.jpg", 100, 100, true, true);
         Image background3 = new Image("/Hintergrund_3.jpg", 100, 100, true, true);
 
+
         gridpane.add(new ImageView(background1), 0, 0);
         gridpane.add(new ImageView(background2), 0, 1);
         gridpane.add(new ImageView(background3), 0, 2);

@@ -32,9 +32,10 @@ public class PlayfieldController {
     public GridPane boardView;
     public VBox vboxPlayfield;
     public AnchorPane apane2;
-    public AnchorPane apne3;
     public Button enterSettings;
     public Label currentPlayer;
+    public GridPane boardView1;
+    public Button helpBtn;
 
 
     Player spieler1;
@@ -62,6 +63,9 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
         //currentPlayer.setText();
 
+        boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
+        //boardView1.getChildren().add(new ImageView(spieler2.getBackground()));
+
 
     }
 
@@ -74,22 +78,22 @@ public class PlayfieldController {
             curry = spieler1;
         }
     }
-    public void schiffsetzen(){
-        int l=5;
+
+    public void schiffsetzen() {
+        int l = 5;
         Ship ship;
 
-        if (a[0].rotate==0){
-            for (int i = a[0].x+1; i < a[0].x+6; i++) {
+        if (a[0].rotate == 0) {
+            for (int i = a[0].x + 1; i < a[0].x + 6; i++) {
                 for (int j = 1; j < l; j++) {
-                    a[j].x=i;
-                    a[j].y=a[0].y;
+                    a[j].x = i;
+                    a[j].y = a[0].y;
                 }
 
             }
 
-            ship = new Ship(a[0],a[1],a[2],a[3],a[4],"MAni");
+            ship = new Ship(a[0], a[1], a[2], a[3], a[4], "MAni");
         }
-
 
 
     }
@@ -109,5 +113,8 @@ public class PlayfieldController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void helper(ActionEvent actionEvent) {
     }
 }

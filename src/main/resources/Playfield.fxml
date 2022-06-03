@@ -23,6 +23,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
+            <Button fx:id="helpBtn" layoutX="866.0" layoutY="-13.0" mnemonicParsing="false" onAction="#helper" text="Button" />
             </children>
         </AnchorPane>
         <Label fx:id="currentPlayer" prefHeight="27.0" prefWidth="89.0" text="Label">
@@ -34,7 +35,7 @@
             <children>
                 <AnchorPane prefHeight="387.0" prefWidth="443.0">
                     <children>
-                        <GridPane fx:id="boardView" gridLinesVisible="true" layoutX="85.0" layoutY="37.0" prefHeight="343.0" prefWidth="338.0">
+                        <GridPane fx:id="boardView" gridLinesVisible="true" layoutX="85.0" layoutY="37.0" prefHeight="343.0" prefWidth="338.0" stylesheets="@Playfield.css">
 
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
@@ -123,7 +124,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="387.0" prefWidth="443.0">
                     <children>
-                        <GridPane fx:id="boardView1" gridLinesVisible="true" layoutX="85.0" layoutY="37.0" prefHeight="343.0" prefWidth="338.0">
+                        <GridPane fx:id="boardView1" gridLinesVisible="true" layoutX="85.0" layoutY="37.0" prefHeight="343.0" prefWidth="338.0" stylesheets="@Playfield.css">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />

@@ -3,10 +3,9 @@ package model;
 import java.util.Objects;
 
 public class Coordinate {
-     public Integer x;
-     public Integer y;
-     public Integer rotate;
-
+    public Integer x;
+    public Integer y;
+    public Integer rotate;
 
 
     @Override
