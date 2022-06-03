@@ -53,43 +53,45 @@ public class BattleShipApplication extends Application {
                     System.out.println(s[readCharacters]);
                     readCharacters++;
                     if (s[0]=="A"){
-                        a[0].x=1;
+                        a[0].setX(1);
                     }
                     if (s[0]=="B"){
-                        a[0].x=2;
+                        a[0].setX(2);
                     }
                     if (s[0]=="C"){
-                        a[0].x=3;
+                        a[0].setX(3);
                     }
                     if (s[0]=="D"){
-                        a[0].x=4;
+                        a[0].setX(4);
                     }
                     if (s[0]=="E"){
-                        a[0].x=5;
+                        a[0].setX(5);
                     }
                     if (s[0]=="F"){
-                        a[0].x=6;
+                        a[0].setX(6);
                     }
                     if (s[0]=="G"){
-                        a[0].x=7;
+                        a[0].setX(7);
                     } if (s[0]=="H"){
-                        a[0].x=8;
+                        a[0].setX(8);
                     } if (s[0]=="I"){
-                        a[0].x=9;
+                        a[0].setX(9);
                     } if (s[0]=="J"){
-                        a[0].x=10;
+                        a[0].setX(10);
                     }
 
+
                     if(s[1]!=null){
-                        a[0].y= Integer.valueOf(s[1]);
+                        a[0].setY(Integer.valueOf(s[1]));
                     }
                     if(s[3]!=null){
-                        a[0].rotate= Integer.valueOf(s[3]);
+                        a[0].setRotate(Integer.valueOf(s[3]));
 
                     }
 
                 } else {
                     System.out.println("Ungültiges Zeichen");
+                    throw new ArithmeticException("Ungültiges Zeichen");
                 }
 
                 System.out.println(Arrays.toString(s));

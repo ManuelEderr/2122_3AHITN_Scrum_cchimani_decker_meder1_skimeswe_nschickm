@@ -45,10 +45,10 @@ public class Playfield {
         Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
             Coordinate field = iterator.next();
-            if (field.x >= MAX_X || field.y >= MAX_Y) {
+            if (field.getX() >= MAX_X || field.getY() >= MAX_Y) {
                 rv = false;
             }
-            if (feld[field.x][field.y] != 0) { //Falls sich etwas anderes als Wasser auf der Position befindet.
+            if (feld[field.getX()][field.getY()] != 0) { //Falls sich etwas anderes als Wasser auf der Position befindet.
                 rv = false;
             }
         }
@@ -60,10 +60,10 @@ public class Playfield {
         Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
             Coordinate place = iterator.next();
-            if (feld[place.x][place.y] != 0) {
+            if (feld[place.getX()][place.getY()] != 0) {
                 System.out.println("Feld bereits belegt");
             } else {
-                feld[place.x][place.y] = 2;
+                feld[place.getX()][place.getY()] = 2;
             }
         }
         flotte.add(ship);
@@ -75,7 +75,7 @@ public class Playfield {
      */
     public boolean checkHit(Coordinate coordinate) {
         boolean rv = false;
-        int position = feld[coordinate.x][coordinate.y];
+        int position = feld[coordinate.getX()][coordinate.getY()];
         if (position == 0 || position == 2) {
             rv = true;
         }
@@ -89,14 +89,14 @@ public class Playfield {
      * @return
      */
     public int placeHit(Coordinate coordinate) {
-        if (feld[coordinate.x][coordinate.y] == 1 || feld[coordinate.x][coordinate.y] == 3) {
+        if (feld[coordinate.getX()][coordinate.getY()] == 1 || feld[coordinate.getX()][coordinate.getY()] == 3) {
             System.out.println("bereits getroffen");
-        } else if (feld[coordinate.x][coordinate.y] == 0) {
-            feld[coordinate.x][coordinate.y] = 1;
+        } else if (feld[coordinate.getX()][coordinate.getY()] == 0) {
+            feld[coordinate.getX()][coordinate.getY()] = 1;
             System.out.println("Wasser");
 
         } else {
-            feld[coordinate.x][coordinate.y] = 3;
+            feld[coordinate.getX()][coordinate.getY()] = 3;
 
         }
 

@@ -36,7 +36,7 @@ public class Ship {
      * @param coord2 Koordinate 2
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         coords.add(coord1);
@@ -53,7 +53,7 @@ public class Ship {
      * @param coord3 Koordinate 3
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;
@@ -73,7 +73,7 @@ public class Ship {
      * @param coord4 Koordinate 4
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;
@@ -97,7 +97,7 @@ public class Ship {
      * @param coord5 Koordinate 5
      * @param name   Name des Schiffes
      */
-    public void ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, Coordinate coord5, String name) {
+    public Ship(Coordinate coord1, Coordinate coord2, Coordinate coord3, Coordinate coord4, Coordinate coord5, String name) {
         this.coord1 = coord1;
         this.coord2 = coord2;
         this.coord3 = coord3;

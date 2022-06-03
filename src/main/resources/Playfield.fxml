@@ -23,7 +23,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-            <Button fx:id="helpBtn" layoutX="866.0" layoutY="-13.0" mnemonicParsing="false" onAction="#helper" text="Button" />
+            <Button fx:id="helpBtn" layoutX="866.0" layoutY="-13.0" mnemonicParsing="false" onAction="#helper" text="Help"/>
             </children>
         </AnchorPane>
         <Label fx:id="currentPlayer" prefHeight="27.0" prefWidth="89.0" text="Label">
