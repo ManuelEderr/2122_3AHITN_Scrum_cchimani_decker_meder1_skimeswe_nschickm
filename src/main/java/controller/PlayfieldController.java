@@ -147,7 +147,7 @@ public class PlayfieldController {
     }
 
     /**
-     * Ein PopUp Fenster oeffnet sich und erklärt das Spiel
+     * Ein PopUp Fenster oeffnet sich und erklaert das Spiel
      *
      * @param actionEvent
      */
@@ -156,13 +156,18 @@ public class PlayfieldController {
         alert.setTitle("Help Dialog");
         alert.setHeaderText(null);
         alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" +
-                "A battleship is 5 boxes long, count: 1.\n" +
-                "A cruiser is 4 boxes long, count: 2.\n" +
-                "A destroyer is 3 squares long, count: 3.\n" +
-                "A submarine is 2 boxes long, count: 4.\n" +
+                "-> battleship is 5 boxes long, count: 1.\n" +
+                "-> cruiser is 4 boxes long, count: 2.\n" +
+                "-> destroyer is 3 squares long, count: 3.\n" +
+                "-> submarine is 2 boxes long, count: 4.\n" +
+                "A ship can be shot at using console input or even clicking the field. " +
+                "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " +
+                "The game is over only when all ships of a player are destroyed.");
+        /*
                 "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
-                "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
-                "");
+                        "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
+                        "Das Spiel ist erst zu Ende wenn von einem Spieler alle Schiffe zerstört sind");
+         */
 
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
