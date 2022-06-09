@@ -53,6 +53,7 @@ public class PlayfieldController {
     Player spieler1;
     Player spieler2;
 
+
     Player curry = spieler1;
 
     public PlayfieldController(Player spieler1, Player spieler2) {
@@ -69,13 +70,26 @@ public class PlayfieldController {
          */
     }
 
+    public void setUser1(Player player) {
+        System.out.println("ich bin hier");
+        spieler1 = player;
+    }
+
+    public void setUser2(Player player1) {
+        spieler2 = player1;
+    }
 
     public void initialize() throws IOException {
 
         enterSettings.setText("Settings");
+
+        System.out.println("Test: " +
+                "" + toRGBCode(spieler1.getColor()));
+
+
         //currentPlayer.setText();
 
- //       boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
+        //       boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
         //boardView1.getChildren().add(new ImageView(spieler2.getBackground()));
 
 
@@ -90,123 +104,131 @@ public class PlayfieldController {
             curry = spieler1;
         }
     }
+
+    private static String toRGBCode(Color color) {
+        return "#" + color.getRed() + color.getGreen() + color.getBlue();
+    }
+
     /*
      1 Schlachtschiff (5 Kästchen)
      2 Kreuzer (je 4 Kästchen)
      3 Zerstörer (je 3 Kästchen)
     4 U-Boote (je 2 Kästchen)
      */
-    public void schiffsetzen(){
-        int l=5;
-        int k=10;
+    public void schiffsetzen() {
+        int l = 5;
+        int k = 10;
         Ship ship;
 
-        if (a[0].getRotate()==0){
-            while(k>0){
-                for (int f = a[0].getX()+1; f < a[0].getX()+3; f++) {
+        if (a[0].getRotate() == 0) {
+            while (k > 0) {
+                for (int f = a[0].getX() + 1; f < a[0].getX() + 3; f++) {
                     for (int d = 1; d < 3; d++) {
                         a[d].setX(f);
                         a[d].setY(a[0].getY());
                     }
                     k--;
-                    ship = new Ship(a[0],a[1],"U-Boote");
+                    ship = new Ship(a[0], a[1], "U-Boote");
 
                     p1playfield1.placeShip(ship);
 
                 }
-        }
-            while(k>=5){
-                for (int v = a[0].getX()+1; v < a[0].getX()+4; v++) {
+            }
+            while (k >= 5) {
+                for (int v = a[0].getX() + 1; v < a[0].getX() + 4; v++) {
                     for (int y = 1; y < 4; y++) {
                         a[y].setX(v);
                         a[y].setY(a[0].getY());
                     }
                     k--;
-                    ship = new Ship(a[0],a[1],a[2],"Zerstoerer");
+                    ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
                     p1playfield1.placeShip(ship);
 
                 }
-            while(k>=8){
-                for (int n = a[0].getX()+1; n < a[0].getX()+5; n++) {
-                    for (int b = 1; b < 5; b++) {
-                        a[b].setX(n);
-                        a[b].setY(a[0].getY());
+                while (k >= 8) {
+                    for (int n = a[0].getX() + 1; n < a[0].getX() + 5; n++) {
+                        for (int b = 1; b < 5; b++) {
+                            a[b].setX(n);
+                            a[b].setY(a[0].getY());
+                        }
+                        k--;
+                        ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
+                        p1playfield1.placeShip(ship);
+
                     }
-                    k--;
-                    ship = new Ship(a[0],a[1],a[2],a[3],"Kreuzer");
-                    p1playfield1.placeShip(ship);
+                    while (k == 10) {
+                        for (int o = a[0].getX() + 1; o < a[0].getX() + 6; o++) {
+                            for (int m = 1; m < 6; m++) {
+                                a[m].setX(o);
+                                a[m].setY(a[0].getY());
+                            }
+                            k--;
+                            ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
+                            p1playfield1.placeShip(ship);
 
-            }
-            while (k==10){
-            for (int o = a[0].getX()+1; o < a[0].getX()+6; o++) {
-                for (int m = 1; m < 6; m++) {
-                    a[m].setX(o);
-                    a[m].setY(a[0].getY());
+                        }
+                    }
+
+
                 }
-              k--;
-                ship = new Ship(a[0],a[1],a[2],a[3],a[4],"Schlachtschiff");
-                p1playfield1.placeShip(ship);
-
-            }}
-
-
-        }
-        }
-        }else if(a[0].getRotate()==1){
-            while(k>=8){
-                for (int z = a[0].getY()+1; z < a[0].getY()+5; z++) {
+            }
+        } else if (a[0].getRotate() == 1) {
+            while (k >= 8) {
+                for (int z = a[0].getY() + 1; z < a[0].getY() + 5; z++) {
                     for (int u = 1; u < l; u++) {
                         a[u].setX(a[0].getX());
                         a[u].setY(z);
                     }
                     k--;
-                    ship = new Ship(a[0],a[1],"U-Boote");
+                    ship = new Ship(a[0], a[1], "U-Boote");
                     p1playfield1.placeShip(ship);
 
+
                 }
-                while(k>0){
-                    for (int e = a[0].getY()+1; e < a[0].getY()+3; e++) {
+                while (k > 0) {
+                    for (int e = a[0].getY() + 1; e < a[0].getY() + 3; e++) {
                         for (int t = 1; t < l; t++) {
                             a[t].setX(a[0].getX());
                             a[t].setY(e);
                         }
                         k--;
-                        ship = new Ship(a[0],a[1],a[2],"Zerstoerer");
+                        ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
                         p1playfield1.placeShip(ship);
 
                     }
                 }
-                while(k>=5){
-                    for (int w = a[0].getY()+1; w < a[0].getY()+4; w++) {
+                while (k >= 5) {
+                    for (int w = a[0].getY() + 1; w < a[0].getY() + 4; w++) {
                         for (int r = 1; r < l; r++) {
                             a[r].setX(a[0].getX());
                             a[r].setY(w);
                         }
                         k--;
-                        ship = new Ship(a[0],a[1],a[2],a[3],"Kreuzer");
+                        ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
                         p1playfield1.placeShip(ship);
 
                     }
-            while (k==10){
-                for (int s = a[0].getY()+1; s < a[0].getY()+6; s++) {
-                    for (int q = 1; q < l; q++) {
-                        a[q].setX(a[0].getX());
-                        a[q].setY(s);
+                    while (k == 10) {
+                        for (int s = a[0].getY() + 1; s < a[0].getY() + 6; s++) {
+                            for (int q = 1; q < l; q++) {
+                                a[q].setX(a[0].getX());
+                                a[q].setY(s);
+                            }
+                            k--;
+                            ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
+                            p1playfield1.placeShip(ship);
+
+                        }
                     }
-                    k--;
-                    ship = new Ship(a[0],a[1],a[2],a[3],a[4],"Schlachtschiff");
-                    p1playfield1.placeShip(ship);
-
-                }}
 
 
+                }
+
+
+            }
         }
-
-
-
     }
-}
-    }
+
     public void settings(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
 
@@ -225,7 +247,7 @@ public class PlayfieldController {
     }
 
     /**
-     * Macht ein Bild von aktuellen Spielfeld
+     * Macht ein Bild von aktuellem Spielfeld
      *
      * @param actionEvent
      * @param <BufferedImage>
@@ -236,10 +258,13 @@ public class PlayfieldController {
         WritableImage snapshot = vboxPlayfield.snapshot(new SnapshotParameters(), null);
         ImageView imageViewAdjusted = new ImageView(snapshot);
         // Jeder hat einen anderen Pfad
+        //  File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
+        // BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
         File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
+        //  ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
 
     /**

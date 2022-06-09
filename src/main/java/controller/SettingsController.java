@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,9 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Player;
-import model.Settings;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,19 +24,15 @@ import java.util.ArrayList;
 public class SettingsController {
 
     public Button fnf;
+    public ColorPicker colorpicker1;
     ObservableList<Integer> list = FXCollections.observableArrayList(1, 2, 3);
-    ArrayList<Image> backgroundlist;
     ArrayList<Image> shiplist;
-    PlayfieldController playfieldController;
 
     @FXML
     private TextArea namelabel;
 
     @FXML
     private GridPane gridpane;
-
-    @FXML
-    private ChoiceBox backgroundchoicebox;
 
     @FXML
     private ChoiceBox shipchoicebox;
@@ -52,18 +43,18 @@ public class SettingsController {
 
     @FXML
     void okbnclicked(ActionEvent event) throws IOException {
-        if (backgroundchoicebox.getValue() != null
-                && shipchoicebox.getValue() != null
+        if (shipchoicebox.getValue() != null
                 && namelabel.getText() != null) {
             String name = namelabel.getText().replaceAll("\n", "");
 
-            Image background = backgroundlist.get((int) backgroundchoicebox.getValue() - 1);
             Image ship = shiplist.get((int) shipchoicebox.getValue() - 1);
 
             if (player1 == null) {
-                player1 = new Player(name, background, ship);
+                player1 = new Player(name, colorpicker1.getValue(), ship);
+                System.out.println("erster: " + colorpicker1.getValue());
             } else if (player2 == null) {
-                player2 = new Player(name, background, ship);
+                System.out.println("zweiter: " + colorpicker1.getValue());
+                player2 = new Player(name, colorpicker1.getValue(), ship);
                 change_scene();
             }
 
@@ -73,23 +64,13 @@ public class SettingsController {
 
     @FXML
     public void initialize() {
-        backgroundchoicebox.setTooltip(new Tooltip("Wähle einen Hintergrund"));
         shipchoicebox.setTooltip(new Tooltip("Wähle ein Schiff"));
 
-        backgroundchoicebox.setItems(list);
         shipchoicebox.setItems(list);
 
         gridpane.setPrefHeight(300);
         gridpane.setPrefWidth(300);
 
-        Image background1 = new Image("/Hintergrund_1.jpg", 100, 100, true, true);
-        Image background2 = new Image("/Hintergrund_2.jpg", 100, 100, true, true);
-        Image background3 = new Image("/Hintergrund_3.jpg", 100, 100, true, true);
-
-
-        gridpane.add(new ImageView(background1), 0, 0);
-        gridpane.add(new ImageView(background2), 0, 1);
-        gridpane.add(new ImageView(background3), 0, 2);
 
         Image ship1 = new Image("/Schiff_1.png", 70, 70, true, true);
         Image ship2 = new Image("/Schiff_2.png", 70, 70, true, true);
@@ -99,10 +80,6 @@ public class SettingsController {
         gridpane.add(new ImageView(ship2), 1, 1);
         gridpane.add(new ImageView(ship3), 1, 2);
 
-        backgroundlist = new ArrayList<>();
-        backgroundlist.add(background1);
-        backgroundlist.add(background2);
-        backgroundlist.add(background3);
 
         shiplist = new ArrayList<>();
         shiplist.add(ship1);
@@ -122,6 +99,16 @@ public class SettingsController {
         URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
         fxmlLoader.setLocation(u);
         Scene scene = new Scene(fxmlLoader.load());
+
+        // TODO: get Controller Objekt from Stage
+        // stageObject.setPlayer()
+
+
+        PlayfieldController pc = fxmlLoader.<PlayfieldController>getController();
+        pc.setUser1(player1);
+        pc.setUser2(player2);
+
+
         stage.setTitle("Battleship");
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
