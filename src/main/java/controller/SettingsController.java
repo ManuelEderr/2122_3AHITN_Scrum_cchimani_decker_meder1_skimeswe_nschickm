@@ -93,7 +93,6 @@ public class SettingsController {
         Stage stageclose = (Stage) fnf.getScene().getWindow();
         stageclose.close();
 
-
         final FXMLLoader fxmlLoader = new FXMLLoader();
         URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
 

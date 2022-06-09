@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Coordinate;
-import model.MusicPlayer;
 import model.Player;
 import model.Ship;
 import model.*;
@@ -32,17 +31,13 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
 
-import static javafx.embed.swing.SwingFXUtils.fromFXImage;
-
-
 public class PlayfieldController {
-    static Coordinate[] a = new Coordinate[10];
+    static Coordinate[] coordinates = new Coordinate[10];
     static int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
     public VBox vboxPlayfield;
     public AnchorPane apane2;
-    public AnchorPane apne3;
     public Button enterSettings;
     public Label currentPlayer;
     Playfield p1playfield1;
@@ -87,7 +82,14 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
 
         System.out.println("Test: " + "" + toRGBCode(spieler1.getColor()));
+        System.out.println("Test: " + "" + toRGBCode(spieler2.getColor()));
 
+        setColor();
+    }
+
+    public void setColor() {
+        boardView.setStyle("-fx-background-color: " + toRGBCode(spieler1.getColor()));
+        boardView1.setStyle("-fx-background-color: " + toRGBCode(spieler2.getColor()));
     }
 
     public void togglePlayer() {
@@ -127,14 +129,14 @@ public class PlayfieldController {
             lenght = 4;
         }
 
-        for (int f = a[0].getX() + 1; f < a[0].getX() + 3; f++) {
+        for (int f = coordinates[0].getX() + 1; f < coordinates[0].getX() + 3; f++) {
             for (int d = 1; d < lenght; d++) {
-                if (a[0].getRotate() == 0) {
-                    a[d].setX(f);
-                    a[d].setY(a[0].getY());
-                } else if (a[0].getRotate() == 1) {
-                    a[d].setY(f);
-                    a[d].setX(a[0].getY());
+                if (coordinates[0].getRotate() == 0) {
+                    coordinates[d].setX(f);
+                    coordinates[d].setY(coordinates[0].getY());
+                } else if (coordinates[0].getRotate() == 1) {
+                    coordinates[d].setY(f);
+                    coordinates[d].setX(coordinates[0].getY());
                 }
             }
             k--;
@@ -142,13 +144,13 @@ public class PlayfieldController {
 
         switch (lenght) {
             case 2:
-                ship = new Ship(a[0], a[1], "U-Boot");
+                ship = new Ship(coordinates[0], coordinates[1], "U-Boot");
             case 3:
-                ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
+                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], "Zerstoerer");
             case 4:
-                ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
+                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], "Kreuzer");
             case 5:
-                ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
+                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], coordinates[4], "Schlachtschiff");
         }
 
         if (ship != null) {
