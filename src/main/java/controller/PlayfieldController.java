@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,15 +7,12 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,12 +22,13 @@ import model.Player;
 import model.Ship;
 import model.*;
 
+import static javafx.embed.swing.SwingFXUtils.fromFXImage;
+
 import java.io.File;
 import javax.imageio.ImageIO;
 
 
 import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
@@ -48,6 +45,7 @@ public class PlayfieldController {
     public Button enterSettings;
     public Label currentPlayer;
     Playfield p1playfield1;
+    Playfield p2playfield1;
     public GridPane boardView1;
     public Button helpBtn;
     public Button snapshotBttn;
@@ -56,8 +54,8 @@ public class PlayfieldController {
     Player spieler1;
     Player spieler2;
 
-
-    Player curry = spieler1;
+    Player current = spieler1;
+    int k = 10;
 
     public PlayfieldController(Player spieler1, Player spieler2) {
         this.spieler1 = spieler1;
@@ -99,12 +97,12 @@ public class PlayfieldController {
     }
 
     public void togglePlayer() {
-        if (curry == spieler1) {
+        if (current == spieler1) {
             currentPlayer.setText(spieler1.getName());
-            curry = spieler2;
-        } else if (curry == spieler2) {
+            current = spieler2;
+        } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName());
-            curry = spieler1;
+            current = spieler1;
         }
     }
 
@@ -119,25 +117,20 @@ public class PlayfieldController {
     4 U-Boote (je 2 Kästchen)
      */
     public void schiffsetzen() {
-        int l = 5;
-        int k = 10;
-        Ship ship;
+        Ship ship = null;
 
         if (a[0].getRotate() == 0) {
-            while (k > 0) {
+            while (k >= 0 && k <= 4) {
                 for (int f = a[0].getX() + 1; f < a[0].getX() + 3; f++) {
                     for (int d = 1; d < 3; d++) {
                         a[d].setX(f);
                         a[d].setY(a[0].getY());
                     }
                     k--;
-                    ship = new Ship(a[0], a[1], "U-Boote");
-
-                    p1playfield1.placeShip(ship);
-
+                    ship = new Ship(a[0], a[1], "U-Boot");
                 }
             }
-            while (k >= 5) {
+            while (k >= 5 && k <= 7) {
                 for (int v = a[0].getX() + 1; v < a[0].getX() + 4; v++) {
                     for (int y = 1; y < 4; y++) {
                         a[y].setX(v);
@@ -145,10 +138,8 @@ public class PlayfieldController {
                     }
                     k--;
                     ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
-                    p1playfield1.placeShip(ship);
-
                 }
-                while (k >= 8) {
+                while (k >= 8 && k <= 9) {
                     for (int n = a[0].getX() + 1; n < a[0].getX() + 5; n++) {
                         for (int b = 1; b < 5; b++) {
                             a[b].setX(n);
@@ -156,8 +147,6 @@ public class PlayfieldController {
                         }
                         k--;
                         ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
-                        p1playfield1.placeShip(ship);
-
                     }
                     while (k == 10) {
                         for (int o = a[0].getX() + 1; o < a[0].getX() + 6; o++) {
@@ -167,68 +156,58 @@ public class PlayfieldController {
                             }
                             k--;
                             ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
-                            p1playfield1.placeShip(ship);
-
                         }
                     }
-
-
                 }
             }
         } else if (a[0].getRotate() == 1) {
-            while (k >= 8) {
+            while (k >= 8 && k <= 9) {
                 for (int z = a[0].getY() + 1; z < a[0].getY() + 5; z++) {
-                    for (int u = 1; u < l; u++) {
+                    for (int u = 1; u < 5; u++) {
                         a[u].setX(a[0].getX());
                         a[u].setY(z);
                     }
                     k--;
-                    ship = new Ship(a[0], a[1], "U-Boote");
-                    p1playfield1.placeShip(ship);
-
-
+                    ship = new Ship(a[0], a[1], "U-Boot");
                 }
-                while (k > 0) {
+                while (k >= 0 && k <= 4) {
                     for (int e = a[0].getY() + 1; e < a[0].getY() + 3; e++) {
-                        for (int t = 1; t < l; t++) {
+                        for (int t = 1; t < 3; t++) {
                             a[t].setX(a[0].getX());
                             a[t].setY(e);
                         }
                         k--;
                         ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
-                        p1playfield1.placeShip(ship);
-
                     }
                 }
-                while (k >= 5) {
+                while (k >= 5 && k <= 7) {
                     for (int w = a[0].getY() + 1; w < a[0].getY() + 4; w++) {
-                        for (int r = 1; r < l; r++) {
+                        for (int r = 1; r < 4; r++) {
                             a[r].setX(a[0].getX());
                             a[r].setY(w);
                         }
                         k--;
                         ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
-                        p1playfield1.placeShip(ship);
-
                     }
                     while (k == 10) {
                         for (int s = a[0].getY() + 1; s < a[0].getY() + 6; s++) {
-                            for (int q = 1; q < l; q++) {
+                            for (int q = 1; q < 6; q++) {
                                 a[q].setX(a[0].getX());
                                 a[q].setY(s);
                             }
                             k--;
                             ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
-                            p1playfield1.placeShip(ship);
-
                         }
                     }
-
-
                 }
-
-
             }
+        }
+
+        if (current == spieler1) {
+
+            p1playfield1.placeShip(ship);
+        } else {
+            p2playfield1.placeShip(ship);
         }
     }
 
