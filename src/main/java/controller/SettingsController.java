@@ -1,6 +1,5 @@
 package controller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +18,6 @@ import model.Player;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
 
 public class SettingsController {
 
@@ -52,7 +50,7 @@ public class SettingsController {
             Image ship = shiplist.get((int) shipchoicebox.getValue() - 1);
 
             if (player1 == null) {
-                System.out.println("Erster: "  + colorpicker1.getValue());
+                System.out.println("Erster: " + colorpicker1.getValue());
                 player1 = new Player(name, colorpicker1.getValue(), ship);
             } else if (player2 == null) {
                 System.out.println("zweiter: " + colorpicker1.getValue());
@@ -97,20 +95,18 @@ public class SettingsController {
 
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
+        URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
+
+        Scene scene = new Scene(fxmlLoader.load(u.openStream()));
         PlayfieldController pc = fxmlLoader.getController();
 
 
-        URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
-        fxmlLoader.setLocation(u);
         pc.setUser1(player1);
         pc.setUser2(player2);
-        Scene scene = new Scene(fxmlLoader.load());
-        System.out.println(pc);
-        System.out.println(player1.getName());
-        System.out.println(player2.getName());
+        pc.afterSwitch();
 
-        // TODO: get Controller Objekt from Stage
-        // stageObject.setPlayer()
+
+        // TODO: get Controller Object from Stage
 
         stage.setTitle("Battleship");
         scene.setFill(Color.TRANSPARENT);

@@ -3,13 +3,11 @@ package controller;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Coordinate;
 import model.ThreadClass1;
 
 import java.io.IOException;
@@ -30,7 +28,7 @@ public class BattleShipApplication extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            String s[]=new String[2];
+            String s[] = new String[2];
 
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -48,43 +46,45 @@ public class BattleShipApplication extends Application {
                     System.out.println(PlayfieldController.result);
 
 
-
                     s[readCharacters] = str;
                     System.out.println(s[readCharacters]);
                     readCharacters++;
-                    if (s[0]=="A"){
+                    if (s[0] == "A") {
                         a[0].setX(1);
                     }
-                    if (s[0]=="B"){
+                    if (s[0] == "B") {
                         a[0].setX(2);
                     }
-                    if (s[0]=="C"){
+                    if (s[0] == "C") {
                         a[0].setX(3);
                     }
-                    if (s[0]=="D"){
+                    if (s[0] == "D") {
                         a[0].setX(4);
                     }
-                    if (s[0]=="E"){
+                    if (s[0] == "E") {
                         a[0].setX(5);
                     }
-                    if (s[0]=="F"){
+                    if (s[0] == "F") {
                         a[0].setX(6);
                     }
-                    if (s[0]=="G"){
+                    if (s[0] == "G") {
                         a[0].setX(7);
-                    } if (s[0]=="H"){
+                    }
+                    if (s[0] == "H") {
                         a[0].setX(8);
-                    } if (s[0]=="I"){
+                    }
+                    if (s[0] == "I") {
                         a[0].setX(9);
-                    } if (s[0]=="J"){
+                    }
+                    if (s[0] == "J") {
                         a[0].setX(10);
                     }
 
 
-                    if(s[1]!=null){
+                    if (s[1] != null) {
                         a[0].setY(Integer.valueOf(s[1]));
                     }
-                    if(s[3]!=null){
+                    if (s[3] != null) {
                         a[0].setRotate(Integer.valueOf(s[3]));
 
                     }

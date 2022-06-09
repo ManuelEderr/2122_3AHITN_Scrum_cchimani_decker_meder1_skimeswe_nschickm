@@ -34,6 +34,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
 
@@ -82,19 +83,12 @@ public class PlayfieldController {
         spieler2 = player1;
     }
 
-    public void initialize() throws IOException {
+    public void afterSwitch() {
 
         enterSettings.setText("Settings");
 
         System.out.println("Test: " +
                 "" + toRGBCode(spieler1.getColor()));
-
-
-        //currentPlayer.setText();
-
-        //       boardView.getChildren().add(new ImageView("C:\\Users\\simon\\Desktop\\Simon\\HTL 3ahitn\\SEW\\2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm\\src\\main\\resources\\Hintergrund_1.jpg"));
-        //boardView1.getChildren().add(new ImageView(spieler2.getBackground()));
-
 
     }
 
@@ -109,7 +103,11 @@ public class PlayfieldController {
     }
 
     private static String toRGBCode(Color color) {
-        return "#" + color.getRed() + color.getGreen() + color.getBlue();
+        String returner = color.toString();
+        returner = returner.substring(2);
+        returner = returner.substring(0, returner.length() - 2);
+
+        return returner;
     }
 
     /*
