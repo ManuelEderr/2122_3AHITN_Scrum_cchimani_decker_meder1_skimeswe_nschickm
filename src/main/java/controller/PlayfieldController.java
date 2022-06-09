@@ -31,6 +31,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
+
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
 
@@ -56,6 +57,7 @@ public class PlayfieldController {
 
     Player current = spieler1;
     int k = 10;
+    int lenght = 3;
 
     public PlayfieldController(Player spieler1, Player spieler2) {
         this.spieler1 = spieler1;
@@ -84,8 +86,7 @@ public class PlayfieldController {
 
         enterSettings.setText("Settings");
 
-        System.out.println("Test: " +
-                "" + toRGBCode(spieler1.getColor()));
+        System.out.println("Test: " + "" + toRGBCode(spieler1.getColor()));
 
 
         //currentPlayer.setText();
@@ -119,95 +120,46 @@ public class PlayfieldController {
     public void schiffsetzen() {
         Ship ship = null;
 
-        if (a[0].getRotate() == 0) {
-            while (k >= 0 && k <= 4) {
-                for (int f = a[0].getX() + 1; f < a[0].getX() + 3; f++) {
-                    for (int d = 1; d < 3; d++) {
-                        a[d].setX(f);
-                        a[d].setY(a[0].getY());
-                    }
-                    k--;
-                    ship = new Ship(a[0], a[1], "U-Boot");
-                }
-            }
-            while (k >= 5 && k <= 7) {
-                for (int v = a[0].getX() + 1; v < a[0].getX() + 4; v++) {
-                    for (int y = 1; y < 4; y++) {
-                        a[y].setX(v);
-                        a[y].setY(a[0].getY());
-                    }
-                    k--;
-                    ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
-                }
-                while (k >= 8 && k <= 9) {
-                    for (int n = a[0].getX() + 1; n < a[0].getX() + 5; n++) {
-                        for (int b = 1; b < 5; b++) {
-                            a[b].setX(n);
-                            a[b].setY(a[0].getY());
-                        }
-                        k--;
-                        ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
-                    }
-                    while (k == 10) {
-                        for (int o = a[0].getX() + 1; o < a[0].getX() + 6; o++) {
-                            for (int m = 1; m < 6; m++) {
-                                a[m].setX(o);
-                                a[m].setY(a[0].getY());
-                            }
-                            k--;
-                            ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
-                        }
-                    }
-                }
-            }
-        } else if (a[0].getRotate() == 1) {
-            while (k >= 8 && k <= 9) {
-                for (int z = a[0].getY() + 1; z < a[0].getY() + 5; z++) {
-                    for (int u = 1; u < 5; u++) {
-                        a[u].setX(a[0].getX());
-                        a[u].setY(z);
-                    }
-                    k--;
-                    ship = new Ship(a[0], a[1], "U-Boot");
-                }
-                while (k >= 0 && k <= 4) {
-                    for (int e = a[0].getY() + 1; e < a[0].getY() + 3; e++) {
-                        for (int t = 1; t < 3; t++) {
-                            a[t].setX(a[0].getX());
-                            a[t].setY(e);
-                        }
-                        k--;
-                        ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
-                    }
-                }
-                while (k >= 5 && k <= 7) {
-                    for (int w = a[0].getY() + 1; w < a[0].getY() + 4; w++) {
-                        for (int r = 1; r < 4; r++) {
-                            a[r].setX(a[0].getX());
-                            a[r].setY(w);
-                        }
-                        k--;
-                        ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
-                    }
-                    while (k == 10) {
-                        for (int s = a[0].getY() + 1; s < a[0].getY() + 6; s++) {
-                            for (int q = 1; q < 6; q++) {
-                                a[q].setX(a[0].getX());
-                                a[q].setY(s);
-                            }
-                            k--;
-                            ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
-                        }
-                    }
-                }
-            }
+        if (k >= 0 && k <= 4) {
+            lenght = 3;
+        } else if (k >= 5 && k <= 7) {
+            lenght = 4;
+        } else if (k >= 8 && k <= 9) {
+            lenght = 4;
+        } else if (k == 10) {
+            lenght = 4;
         }
 
-        if (current == spieler1) {
+        for (int f = a[0].getX() + 1; f < a[0].getX() + 3; f++) {
+            for (int d = 1; d < lenght; d++) {
+                if (a[0].getRotate() == 0) {
+                    a[d].setX(f);
+                    a[d].setY(a[0].getY());
+                } else if (a[0].getRotate() == 1) {
+                    a[d].setY(f);
+                    a[d].setX(a[0].getY());
+                }
+            }
+            k--;
+        }
 
-            p1playfield1.placeShip(ship);
-        } else {
-            p2playfield1.placeShip(ship);
+        switch (lenght) {
+            case 2:
+                ship = new Ship(a[0], a[1], "U-Boot");
+            case 3:
+                ship = new Ship(a[0], a[1], a[2], "Zerstoerer");
+            case 4:
+                ship = new Ship(a[0], a[1], a[2], a[3], "Kreuzer");
+            case 5:
+                ship = new Ship(a[0], a[1], a[2], a[3], a[4], "Schlachtschiff");
+        }
+
+        if (ship != null) {
+            if (current == spieler1) {
+                p1playfield1.placeShip(ship);
+            } else {
+                p2playfield1.placeShip(ship);
+            }
         }
     }
 
@@ -258,14 +210,7 @@ public class PlayfieldController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Help Dialog");
         alert.setHeaderText(null);
-        alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" +
-                "-> battleship is 5 boxes long, count: 1.\n" +
-                "-> cruiser is 4 boxes long, count: 2.\n" +
-                "-> destroyer is 3 squares long, count: 3.\n" +
-                "-> submarine is 2 boxes long, count: 4.\n" +
-                "A ship can be shot at using console input or even clicking the field. " +
-                "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " +
-                "The game is over only when all ships of a player are destroyed.");
+        alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" + "-> battleship is 5 boxes long, count: 1.\n" + "-> cruiser is 4 boxes long, count: 2.\n" + "-> destroyer is 3 squares long, count: 3.\n" + "-> submarine is 2 boxes long, count: 4.\n" + "A ship can be shot at using console input or even clicking the field. " + "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " + "The game is over only when all ships of a player are destroyed.");
         /*
                 "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
                         "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +

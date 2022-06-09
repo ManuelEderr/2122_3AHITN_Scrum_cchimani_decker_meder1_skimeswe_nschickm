@@ -47,8 +47,6 @@ public class BattleShipApplication extends Application {
                     PlayfieldController.result = mt.matches();
                     System.out.println(PlayfieldController.result);
 
-
-
                     s[readCharacters] = str;
                     System.out.println(s[readCharacters]);
                     readCharacters++;
@@ -104,7 +102,6 @@ public class BattleShipApplication extends Application {
     }
 
     public static void main(String[] args) {
-
         ThreadClass1 thread = new ThreadClass1("musicfiles\\legendarymusic.mp3");
         Thread thread2 = new Thread(thread);
         thread2.start();
