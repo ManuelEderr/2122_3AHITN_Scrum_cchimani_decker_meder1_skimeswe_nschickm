@@ -22,13 +22,13 @@ public class BattleShipApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/Settings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/FXML/Settings1.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            String s[]=new String[2];
+            String s[] = new String[2];
 
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -61,7 +61,7 @@ public class BattleShipApplication extends Application {
                     if (s[0] == "D") {
                         coordinates[0].setX(4);
                     }
-                    if (s[0]=="E"){
+                    if (s[0] == "E") {
                         coordinates[0].setX(5);
                     }
                     if (s[0] == "F") {

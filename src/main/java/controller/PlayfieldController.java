@@ -16,9 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Coordinate;
-import model.Player;
-import model.Ship;
 import model.*;
 
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
@@ -46,7 +43,6 @@ public class PlayfieldController {
     public Button helpBtn;
     public Button snapshotBttn;
 
-
     Player spieler1;
     Player spieler2;
 
@@ -71,6 +67,7 @@ public class PlayfieldController {
     public void setUser1(Player player) {
         System.out.println("ich bin hier");
         spieler1 = player;
+        current = spieler1;
     }
 
     public void setUser2(Player player1) {
@@ -78,12 +75,8 @@ public class PlayfieldController {
     }
 
     public void afterSwitch() {
-
         enterSettings.setText("Settings");
-
-        System.out.println("Test: " + "" + toRGBCode(spieler1.getColor()));
-        System.out.println("Test: " + "" + toRGBCode(spieler2.getColor()));
-
+        togglePlayer();
         setColor();
     }
 
@@ -94,7 +87,7 @@ public class PlayfieldController {
 
     public void togglePlayer() {
         if (current == spieler1) {
-            currentPlayer.setText(spieler1.getName());
+            currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName());
@@ -169,7 +162,7 @@ public class PlayfieldController {
         stageclose.close();
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = BattleShipApplication.class.getResource("/Settings.fxml");
+        URL u = BattleShipApplication.class.getResource("/FXML/Settings1.fxml");
         fxmlLoader.setLocation(u);
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
@@ -191,13 +184,10 @@ public class PlayfieldController {
         WritableImage snapshot = vboxPlayfield.snapshot(new SnapshotParameters(), null);
         ImageView imageViewAdjusted = new ImageView(snapshot);
         // Jeder hat einen anderen Pfad
-        //  File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
-        // BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
         File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
-        //  ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
 
     /**

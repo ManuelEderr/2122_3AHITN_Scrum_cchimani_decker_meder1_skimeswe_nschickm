@@ -29,13 +29,10 @@ public class SettingsController {
 
     @FXML
     private TextArea namelabel;
-
     @FXML
     private GridPane gridpane;
-
     @FXML
     private ChoiceBox shipchoicebox;
-
 
     private Player player1;
     private Player player2;
@@ -58,9 +55,7 @@ public class SettingsController {
 
                 change_scene();
             }
-
         }
-
     }
 
     @FXML
@@ -79,7 +74,6 @@ public class SettingsController {
         gridpane.add(new ImageView(ship2), 1, 1);
         gridpane.add(new ImageView(ship3), 1, 2);
 
-
         shiplist = new ArrayList<>();
         shiplist.add(ship1);
         shiplist.add(ship2);
@@ -94,18 +88,15 @@ public class SettingsController {
         stageclose.close();
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = BattleShipApplication.class.getResource("/Playfield.fxml");
+        URL u = BattleShipApplication.class.getResource("/FXML/Playfield1.fxml");
 
+        assert u != null;
         Scene scene = new Scene(fxmlLoader.load(u.openStream()));
         PlayfieldController pc = fxmlLoader.getController();
-
 
         pc.setUser1(player1);
         pc.setUser2(player2);
         pc.afterSwitch();
-
-
-        // TODO: get Controller Object from Stage
 
         stage.setTitle("Battleship ");
         scene.setFill(Color.TRANSPARENT);

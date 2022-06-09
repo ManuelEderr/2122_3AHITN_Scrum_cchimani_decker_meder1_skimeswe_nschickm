@@ -3,7 +3,6 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 
 /**
  * @author david
@@ -28,7 +27,6 @@ public class Player {
     }
 
     public Player() {
-
     }
 
     public Color getColor() {
