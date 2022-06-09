@@ -3,11 +3,13 @@ package controller;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Coordinate;
 import model.ThreadClass1;
 
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class BattleShipApplication extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            String s[] = new String[2];
+            String s[]=new String[2];
 
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -61,7 +63,7 @@ public class BattleShipApplication extends Application {
                     if (s[0] == "D") {
                         a[0].setX(4);
                     }
-                    if (s[0] == "E") {
+                    if (s[0]=="E"){
                         a[0].setX(5);
                     }
                     if (s[0] == "F") {

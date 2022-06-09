@@ -47,6 +47,14 @@ public class Coordinate {
         return Objects.hash(x, y);
     }
 
+    /**
+     * Ein X-, Y-Wert und eine rotation werden gespeichert
+     * für rotate gilt: 1 - horizontal
+     * 2 - vertikal
+     *
+     * @param x -> x-Wert in einem Koordinatensystem
+     * @param y -> y-Wert in einem Koordinatensystem
+     */
     public Coordinate(Integer x, Integer y) {
         this.x = x;
         this.y = y;
