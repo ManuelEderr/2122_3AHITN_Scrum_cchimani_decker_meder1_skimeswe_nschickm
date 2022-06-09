@@ -20,9 +20,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Coordinate;
+import model.MusicPlayer;
+import model.Player;
+import model.Ship;
 import model.*;
-
-import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -32,6 +34,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
 
 public class PlayfieldController {
