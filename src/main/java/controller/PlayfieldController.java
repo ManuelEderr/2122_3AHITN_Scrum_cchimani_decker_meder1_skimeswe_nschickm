@@ -63,7 +63,7 @@ public class PlayfieldController {
         this.spieler1 = spieler1;
         this.spieler2 = spieler2;
         /*
-        konstruktor
+        konstruktorx
          */
     }
 
