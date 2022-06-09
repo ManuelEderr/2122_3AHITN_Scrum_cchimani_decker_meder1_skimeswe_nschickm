@@ -99,7 +99,7 @@ public class BattleShipApplication extends Application {
                 System.out.println(Arrays.toString(s));
             }
         });
-        stage.setTitle("Schiffe versenken");
+        stage.setTitle("Schiffe versenken ");
         stage.setScene(scene);
         stage.show();
 

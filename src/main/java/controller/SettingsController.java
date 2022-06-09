@@ -108,7 +108,7 @@ public class SettingsController {
 
         // TODO: get Controller Object from Stage
 
-        stage.setTitle("Battleship");
+        stage.setTitle("Battleship ");
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
