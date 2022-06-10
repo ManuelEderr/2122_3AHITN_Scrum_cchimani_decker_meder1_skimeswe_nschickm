@@ -119,15 +119,14 @@ public class SettingsController {
         stage.show();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             String s[] = new String[4];
-            Integer x=0;
-            Integer y=0;
-            int readCharacters=0;
-            int rot=0;
+            Integer x = 0;
+            Integer y = 0;
+            int readCharacters = 0;
+            int rot = 0;
 
 
             @Override
             public void handle(KeyEvent keyEvent) {
-
 
 
                 if (readCharacters < 3 && PlayfieldController.result) {
@@ -147,74 +146,66 @@ public class SettingsController {
                     System.out.println(str);
 
 
-
-
                     if (Objects.equals(s[1], "A")) {
-                       // coordinates[readCharacters].setX(1);
-                        x=1;
+                        // coordinates[readCharacters].setX(1);
+                        x = 1;
                     }
-                    if (s[1] == "B") {
+                    if (Objects.equals(s[1], "B")) {
                         //coordinates[readCharacters].setX(2);
-                        x=2;
+                        x = 2;
                     }
-                    if (s[1] == "C") {
-                       // coordinates[readCharacters].setX(3);
-                        x=3;
+                    if (Objects.equals(s[1], "C")) {
+                        // coordinates[readCharacters].setX(3);
+                        x = 3;
                     }
-                    if (s[1] == "D") {
+                    if (Objects.equals(s[1], "D")) {
                         //coordinates[readCharacters].setX(4);
-                        x=4;
+                        x = 4;
                     }
-                    if (s[1] == "E") {
+                    if (Objects.equals(s[1], "E")) {
                         //coordinates[readCharacters].setX(5);
-                        x=5;
+                        x = 5;
                     }
-                    if (s[1] == "F") {
+                    if (Objects.equals(s[1], "F")) {
                         //coordinates[readCharacters].setX(6);
-                        x=6;
+                        x = 6;
                     }
-                    if (s[1] == "G") {
+                    if (Objects.equals(s[1], "G")) {
                         //coordinates[readCharacters].setX(7);
-                        x=7;
+                        x = 7;
                     }
-                    if (s[1] == "H") {
+                    if (Objects.equals(s[1], "H")) {
                         //coordinates[readCharacters].setX(8);
-                        x=8;
+                        x = 8;
                     }
-                    if (s[1] == "I") {
+                    if (Objects.equals(s[1], "I")) {
                         //coordinates[readCharacters].setX(9);
-                        x=9;
+                        x = 9;
                     }
-                    if (s[1] == "J") {
+                    if (Objects.equals(s[1], "J")) {
                         //coordinates[readCharacters].setX(10);
-                        x=10;
+                        x = 10;
                     }
-
 
 
                     if (s[2] != null) {
                         //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
-                        y=Integer.valueOf(s[2]);
+                        y = Integer.valueOf(s[2]);
                     }
 
 
                     if (s[3] != null) {
 
                         //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
-                        rot=Integer.valueOf(s[3]);
+                        rot = Integer.valueOf(s[3]);
 
                     }
-                    Coordinate cd = new Coordinate(x,y,rot);
+                    Coordinate cd = new Coordinate(x, y, rot);
 
                 }
 
 
-
-
-
-
-               }});
-
-
+            }
+        });
     }
-    }
+}
