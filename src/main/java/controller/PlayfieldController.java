@@ -16,6 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Coordinate;
+import model.Player;
+import model.Ship;
 import model.*;
 
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
@@ -28,9 +31,10 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
 
+
 public class PlayfieldController {
     static Coordinate[] coordinates = new Coordinate[10];
-    static int readCharacters = 0;
+    public int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
     public VBox vboxPlayfield;
@@ -48,7 +52,7 @@ public class PlayfieldController {
 
     Player current = spieler1;
     int k = 10;
-    int lenght = 3;
+    int length = 3;
 
     /**
      * @param spieler1
@@ -135,17 +139,17 @@ public class PlayfieldController {
         Ship ship = null;
 
         if (k >= 0 && k <= 4) {
-            lenght = 3;
+            length = 3;
         } else if (k >= 5 && k <= 7) {
-            lenght = 4;
+            length = 4;
         } else if (k >= 8 && k <= 9) {
-            lenght = 4;
+            length = 4;
         } else if (k == 10) {
-            lenght = 4;
+            length = 4;
         }
 
         for (int f = coordinates[0].getX() + 1; f < coordinates[0].getX() + 3; f++) {
-            for (int d = 1; d < lenght; d++) {
+            for (int d = 1; d < length; d++) {
                 if (coordinates[0].getRotate() == 0) {
                     coordinates[d].setX(f);
                     coordinates[d].setY(coordinates[0].getY());
@@ -157,7 +161,7 @@ public class PlayfieldController {
             k--;
         }
 
-        switch (lenght) {
+        switch (length) {
             case 2:
                 ship = new Ship(coordinates[0], coordinates[1], "U-Boot");
             case 3:

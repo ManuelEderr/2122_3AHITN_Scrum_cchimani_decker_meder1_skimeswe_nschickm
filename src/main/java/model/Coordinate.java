@@ -33,6 +33,11 @@ public class Coordinate {
     private Integer rotate;
 
 
+    public Coordinate(Integer x, Integer y, Integer rotate) {
+        this.x = x;
+        this.y = y;
+        this.rotate = rotate;
+    }
 
     @Override
     public boolean equals(Object o) {
