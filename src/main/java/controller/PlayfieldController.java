@@ -192,7 +192,6 @@ public class PlayfieldController {
         WritableImage snapshot = vboxPlayfield.snapshot(new SnapshotParameters(), null);
         ImageView imageViewAdjusted = new ImageView(snapshot);
         File outputFile = new File(outputfile.getAbsolutePath() + "\\Pictures\\pictures.png");
-        System.out.println(outputFile.getAbsolutePath() + "\\Pictures\\pictures.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
