@@ -78,6 +78,11 @@ public class SettingsController {
         shiplist.add(ship3);
     }
 
+    /**
+     * @throws IOException Diese Methode ist notwendig um die Scene zu wechseln, da ein parameterloser
+     *                     Konstruktor notwendig ist, werden die Parametter mittels dem PlayfieldController übergeben
+     * @author: skimeswe
+     */
     public void change_scene() throws IOException {
 
         Stage stage = new Stage();

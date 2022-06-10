@@ -27,7 +27,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 
 public class PlayfieldController {
     static Coordinate[] coordinates = new Coordinate[10];
@@ -51,18 +50,22 @@ public class PlayfieldController {
     int k = 10;
     int lenght = 3;
 
+    /**
+     * @param spieler1
+     * @param spieler2
+     * @author: skimeswe
+     */
     public PlayfieldController(Player spieler1, Player spieler2) {
         this.spieler1 = spieler1;
         this.spieler2 = spieler2;
-        /*
-        konstruktor
-         */
     }
 
+    /**
+     * @author: skimeswe
+     * parameterloser Konstruktor ist fürs Laden des FXMLs notwenig
+     */
     public PlayfieldController() {
-        /*
-        konstruktor für das FXML zum Laden
-         */
+
     }
 
     public void setUser1(Player player) {
@@ -74,17 +77,29 @@ public class PlayfieldController {
         spieler2 = player1;
     }
 
+    /**
+     * @author: skimeswe
+     * Die Methode die nach dem Scene wechseln aufgerufen wird. Ruft die togglePlayer Methode auf und setzt die Farben
+     */
     public void afterSwitch() {
         enterSettings.setText("Settings");
         togglePlayer();
         setColor();
     }
 
+    /**
+     * @author: skimeswe
+     * die Farbe des Spieler wird gesetzt. das # ist notwendig um einen gültigen CSS-RGB code zu haben
+     */
     public void setColor() {
         boardView.setStyle("-fx-background-color: #" + toRGBCode(spieler1.getColor()));
         boardView1.setStyle("-fx-background-color: #" + toRGBCode(spieler2.getColor()));
     }
 
+    /**
+     * @author: skimeswe
+     * TogglePlayer-Methode wechselt den aktuellen Spieler und gibt diesen im Label aus.
+     */
     public void togglePlayer() {
         if (current == spieler1) {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
@@ -95,6 +110,10 @@ public class PlayfieldController {
         }
     }
 
+    /**
+     * @author: skimeswe
+     * diese Methode returned einen vollständigen RGB CODE
+     */
     private static String toRGBCode(Color color) {
         String returner = color.toString();
         returner = returner.substring(2);
@@ -156,10 +175,13 @@ public class PlayfieldController {
                 p2playfield1.placeShip(ship);
             }
         }
-
-
     }
 
+    /**
+     * @param actionEvent
+     * @throws IOException
+     * @author: skimeswe
+     */
     public void settings(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
 

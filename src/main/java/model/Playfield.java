@@ -39,6 +39,7 @@ public class Playfield {
      * Diese Methode prüft, ob sich auf der gewählten Position ein Schiff befindet.
      *
      * @param ship
+     * @author: skimeswe
      */
     public boolean checkShip(Ship ship) {
         boolean rv = true;
@@ -56,6 +57,11 @@ public class Playfield {
 
     }
 
+    /**
+     * @param ship
+     * @author: skimeswe
+     * diese Methode plaziert die Schiffe mittels der Koordinaten
+     */
     public void placeShip(Ship ship) {
         Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
@@ -71,6 +77,7 @@ public class Playfield {
     /**
      * @param coordinate Die zu überprüfende Koordinate
      * @return Falls die Koordinate EMPTY oder SCHIFF aufweist, returnt diese Funktion true, ansonsten false
+     * @author: skimeswe
      */
     public boolean checkHit(Coordinate coordinate) {
         boolean rv = false;
@@ -84,8 +91,8 @@ public class Playfield {
 
     /**
      * Ein Schuss wird platziert.
-     * @param coordinate
-     * @return
+     *
+     * @author: skimeswe
      */
     public int placeHit(Coordinate coordinate) {
         if (feld[coordinate.getX()][coordinate.getY()] == 1 || feld[coordinate.getX()][coordinate.getY()] == 3) {
