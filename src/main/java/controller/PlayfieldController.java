@@ -27,6 +27,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 
 public class PlayfieldController {
     static Coordinate[] coordinates = new Coordinate[10];
@@ -153,6 +154,9 @@ public class PlayfieldController {
                 p2playfield1.placeShip(ship);
             }
         }
+
+        System.out.println(Arrays.deepToString(p1playfield1.feld).replace("], ", "]\n"));
+
     }
 
     public void settings(ActionEvent actionEvent) throws IOException {
