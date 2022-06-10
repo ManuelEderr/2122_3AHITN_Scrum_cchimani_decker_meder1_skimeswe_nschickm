@@ -96,11 +96,9 @@ public class BattleShipApplication extends Application {
                     }
 
                 } else {
-                    System.out.println("Ungültiges Zeichen");
                     throw new ArithmeticException("Ungültiges Zeichen");
                 }
 
-                System.out.println(Arrays.toString(s));
             }
         });
         stage.setTitle("Schiffe versenken");

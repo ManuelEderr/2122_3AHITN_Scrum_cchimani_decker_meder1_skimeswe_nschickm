@@ -44,14 +44,11 @@ public class SettingsController {
         if (colorpicker1.getValue() != null
                 && namelabel.getText() != null) {
             String name = namelabel.getText().replaceAll("\n", "");
-
             Image ship = shiplist.get((int) shipchoicebox.getValue() - 1);
 
             if (player1 == null) {
-                System.out.println("Erster: " + colorpicker1.getValue());
                 player1 = new Player(name, colorpicker1.getValue(), ship);
             } else if (player2 == null) {
-                System.out.println("zweiter: " + colorpicker1.getValue());
                 player2 = new Player(name, colorpicker1.getValue(), ship);
 
                 change_scene();

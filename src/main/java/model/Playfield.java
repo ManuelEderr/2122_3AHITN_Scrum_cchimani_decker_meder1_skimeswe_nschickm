@@ -61,7 +61,6 @@ public class Playfield {
         while (iterator.hasNext()) {
             Coordinate place = iterator.next();
             if (feld[place.getX()][place.getY()] != 0) {
-                System.out.println("Feld bereits belegt");
             } else {
                 feld[place.getX()][place.getY()] = 2;
             }

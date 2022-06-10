@@ -5,6 +5,7 @@
 | 3   | 02.06.2022 | 1.2     | Scenes wechseln, Transparenter Hintergrund            | zw. SettingsMenü und Spielfeld wechseln, Transparenter Hintergrund                    | Kimeswenger Simon | fg     |
 | 4   | 03.06.2022 | 1.3     | Scenes wechseln, Transparenter Hintergrund            | Hintergrund ändern                                                                    | Kimeswenger Simon | fg     |
 | 5   | 09.06.2022 | 1.4     | Scenes wechseln, ColorPicker auf Grids, toggglePlayer | Hintergrund ändern                                                                    | Kimeswenger Simon | fg     |
+| 5   | 10.06.2022 | 1.5     | Farbe auswählen CSS, Dynamic Path, ...                | Hintergrund ändern                                                                    | Kimeswenger Simon | fg     |
 
 
 
