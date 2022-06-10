@@ -16,9 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * FXML Controller class
- *
  * @author nschickm
+ * FXML Controller class
+ * <p>
+ * Die Settings1.fxml Scene wird aufgerufen und dargestellt
  */
 public class SplashController implements Initializable {
 
@@ -31,6 +32,9 @@ public class SplashController implements Initializable {
         splash();
     }
 
+    /**
+     * Die Settings1.fxml Scene wird nach 2 Sekunden aufgerufen
+     */
     private void splash() {
         new Thread() {
             @Override
