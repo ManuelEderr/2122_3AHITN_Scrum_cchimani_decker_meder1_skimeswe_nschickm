@@ -55,7 +55,7 @@ public class PlayfieldController {
         this.spieler1 = spieler1;
         this.spieler2 = spieler2;
         /*
-        konstruktorx
+        konstruktor
          */
     }
 
@@ -99,8 +99,12 @@ public class PlayfieldController {
     private static String toRGBCode(Color color) {
         String returner = color.toString();
         returner = returner.substring(2);
-        returner = returner.substring(0, returner.length() - 2);
-
+        if (returner.contains("fff")) {
+            returner = returner.substring(0, returner.length() - 2);
+        } else {
+            returner = returner.replace("ff", "");
+        }
+        System.out.println(returner);
         return returner;
     }
 
@@ -184,11 +188,12 @@ public class PlayfieldController {
      * @throws IOException
      */
     public <BufferedImage> void snapen(ActionEvent actionEvent) throws IOException {
-        // vboxPlayfield (ganzes Bild) oder boardView (nur ein Spieldfeld)
+        File outputfile = new File("");
+
         WritableImage snapshot = vboxPlayfield.snapshot(new SnapshotParameters(), null);
         ImageView imageViewAdjusted = new ImageView(snapshot);
-        // Jeder hat einen anderen Pfad
-        File outputFile = new File("C:\\Users\\43670/formattedPicture.png");
+        File outputFile = new File(outputfile.getAbsolutePath() + "\\Pictures\\pictures.png");
+        System.out.println(outputFile.getAbsolutePath() + "\\Pictures\\pictures.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
@@ -205,7 +210,7 @@ public class PlayfieldController {
         alert.setHeaderText(null);
         alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" + "-> battleship is 5 boxes long, count: 1.\n" + "-> cruiser is 4 boxes long, count: 2.\n" + "-> destroyer is 3 squares long, count: 3.\n" + "-> submarine is 2 boxes long, count: 4.\n" + "A ship can be shot at using console input or even clicking the field. " + "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " + "The game is over only when all ships of a player are destroyed.");
         /*
-                "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
+         "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
                         "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
                         "Das Spiel ist erst zu Ende wenn von einem Spieler alle Schiffe zerstört sind");
          */

@@ -4,6 +4,7 @@ module controller {
     requires javafx.media;
     requires soundPlay;
     requires javafx.swing;
+    requires java.logging;
 
 
     opens controller to javafx.fxml;
