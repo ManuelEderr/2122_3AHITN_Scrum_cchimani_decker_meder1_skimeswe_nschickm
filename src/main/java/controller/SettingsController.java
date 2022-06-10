@@ -151,42 +151,42 @@ public class SettingsController {
                             // coordinates[readCharacters].setX(1);
                             x = 1;
                         }
-                        if (s[1] == "B") {
+                        if (Objects.equals(s[1], "B")) {
                             //coordinates[readCharacters].setX(2);
                             x = 2;
                         }
-                        if (s[readCharacters] == "C") {
+                        if (Objects.equals(s[readCharacters], "C")) {
                             // coordinates[readCharacters].setX(3);
                             x = 3;
-                            if (s[1] == "C") {
+                            if (Objects.equals(s[1], "C")) {
                                 // coordinates[readCharacters].setX(3);
                                 x = 3;
                             }
-                            if (s[1] == "D") {
+                            if (Objects.equals(s[1], "D")) {
                                 //coordinates[readCharacters].setX(4);
                                 x = 4;
                             }
-                            if (s[1] == "E") {
+                            if (Objects.equals(s[1], "E")) {
                                 //coordinates[readCharacters].setX(5);
                                 x = 5;
                             }
-                            if (s[1] == "F") {
+                            if (Objects.equals(s[1], "F")) {
                                 //coordinates[readCharacters].setX(6);
                                 x = 6;
                             }
-                            if (s[1] == "G") {
+                            if (Objects.equals(s[1], "G")) {
                                 //coordinates[readCharacters].setX(7);
                                 x = 7;
                             }
-                            if (s[1] == "H") {
+                            if (Objects.equals(s[1], "H")) {
                                 //coordinates[readCharacters].setX(8);
                                 x = 8;
                             }
-                            if (s[1] == "I") {
+                            if (Objects.equals(s[1], "I")) {
                                 //coordinates[readCharacters].setX(9);
                                 x = 9;
                             }
-                            if (s[1] == "J") {
+                            if (Objects.equals(s[1], "J")) {
                                 //coordinates[readCharacters].setX(10);
                                 x = 10;
                             }
