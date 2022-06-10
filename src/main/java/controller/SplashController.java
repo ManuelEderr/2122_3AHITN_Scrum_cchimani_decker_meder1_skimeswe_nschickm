@@ -25,16 +25,18 @@ public class SplashController implements Initializable {
     @FXML
     private AnchorPane apane;
     private AnchorPane AnchorPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         splash();
     }
+
     private void splash() {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
