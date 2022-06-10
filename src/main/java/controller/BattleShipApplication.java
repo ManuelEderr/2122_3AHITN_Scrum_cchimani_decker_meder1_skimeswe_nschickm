@@ -30,8 +30,6 @@ public class BattleShipApplication extends Application {
         Parent pane = FXMLLoader.load(getClass().getResource("/FXML/Splash-view.fxml"));
         Scene scene = new Scene(pane);
 
-
-
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
 
