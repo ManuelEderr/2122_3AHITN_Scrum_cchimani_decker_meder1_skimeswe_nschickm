@@ -26,8 +26,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static controller.PlayfieldController.coordinates;
-
 
 public class SettingsController {
 
@@ -36,14 +34,12 @@ public class SettingsController {
     public ColorPicker colorpicker1;
     ObservableList<Integer> list = FXCollections.observableArrayList(1, 2, 3);
     ArrayList<Image> shiplist;
-
     @FXML
     private TextArea namelabel;
     @FXML
     private GridPane gridpane;
     @FXML
     private ChoiceBox shipchoicebox;
-
     private Player player1;
     private Player player2;
 
@@ -146,66 +142,80 @@ public class SettingsController {
                     System.out.println(str);
 
 
-                    if (Objects.equals(s[1], "A")) {
+                    if (Objects.equals(s[readCharacters], "A")) {
                         // coordinates[readCharacters].setX(1);
                         x = 1;
-                    }
-                    if (Objects.equals(s[1], "B")) {
-                        //coordinates[readCharacters].setX(2);
-                        x = 2;
-                    }
-                    if (Objects.equals(s[1], "C")) {
-                        // coordinates[readCharacters].setX(3);
-                        x = 3;
-                    }
-                    if (Objects.equals(s[1], "D")) {
-                        //coordinates[readCharacters].setX(4);
-                        x = 4;
-                    }
-                    if (Objects.equals(s[1], "E")) {
-                        //coordinates[readCharacters].setX(5);
-                        x = 5;
-                    }
-                    if (Objects.equals(s[1], "F")) {
-                        //coordinates[readCharacters].setX(6);
-                        x = 6;
-                    }
-                    if (Objects.equals(s[1], "G")) {
-                        //coordinates[readCharacters].setX(7);
-                        x = 7;
-                    }
-                    if (Objects.equals(s[1], "H")) {
-                        //coordinates[readCharacters].setX(8);
-                        x = 8;
-                    }
-                    if (Objects.equals(s[1], "I")) {
-                        //coordinates[readCharacters].setX(9);
-                        x = 9;
-                    }
-                    if (Objects.equals(s[1], "J")) {
-                        //coordinates[readCharacters].setX(10);
-                        x = 10;
-                    }
 
 
-                    if (s[2] != null) {
-                        //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
-                        y = Integer.valueOf(s[2]);
+                        if (Objects.equals(s[1], "A")) {
+                            // coordinates[readCharacters].setX(1);
+                            x = 1;
+                        }
+                        if (s[1] == "B") {
+                            //coordinates[readCharacters].setX(2);
+                            x = 2;
+                        }
+                        if (s[readCharacters] == "C") {
+                            // coordinates[readCharacters].setX(3);
+                            x = 3;
+                            if (s[1] == "C") {
+                                // coordinates[readCharacters].setX(3);
+                                x = 3;
+                            }
+                            if (s[1] == "D") {
+                                //coordinates[readCharacters].setX(4);
+                                x = 4;
+                            }
+                            if (s[1] == "E") {
+                                //coordinates[readCharacters].setX(5);
+                                x = 5;
+                            }
+                            if (s[1] == "F") {
+                                //coordinates[readCharacters].setX(6);
+                                x = 6;
+                            }
+                            if (s[1] == "G") {
+                                //coordinates[readCharacters].setX(7);
+                                x = 7;
+                            }
+                            if (s[1] == "H") {
+                                //coordinates[readCharacters].setX(8);
+                                x = 8;
+                            }
+                            if (s[1] == "I") {
+                                //coordinates[readCharacters].setX(9);
+                                x = 9;
+                            }
+                            if (s[1] == "J") {
+                                //coordinates[readCharacters].setX(10);
+                                x = 10;
+                            }
+
+
+                            if (s[2] != null) {
+                                //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
+                                y = Integer.valueOf(s[readCharacters]);
+                                y = Integer.valueOf(s[2]);
+                            }
+
+
+                            if (s[3] != null) {
+
+                                //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
+                                rot = Integer.valueOf(s[3]);
+                                rot = Integer.valueOf(s[readCharacters]);
+
+                            }
+                            Coordinate cd = new Coordinate(x, y, rot);
+
+                        }
                     }
-
-
-                    if (s[3] != null) {
-
-                        //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
-                        rot = Integer.valueOf(s[3]);
-
-                    }
-                    Coordinate cd = new Coordinate(x, y, rot);
-
                 }
-
-
             }
         });
+
     }
 }
+
+
+

@@ -46,10 +46,8 @@ public class PlayfieldController {
     public GridPane boardView1;
     public Button helpBtn;
     public Button snapshotBttn;
-
     Player spieler1;
     Player spieler2;
-
     Player current = spieler1;
     int k = 10;
     int length = 3;
@@ -204,10 +202,7 @@ public class PlayfieldController {
     }
 
     /**
-     * @param actionEvent
-     * @param <BufferedImage>
-     * @throws IOException
-     * @auther skimeswe, nschickm
+     * @author: skimeswe, nschickm
      * Macht ein Bild von aktuellem Spielfeld
      * Speichert es in "\Pictures\pictures.png"
      * Wird bei jedem Snapshot ueberschrieben
@@ -225,7 +220,7 @@ public class PlayfieldController {
 
     /**
      * @param actionEvent
-     * @auther nschickm
+     * @author: nschickm
      * Ein Help-PopUp Fenster oeffnet sich und erklaert das Spiel
      */
     public void helper(ActionEvent actionEvent) {
