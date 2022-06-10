@@ -66,7 +66,6 @@ public class PlayfieldController {
     }
 
     public void setUser1(Player player) {
-        System.out.println("ich bin hier");
         spieler1 = player;
         current = spieler1;
     }
@@ -82,8 +81,8 @@ public class PlayfieldController {
     }
 
     public void setColor() {
-        boardView.setStyle("-fx-background-color: " + toRGBCode(spieler1.getColor()));
-        boardView1.setStyle("-fx-background-color: " + toRGBCode(spieler2.getColor()));
+        boardView.setStyle("-fx-background-color: #" + toRGBCode(spieler1.getColor()));
+        boardView1.setStyle("-fx-background-color: #" + toRGBCode(spieler2.getColor()));
     }
 
     public void togglePlayer() {
@@ -91,7 +90,7 @@ public class PlayfieldController {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
         } else if (current == spieler2) {
-            currentPlayer.setText(spieler2.getName());
+            currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
         }
     }
@@ -104,7 +103,6 @@ public class PlayfieldController {
         } else {
             returner = returner.replace("ff", "");
         }
-        System.out.println(returner);
         return returner;
     }
 
@@ -159,7 +157,6 @@ public class PlayfieldController {
             }
         }
 
-        System.out.println(Arrays.deepToString(p1playfield1.feld).replace("], ", "]\n"));
 
     }
 
@@ -181,13 +178,13 @@ public class PlayfieldController {
     }
 
     /**
+     * @param actionEvent
+     * @param <BufferedImage>
+     * @throws IOException
      * @auther skimeswe, nschickm
      * Macht ein Bild von aktuellem Spielfeld
      * Speichert es in "\Pictures\pictures.png"
      * Wird bei jedem Snapshot ueberschrieben
-     * @param actionEvent
-     * @param <BufferedImage>
-     * @throws IOException
      */
     public <BufferedImage> void snapen(ActionEvent actionEvent) throws IOException {
         File outputfile = new File("");
@@ -202,16 +199,20 @@ public class PlayfieldController {
     }
 
     /**
+     * @param actionEvent
      * @auther nschickm
      * Ein Help-PopUp Fenster oeffnet sich und erklaert das Spiel
-     *
-     * @param actionEvent
      */
     public void helper(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Help Dialog ");
         alert.setHeaderText(null);
         alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" + "-> battleship is 5 boxes long, count: 1.\n" + "-> cruiser is 4 boxes long, count: 2.\n" + "-> destroyer is 3 squares long, count: 3.\n" + "-> submarine is 2 boxes long, count: 4.\n" + "A ship can be shot at using console input or even clicking the field. " + "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " + "The game is over only when all ships of a player are destroyed.");
+
+        /* "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
+           "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
+           "Das Spiel ist erst zu Ende wenn von einem Spieler alle Schiffe zerstört sind");
+         */
 
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
