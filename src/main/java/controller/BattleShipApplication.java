@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -22,8 +23,15 @@ public class BattleShipApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/FXML/Settings1.fxml"));
+     /*
+        FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/FXML/Splash-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+      */
+        Parent pane = FXMLLoader.load(getClass().getResource("/FXML/Splash-view.fxml"));
+        Scene scene = new Scene(pane);
+
+
+
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
 

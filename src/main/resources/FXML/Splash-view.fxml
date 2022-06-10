@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="apane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to left bottom, #021634, #2d1946, #581149, #7e003c, #981022);;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashController">
+    <children>
+        <Label layoutX="167.0" layoutY="163.0" text="BATTLESHIP" textFill="WHITE">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
