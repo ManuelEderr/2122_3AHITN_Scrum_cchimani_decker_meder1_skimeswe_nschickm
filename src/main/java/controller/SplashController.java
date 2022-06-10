@@ -13,6 +13,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class SplashController implements Initializable {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1999);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -50,7 +51,7 @@ public class SplashController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            AnchorPane = FXMLLoader.load(getClass().getResource("/FXML/Settings1.fxml"));
+                            AnchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/Settings1.fxml")));
                             Stage stage = new Stage();
                             Scene scene = new Scene(AnchorPane);
                             scene.setFill(Color.TRANSPARENT);
