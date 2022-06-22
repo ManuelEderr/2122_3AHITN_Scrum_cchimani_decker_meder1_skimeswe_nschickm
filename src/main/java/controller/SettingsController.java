@@ -102,7 +102,7 @@ public class SettingsController {
         assert u != null;
         Scene scene = new Scene(fxmlLoader.load(u.openStream()));
         PlayfieldController pc = fxmlLoader.getController();
-
+        final Coordinate[] cd = new Coordinate[1];
         pc.setUser1(player1);
         pc.setUser2(player2);
         pc.afterSwitch();
@@ -202,17 +202,17 @@ public class SettingsController {
                             if (s[3] != null) {
 
                                 //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
-                                rot = Integer.valueOf(s[3]);
-                                rot = Integer.valueOf(s[readCharacters]);
+                                rot = Integer.parseInt(s[3]);
+                                rot = Integer.parseInt(s[readCharacters]);
 
                             }
-                            Coordinate cd = new Coordinate(x, y, rot);
-
+                            cd[0] = new Coordinate(x, y, rot);
                         }
                     }
                 }
             }
         });
+
 
     }
 }

@@ -1,14 +1,18 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -20,6 +24,7 @@ import model.Coordinate;
 import model.Player;
 import model.Ship;
 import model.*;
+import view.PlayfieldView;
 
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
@@ -41,8 +46,9 @@ public class PlayfieldController {
     public AnchorPane apane2;
     public Button enterSettings;
     public Label currentPlayer;
-    Playfield p1playfield1;
-    Playfield p2playfield1;
+    public Button input;
+    Playfield p1playfield1 = new Playfield();
+    Playfield p2playfield1 = new Playfield();
     public GridPane boardView1;
     public Button helpBtn;
     public Button snapshotBttn;
@@ -51,6 +57,8 @@ public class PlayfieldController {
     Player current = spieler1;
     int k = 10;
     int length = 3;
+    PlayfieldView playfieldView;
+    PlayfieldView playfieldView1;
 
     /**
      * @param spieler1
@@ -86,16 +94,16 @@ public class PlayfieldController {
     public void afterSwitch() {
         enterSettings.setText("Settings");
         togglePlayer();
-        setColor();
+        setColor(current);
     }
 
     /**
      * @author: skimeswe
      * die Farbe des Spieler wird gesetzt. das # ist notwendig um einen gültigen CSS-RGB code zu haben
      */
-    public void setColor() {
-        boardView.setStyle("-fx-background-color: #" + toRGBCode(spieler1.getColor()));
-        boardView1.setStyle("-fx-background-color: #" + toRGBCode(spieler2.getColor()));
+    public void setColor(Player player) {
+        boardView.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
+        boardView1.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
     }
 
     /**
@@ -103,12 +111,18 @@ public class PlayfieldController {
      * TogglePlayer-Methode wechselt den aktuellen Spieler und gibt diesen im Label aus.
      */
     public void togglePlayer() {
+        playfieldView = new PlayfieldView(p1playfield1, boardView1);
+        playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
         if (current == spieler1) {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
+            setColor(current);
+            playfieldView.drawPlayfield();
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
+            setColor(current);
+            playfieldView1.drawPlayfield();
         }
     }
 
@@ -127,6 +141,7 @@ public class PlayfieldController {
         return returner;
     }
 
+
     /*
      1 Schlachtschiff (5 Kästchen)
      2 Kreuzer (je 4 Kästchen)
@@ -135,6 +150,8 @@ public class PlayfieldController {
      */
     public void schiffsetzen() {
         Ship ship = null;
+
+
 
         if (k >= 0 && k <= 4) {
             length = 3;
@@ -173,8 +190,10 @@ public class PlayfieldController {
         if (ship != null) {
             if (current == spieler1) {
                 p1playfield1.placeShip(ship);
+                togglePlayer();
             } else {
                 p2playfield1.placeShip(ship);
+                togglePlayer();
             }
         }
     }
@@ -218,6 +237,9 @@ public class PlayfieldController {
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
 
+
+
+
     /**
      * @param actionEvent
      * @author: nschickm
@@ -236,5 +258,17 @@ public class PlayfieldController {
 
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
+    }
+
+    /**
+     * Sollte wenn ein Click auf eine Cell des linken GridPane betätigt wurde,
+     * die entsprechenden Koordinaten zurückgeben, welche für das schießen verwendet werden.
+     * @param mouseEvent
+     */
+    public void test(MouseEvent mouseEvent) {
+        Node source = (Node)mouseEvent.getSource() ;
+        Integer colIndex = GridPane.getColumnIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
+        System.out.printf(String.valueOf(colIndex + rowIndex));
     }
 }
