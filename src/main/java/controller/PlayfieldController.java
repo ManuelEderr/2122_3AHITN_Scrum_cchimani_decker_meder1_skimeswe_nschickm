@@ -96,6 +96,30 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
         togglePlayer();
         setColor(current);
+        boardView1.setOnMouseClicked(event -> {
+            double x = 0;
+            double y = 0;
+            double rot = 0;
+            Coordinate cd = null;
+            if (event.getButton() == MouseButton.PRIMARY) {
+                x = (event.getX() / 33.8);
+                x = Math.floor(x);
+                y = (event.getY() / 33.8);
+                y = Math.floor(y);
+                rot = 0;
+                cd = new Coordinate((int) x, (int) y, 0);
+                System.out.println(cd.toString());
+            } else if (event.getButton() == MouseButton.SECONDARY) {
+                x = (event.getX() / 33.8);
+                x = Math.floor(x);
+                y = (event.getY() / 33.8);
+                y = Math.floor(y);
+                rot = 1;
+                cd = new Coordinate((int) x, (int) y, 1);
+                System.out.println(cd.toString());
+            }
+        });
+
     }
 
     /**
@@ -274,29 +298,41 @@ public class PlayfieldController {
      * First Click doesn't work
      * @param mouseEvent
      */
-
+/*
     public void test(MouseEvent mouseEvent) {
+
+
         boardView1.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             double x = 0;
             double y = 0;
             double rot = 0;
             Coordinate cd = null;
             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                x = (e.getX() / 33.8);
+                x = (mouseEvent.getX() / 33.8);
                 x = Math.floor(x);
-                y = (e.getY() / 33.8);
+                y = (mouseEvent.getY() / 33.8);
                 y = Math.floor(y);
                 rot = 0;
                 cd = new Coordinate((int) x, (int) y, 0);
+                System.out.println(cd.toString());
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                x = (e.getX() / 33.8);
+                x = (mouseEvent.getX() / 33.8);
                 x = Math.floor(x);
-                y = (e.getY() / 33.8);
+                y = (mouseEvent.getY() / 33.8);
                 y = Math.floor(y);
                 rot = 1;
                 cd = new Coordinate((int) x, (int) y, 1);
+                System.out.println(cd.toString());
             }
-            System.out.println(cd.toString());
         });
+
+
+
+
+
+
     }
+
+ */
+
 }
