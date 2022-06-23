@@ -16,9 +16,15 @@
 ### SoundPlay.jar Fehler
 
 Project Structure -> Libraries
-![img_2.png](img_2.png)  
-![img_3.png](img_3.png)   
-![img_4.png](img_4.png)  
+<p align="center">
+  <img src="img_2.png" alt=""/>
+</p>
+<p align="center">
+  <img src="img_3.png" alt=""/>
+</p>
+<p align="center">
+  <img src="img_4.png" alt=""/>
+</p>
 SoundPlay.jar auswählen
 
 
