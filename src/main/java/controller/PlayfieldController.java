@@ -285,8 +285,6 @@ public class PlayfieldController {
             @Override
             public void handle(KeyEvent keyEvent) {
 
-
-
                 if ( PlayfieldController.result) {
                     String str = keyEvent.getCode().toString();
                     if (str.contains("DIGIT")) {
