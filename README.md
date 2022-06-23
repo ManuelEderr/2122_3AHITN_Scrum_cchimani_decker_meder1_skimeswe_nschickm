@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/83589343/175273683-5c6cbbe8-ffd8-411f-a8ab-db370ccdd7e0.png)
 
-# 2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm
+# Battleship
 
 | Rolle          | Name            | Git-Account                       | E-Mail                          |
 |----------------|-----------------|-----------------------------------|---------------------------------|
