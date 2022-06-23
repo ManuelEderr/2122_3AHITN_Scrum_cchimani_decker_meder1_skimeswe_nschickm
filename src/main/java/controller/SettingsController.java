@@ -90,8 +90,6 @@ public class SettingsController {
      * @author: skimeswe
      */
     public void change_scene() throws IOException {
-
-
         Stage stage = new Stage();
 
         Stage stageclose = (Stage) fnf.getScene().getWindow();

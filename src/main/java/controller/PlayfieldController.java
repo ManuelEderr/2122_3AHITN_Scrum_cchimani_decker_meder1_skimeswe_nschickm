@@ -36,10 +36,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class PlayfieldController {
-    static Coordinate[] coordinates = new Coordinate[10];
+    static ArrayList<Coordinate> coordinates = new ArrayList<>();
     public int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
@@ -108,6 +109,7 @@ public class PlayfieldController {
                 y = Math.floor(y);
                 rot = 0;
                 cd = new Coordinate((int) x, (int) y, 0);
+                schiffsetzen(cd);
                 System.out.println(cd.toString());
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 x = (event.getX() / 33.8);
@@ -116,6 +118,7 @@ public class PlayfieldController {
                 y = Math.floor(y);
                 rot = 1;
                 cd = new Coordinate((int) x, (int) y, 1);
+                schiffsetzen(cd);
                 System.out.println(cd.toString());
             }
         });
@@ -142,12 +145,12 @@ public class PlayfieldController {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
-            playfieldView.drawPlayfield();
+            playfieldView.drawPlayfield(current);
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
             setColor(current);
-            playfieldView1.drawPlayfield();
+            playfieldView1.drawPlayfield(current);
         }
     }
 
@@ -166,7 +169,6 @@ public class PlayfieldController {
         return returner;
     }
 
-
     /*
      1 Schlachtschiff (5 Kästchen)
      2 Kreuzer (je 4 Kästchen)
@@ -175,12 +177,11 @@ public class PlayfieldController {
      */
 
     /**
-     * @author: david
+     * @author: david, (cchimani)
      */
-    public void schiffsetzen() {
+    public void schiffsetzen(Coordinate coord) {
         Ship ship = null;
-
-
+        Coordinate coordinate;
 
         if (k >= 0 && k <= 4) {
             length = 3;
@@ -192,29 +193,28 @@ public class PlayfieldController {
             length = 4;
         }
 
-        for (int f = coordinates[0].getX() + 1; f < coordinates[0].getX() + 3; f++) {
+        for (int f = coord.getX() + 1; f < coord.getX() + 3; f++) {
             for (int d = 1; d < length; d++) {
-                if (coordinates[0].getRotate() == 0) {
-                    coordinates[d].setX(f);
-                    coordinates[d].setY(coordinates[0].getY());
-
-                } else if (coordinates[0].getRotate() == 1) {
-                    coordinates[d].setY(f);
-                    coordinates[d].setX(coordinates[0].getY());
+                if (coord.getRotate() == 0) {
+                    coordinate = new Coordinate(f, coord.getY());
+                    coordinates.add(coordinate);
+                } else if (coord.getRotate() == 1) {
+                    coordinate = new Coordinate(coord.getX(), f);
+                    coordinates.add(coordinate);
                 }
             }
-            k--;
         }
+        k--;
 
         switch (length) {
             case 2:
-                ship = new Ship(coordinates[0], coordinates[1], "U-Boot");
+                ship = new Ship(coord, coordinates.get(1), "U-Boot");
             case 3:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], "Zerstoerer");
+                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), "Zerstoerer");
             case 4:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], "Kreuzer");
+                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), "Kreuzer");
             case 5:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], coordinates[4], "Schlachtschiff");
+                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
         }
 
         if (ship != null) {
@@ -266,8 +266,6 @@ public class PlayfieldController {
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
-
-
 
 
     /**
