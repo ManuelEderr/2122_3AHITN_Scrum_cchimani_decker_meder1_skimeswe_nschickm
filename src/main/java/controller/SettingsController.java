@@ -45,6 +45,7 @@ public class SettingsController {
     private Player player2;
 
 
+
     @FXML
     void okbnclicked(ActionEvent event) throws IOException {
         if (colorpicker1.getValue() != null
@@ -112,43 +113,13 @@ public class SettingsController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            String s[] = new String[4];
-            Integer x = 0;
-            Integer y = 0;
-            int readCharacters = 0;
-            int rot = 0;
+        pc.tastatureingabe(scene);
+
+    };
 
 
-            @Override
-            public void handle(KeyEvent keyEvent) {
-
-
-                if (readCharacters < 30 && PlayfieldController.result) {
-                    String str = keyEvent.getCode().toString();
-                    if (str.contains("DIGIT")) {
-                        str = str.substring(5);
-                    }
-                    String ver = "[A-J]|[0-9]";
-                    Pattern pt = Pattern.compile(ver);
-                    Matcher mt = pt.matcher(str);
-
-                    PlayfieldController.result = mt.matches();
-
-
-                    s[readCharacters] = str;
-                    readCharacters++;
-                    System.out.println(str);
-
-
-
-                }
-            }
-        });
-
-
-    }
 }
+
 
 
 

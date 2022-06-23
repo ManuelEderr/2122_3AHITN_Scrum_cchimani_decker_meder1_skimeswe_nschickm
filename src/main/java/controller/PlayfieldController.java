@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -34,6 +36,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class PlayfieldController {
@@ -59,6 +63,13 @@ public class PlayfieldController {
     PlayfieldView playfieldView1;
     int length = 0;
     Ship[] ship = new Ship[10];
+    private String s[] = new String[4];
+    private Integer x = 0;
+    private Integer y = 0;
+    private Integer rot = 0;
+
+
+
 
     /**
      * @param spieler1
@@ -256,6 +267,85 @@ public class PlayfieldController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+
+    /**
+     * @author: cchimani
+     * @param scene Die Scene wird vom Settings Controller in die methode tastatureingabe uebergeben, auf alle KeyEvents(Tastatur eingabe) wird solange die scene aktiv ist (geoeffnet ist) reagiert
+     *       Alle key events werden im String str gespeichert
+     *      Durch regular Expression werden nur gueltige Zeichen im string aktzeptiert
+     *       Die zeichen werden in x,y,rotate aufgeteilt und mit einer Coordinate der methode schiffsetzen uebergeben
+     */
+    public void tastatureingabe(Scene scene){
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+
+
+                if ( PlayfieldController.result) {
+                    String str = keyEvent.getCode().toString();
+                    if (str.contains("DIGIT")) {
+                        str = str.substring(5);
+                    }
+                    String ver = "[A-J]|[0-9]";
+                    Pattern pt = Pattern.compile(ver);
+                    Matcher mt = pt.matcher(str);
+
+                    PlayfieldController.result = mt.matches();
+                    if (readCharacters==3){
+                        readCharacters=0;
+                    }
+
+
+
+                    System.out.println(str);
+                    s[readCharacters]=str;
+
+
+                    if (s[0] != null) {
+                        char[] a  = s[0].toCharArray();
+                        x = (int)a[0]-65;
+                        s[0]=null;
+                    }
+
+
+                    if (s[1] != null) {
+                        //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
+                        y = Integer.valueOf(s[1])-1;
+                        s[1]=null;
+                    }
+
+
+                    if (s[2] != null) {
+                        //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
+                        rot = Integer.valueOf(s[2]);
+                        s[2]=null;
+
+                    }
+                    Coordinate c=null;
+
+                    if(readCharacters==2){
+                        c = new Coordinate(x,y,rot);
+                        schiffsetzen(c);
+
+
+                    }
+                    readCharacters++;
+                    if (current == spieler1) {
+                        playfieldView.drawPlayfield(current);
+                    } else if (current == spieler2) {
+                        playfieldView1.drawPlayfield(current);
+                    }
+
+
+                }
+            }
+
+        });
+
     }
 
     /**

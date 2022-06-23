@@ -3,8 +3,8 @@ package model;
 import java.util.Objects;
 
 public class Coordinate {
-     private Integer x;
-     private Integer y;
+    private Integer x;
+    private Integer y;
 
     public Integer getX() {
         return x;
