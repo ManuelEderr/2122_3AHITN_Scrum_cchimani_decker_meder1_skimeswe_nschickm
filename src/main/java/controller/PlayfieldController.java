@@ -204,7 +204,7 @@ public class PlayfieldController {
      */
 
     /**
-     * @author: david, (cchimani)
+     * @author: david, (*cchimani)
      */
     public void schiffsetzen(Coordinate coord) {
         if (shipcounter >= 0 && shipcounter <= 4) {

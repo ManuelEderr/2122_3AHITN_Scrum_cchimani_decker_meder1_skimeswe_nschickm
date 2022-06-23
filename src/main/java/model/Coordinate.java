@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * @author: cchimani
- * Die ueber Tastatur oder klick eingelesenen Events werden über den Konstruktor gesetzt und können so in anderen methoden weiter verwendet werden
+ * Die ueber Tastatur oder klick eingelesenen Events werden über den Konstruktor gesetzt und können so in anderen methoden weiter verwendet werden (x,y,rotate)
  *
  */
 public class Coordinate {
