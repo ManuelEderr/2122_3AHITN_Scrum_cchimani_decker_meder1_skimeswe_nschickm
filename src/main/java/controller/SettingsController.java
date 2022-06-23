@@ -45,7 +45,6 @@ public class SettingsController {
     private Player player2;
 
 
-
     @FXML
     void okbnclicked(ActionEvent event) throws IOException {
         if (colorpicker1.getValue() != null

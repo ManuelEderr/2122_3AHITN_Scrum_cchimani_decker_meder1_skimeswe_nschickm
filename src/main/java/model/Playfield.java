@@ -18,6 +18,9 @@ public class Playfield {
 
      public ArrayList<Ship> flotte = new ArrayList<Ship>();
 
+    public ArrayList<Ship> getFlotte() {
+        return flotte;
+    }
 
     /**
      * Konstruktor
@@ -62,13 +65,17 @@ public class Playfield {
      * diese Methode plaziert die Schiffe mittels der Koordinaten
      */
     public void placeShip(Ship ship) {
+
         for (Coordinate place : ship.coords) {
             if (feld[place.getX()][place.getY()] == EMPTY) {
                 feld[place.getX()][place.getY()] = SHIP;
             }
         }
         flotte.add(ship);
+
+
     }
+
 
     /**
      * @param coordinate Die zu überprüfende Koordinate
