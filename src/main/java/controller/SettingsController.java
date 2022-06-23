@@ -22,6 +22,7 @@ import model.Player;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -125,7 +126,7 @@ public class SettingsController {
             public void handle(KeyEvent keyEvent) {
 
 
-                if (readCharacters < 3 && PlayfieldController.result) {
+                if (readCharacters < 30 && PlayfieldController.result) {
                     String str = keyEvent.getCode().toString();
                     if (str.contains("DIGIT")) {
                         str = str.substring(5);
@@ -142,73 +143,7 @@ public class SettingsController {
                     System.out.println(str);
 
 
-                    if (Objects.equals(s[readCharacters], "A")) {
-                        // coordinates[readCharacters].setX(1);
-                        x = 1;
 
-
-                        if (Objects.equals(s[1], "A")) {
-                            // coordinates[readCharacters].setX(1);
-                            x = 1;
-                        }
-                        if (Objects.equals(s[1], "B")) {
-                            //coordinates[readCharacters].setX(2);
-                            x = 2;
-                        }
-                        if (Objects.equals(s[readCharacters], "C")) {
-                            // coordinates[readCharacters].setX(3);
-                            x = 3;
-                            if (Objects.equals(s[1], "C")) {
-                                // coordinates[readCharacters].setX(3);
-                                x = 3;
-                            }
-                            if (Objects.equals(s[1], "D")) {
-                                //coordinates[readCharacters].setX(4);
-                                x = 4;
-                            }
-                            if (Objects.equals(s[1], "E")) {
-                                //coordinates[readCharacters].setX(5);
-                                x = 5;
-                            }
-                            if (Objects.equals(s[1], "F")) {
-                                //coordinates[readCharacters].setX(6);
-                                x = 6;
-                            }
-                            if (Objects.equals(s[1], "G")) {
-                                //coordinates[readCharacters].setX(7);
-                                x = 7;
-                            }
-                            if (Objects.equals(s[1], "H")) {
-                                //coordinates[readCharacters].setX(8);
-                                x = 8;
-                            }
-                            if (Objects.equals(s[1], "I")) {
-                                //coordinates[readCharacters].setX(9);
-                                x = 9;
-                            }
-                            if (Objects.equals(s[1], "J")) {
-                                //coordinates[readCharacters].setX(10);
-                                x = 10;
-                            }
-
-
-                            if (s[2] != null) {
-                                //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
-                                y = Integer.valueOf(s[readCharacters]);
-                                y = Integer.valueOf(s[2]);
-                            }
-
-
-                            if (s[3] != null) {
-
-                                //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
-                                rot = Integer.parseInt(s[3]);
-                                rot = Integer.parseInt(s[readCharacters]);
-
-                            }
-                            cd[0] = new Coordinate(x, y, rot);
-                        }
-                    }
                 }
             }
         });

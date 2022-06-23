@@ -1,17 +1,14 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -35,6 +32,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class PlayfieldController {
@@ -95,6 +93,20 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
         togglePlayer();
         setColor(current);
+        new Thread(() -> {
+            while (true) {
+                boardView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    for (Node node : boardView.getChildren()) {
+                        if (node instanceof Label) {
+                            if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+                                System.out.println(GridPane.getRowIndex(node) + "/" + GridPane.getColumnIndex(node));
+                            }
+                        }
+                    }
+                });
+            }
+        }).start();
+
     }
 
     /**
@@ -150,7 +162,6 @@ public class PlayfieldController {
      */
     public void schiffsetzen() {
         Ship ship = null;
-
 
 
         if (k >= 0 && k <= 4) {
@@ -238,8 +249,6 @@ public class PlayfieldController {
     }
 
 
-
-
     /**
      * @param actionEvent
      * @author: nschickm
@@ -260,15 +269,37 @@ public class PlayfieldController {
         alert.showAndWait();
     }
 
+
     /**
-     * Sollte wenn ein Click auf eine Cell des linken GridPane betätigt wurde,
-     * die entsprechenden Koordinaten zurückgeben, welche für das schießen verwendet werden.
+     * Es werden die x und die y Koordinaten des Gridpanes zurückgegeben wenn diejenige Zelle geclicked wird.
+     * Linksklick auf die Zelle: Rotation = 0
+     * Rechtsklick auf die Zelle: Rotation = 1
+     * First Click doesn't work
      * @param mouseEvent
      */
+
     public void test(MouseEvent mouseEvent) {
-        Node source = (Node)mouseEvent.getSource() ;
-        Integer colIndex = GridPane.getColumnIndex(source);
-        Integer rowIndex = GridPane.getRowIndex(source);
-        System.out.printf(String.valueOf(colIndex + rowIndex));
+        boardView1.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            double x = 0;
+            double y = 0;
+            double rot = 0;
+            Coordinate cd = null;
+            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                x = (e.getX() / 33.8);
+                x = Math.floor(x);
+                y = (e.getY() / 33.8);
+                y = Math.floor(y);
+                rot = 0;
+                cd = new Coordinate((int) x, (int) y, 0);
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                x = (e.getX() / 33.8);
+                x = Math.floor(x);
+                y = (e.getY() / 33.8);
+                y = Math.floor(y);
+                rot = 1;
+                cd = new Coordinate((int) x, (int) y, 1);
+            }
+            System.out.println(cd.toString());
+        });
     }
 }
