@@ -33,6 +33,7 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class PlayfieldController {
@@ -161,6 +162,7 @@ public class PlayfieldController {
         return returner;
     }
 
+
     /*
      1 Schlachtschiff (5 Kästchen)
      2 Kreuzer (je 4 Kästchen)
@@ -278,17 +280,28 @@ public class PlayfieldController {
      * @param actionEvent
      * @author: nschickm
      * Ein Help-PopUp Fenster oeffnet sich und erklaert das Spiel
+     * -> wie Schiffe platziert werden
+     * -> welche Groeße die Schiffe haben
+     * -> wie auf Schiffe geschossen werden kann
      */
     public void helper(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Help Dialog ");
         alert.setHeaderText(null);
-        alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" + "-> battleship is 5 boxes long, count: 1.\n" + "-> cruiser is 4 boxes long, count: 2.\n" + "-> destroyer is 3 squares long, count: 3.\n" + "-> submarine is 2 boxes long, count: 4.\n" + "A ship can be shot at using console input or even clicking the field. " + "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " + "The game is over only when all ships of a player are destroyed.");
-
-        /* "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
-           "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
-           "Das Spiel ist erst zu Ende wenn von einem Spieler alle Schiffe zerstört sind");
-         */
+        alert.setContentText("Place ships:\n" +
+                "A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" +
+                "A ship can be placed with a mouse click. \n" +
+                "-> right mouse click => vertical\n" +
+                "-> left mouse click => horizontal\n" +
+                "Ships:\n" +
+                "-> battleship is 5 boxes long, count: 1.\n" +
+                "-> cruiser is 4 boxes long, count: 2.\n" +
+                "-> destroyer is 3 boxes long, count: 3.\n" +
+                "-> submarine is 2 boxes long, count: 4.\n" +
+                "Shoot ships:\n" +
+                "A ship can be shot at using console input or even clicking the field. " +
+                "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " +
+                "The game is over only when all ships of a player are destroyed.");
 
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
@@ -328,11 +341,28 @@ public class PlayfieldController {
                 System.out.println(cd.toString());
             }
         });
-    }
 
+    }
  */
     public void initialize() {
         playfieldView = new PlayfieldView(p1playfield1, boardView1);
         playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
+    }
+    /**
+     * @author: nschickm
+     * Checkt ob alle Schiffe zerstoert sind
+     * <p>
+     * allDestroyed = false wenn noch Schiffe uebrig sind
+     * allDestroyed = true wenn alle Schiffe zerstoert sind
+     */
+    public void checkifWon() {
+        ArrayList<Ship> flotte = p1playfield1.flotte;
+        boolean allDestroyed = true;
+
+        for (Ship s : flotte) {
+            if (s.areShipsLeft()) {
+                allDestroyed = false;
+            }
+        }
     }
 }
