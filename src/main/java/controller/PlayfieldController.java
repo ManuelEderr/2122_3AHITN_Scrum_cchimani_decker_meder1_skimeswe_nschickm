@@ -35,7 +35,6 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,7 +67,10 @@ public class PlayfieldController {
     private Integer y = 0;
     private Integer rot = 0;
 
+    private Integer playercounter = 0;
 
+    private Integer boardViewClickable = 0;
+    private Integer boardView1Clickable = 1;
 
 
     /**
@@ -99,37 +101,54 @@ public class PlayfieldController {
     }
 
     /**
-     * @author: skimeswe
+     * @author: skimeswe, meder1
      * Die Methode die nach dem Scene wechseln aufgerufen wird. Ruft die togglePlayer Methode auf und setzt die Farben
      */
     public void afterSwitch() {
         enterSettings.setText("Settings");
         setColor(current);
-        boardView1.setOnMouseClicked(event -> {
-            double x = 0;
-            double y = 0;
-            Coordinate cd = null;
-            if (event.getButton() == MouseButton.PRIMARY) {
-                x = (event.getX() / 33.8);
-                x = Math.floor(x);
-                y = (event.getY() / 33.8);
-                y = Math.floor(y);
-                cd = new Coordinate((int) x, (int) y, 0);
-                schiffsetzen(cd);
-            } else if (event.getButton() == MouseButton.SECONDARY) {
-                x = (event.getX() / 33.8);
-                x = Math.floor(x);
-                y = (event.getY() / 33.8);
-                y = Math.floor(y);
-                cd = new Coordinate((int) x, (int) y, 1);
-                schiffsetzen(cd);
-            }
-            if (current == spieler1) {
-                playfieldView.drawPlayfield(current);
-            } else if (current == spieler2) {
-                playfieldView1.drawPlayfield(current);
-            }
-        });
+        if (boardView1Clickable == 1) {
+            boardView1.setOnMouseClicked(event -> {
+                double x = 0;
+                double y = 0;
+                Coordinate cd = null;
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    x = (event.getX() / 33.8);
+                    x = Math.floor(x);
+                    y = (event.getY() / 33.8);
+                    y = Math.floor(y);
+                    cd = new Coordinate((int) x, (int) y, 0);
+                    schiffsetzen(cd);
+                } else if (event.getButton() == MouseButton.SECONDARY) {
+                    x = (event.getX() / 33.8);
+                    x = Math.floor(x);
+                    y = (event.getY() / 33.8);
+                    y = Math.floor(y);
+                    cd = new Coordinate((int) x, (int) y, 1);
+                    schiffsetzen(cd);
+                }
+                if (current == spieler1) {
+                    playfieldView.drawPlayfield(current);
+                } else if (current == spieler2) {
+                    playfieldView1.drawPlayfield(current);
+                }
+            });
+        }
+        if (boardViewClickable == 1) {
+            boardView.setOnMouseClicked(event -> {
+                double x = 0;
+                double y = 0;
+                Coordinate cd = null;
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    x = (event.getX() / 33.8);
+                    x = Math.floor(x);
+                    y = (event.getY() / 33.8);
+                    y = Math.floor(y);
+                    cd = new Coordinate((int) x, (int) y);
+                    System.out.println(cd);
+                }
+            });
+        }
     }
 
     /**
@@ -157,7 +176,9 @@ public class PlayfieldController {
             setColor(current);
             playfieldView1.disable();
         }
+
     }
+
 
     /**
      * @author: skimeswe
@@ -245,7 +266,18 @@ public class PlayfieldController {
         shipcounter--;
         if (shipcounter == 0) {
             shipcounter = 10;
+            playercounter++;
             togglePlayer();
+            if (playercounter == 2) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Spielbeginn");
+                alert.setHeaderText("Alle Schiffe plaziert, Spiel beginnt");
+                alert.showAndWait();
+                boardView1Clickable = 0;
+                boardViewClickable = 1;
+
+
+            }
         }
     }
 
@@ -273,19 +305,19 @@ public class PlayfieldController {
 
 
     /**
-     * @author: cchimani
      * @param scene Die Scene wird vom Settings Controller in die methode tastatureingabe uebergeben, auf alle KeyEvents(Tastatur eingabe) wird solange die scene aktiv ist (geoeffnet ist) reagiert
-     *       Alle key events werden im String str gespeichert
-     *      Durch regular Expression werden nur gueltige Zeichen im string aktzeptiert
-     *       Die zeichen werden in x,y,rotate aufgeteilt und mit einer Coordinate der methode schiffsetzen uebergeben
+     *              Alle key events werden im String str gespeichert
+     *              Durch regular Expression werden nur gueltige Zeichen im string aktzeptiert
+     *              Die zeichen werden in x,y,rotate aufgeteilt und mit einer Coordinate der methode schiffsetzen uebergeben
+     * @author: cchimani
      */
-    public void tastatureingabe(Scene scene){
+    public void tastatureingabe(Scene scene) {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent keyEvent) {
 
-                if ( PlayfieldController.result) {
+                if (PlayfieldController.result) {
                     String str = keyEvent.getCode().toString();
                     if (str.contains("DIGIT")) {
                         str = str.substring(5);
@@ -295,40 +327,39 @@ public class PlayfieldController {
                     Matcher mt = pt.matcher(str);
 
                     PlayfieldController.result = mt.matches();
-                    if (readCharacters==3){
-                        readCharacters=0;
+                    if (readCharacters == 3) {
+                        readCharacters = 0;
                     }
 
 
-
                     System.out.println(str);
-                    s[readCharacters]=str;
+                    s[readCharacters] = str;
 
 
                     if (s[0] != null) {
-                        char[] a  = s[0].toCharArray();
-                        x = (int)a[0]-65;
-                        s[0]=null;
+                        char[] a = s[0].toCharArray();
+                        x = (int) a[0] - 65;
+                        s[0] = null;
                     }
 
 
                     if (s[1] != null) {
                         //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
-                        y = Integer.valueOf(s[1])-1;
-                        s[1]=null;
+                        y = Integer.valueOf(s[1]) - 1;
+                        s[1] = null;
                     }
 
 
                     if (s[2] != null) {
                         //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
                         rot = Integer.valueOf(s[2]);
-                        s[2]=null;
+                        s[2] = null;
 
                     }
-                    Coordinate c=null;
+                    Coordinate c = null;
 
-                    if(readCharacters==2){
-                        c = new Coordinate(x,y,rot);
+                    if (readCharacters == 2) {
+                        c = new Coordinate(x, y, rot);
                         schiffsetzen(c);
 
 
@@ -438,6 +469,7 @@ public class PlayfieldController {
         playfieldView = new PlayfieldView(p1playfield1, boardView1);
         playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
     }
+
     /**
      * @author: nschickm
      * Checkt ob alle Schiffe zerstoert sind
