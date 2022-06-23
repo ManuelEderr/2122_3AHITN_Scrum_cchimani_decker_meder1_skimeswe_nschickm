@@ -112,7 +112,11 @@ public class PlayfieldController {
                 cd = new Coordinate((int) x, (int) y, 1);
                 schiffsetzen(cd);
             }
-            playfieldView.drawPlayfield(current);
+            if (current == spieler1) {
+                playfieldView.drawPlayfield(current);
+            } else if (current == spieler2) {
+                playfieldView1.drawPlayfield(current);
+            }
         });
 
     }
@@ -192,24 +196,16 @@ public class PlayfieldController {
             }
         }
 
-
         if (length == 2) {
-            System.out.println("2");
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), "U-Boot");
-            System.out.println(coord + " - " + coordinates.get(1).toString());
         } else if (length == 3) {
-            System.out.println("3");
-            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString());
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), "Zerstoerer");
         } else if (length == 4) {
-            System.out.println("4");
-            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString() + " - " + coordinates.get(3).toString());
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), "Kreuzer");
         } else if (length == 5) {
-            System.out.println("5");
-            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString() + " - " + coordinates.get(3).toString() + " - " + coordinates.get(4).toString() + " end");
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
         }
+
         boolean isShip;
         if (ship[shipcounter - 1] != null) {
             if (current == spieler1) {
@@ -233,6 +229,7 @@ public class PlayfieldController {
 
         shipcounter--;
         if (shipcounter == 0) {
+            shipcounter = 10;
             togglePlayer();
         }
     }
