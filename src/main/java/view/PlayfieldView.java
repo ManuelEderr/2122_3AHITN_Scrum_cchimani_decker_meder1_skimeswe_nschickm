@@ -66,18 +66,9 @@ public class PlayfieldView {
 
 
     public void disable() {
-        ObservableList<Node> childrens = gridPane.getChildren();
-        for (int i = 0; i < feld.feld.length; i++) {
-            for (int j = 0; j < feld.feld[i].length; j++) {
-                for (Node node : childrens) {
-                    if (node instanceof ImageView) {
-                        ImageView imageView = new ImageView(); // use what you want to remove
-                        gridPane.getChildren().remove(imageView);
-                        break;
-                    }
-                }
-            }
-        }
+        Node node = gridPane.getChildren().get(0);
+        gridPane.getChildren().clear();
+        gridPane.getChildren().add(0,node);
 
     }
 }
