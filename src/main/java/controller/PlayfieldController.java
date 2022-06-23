@@ -148,10 +148,12 @@ public class PlayfieldController {
      3 Zerstörer (je 3 Kästchen)
     4 U-Boote (je 2 Kästchen)
      */
+
+    /**
+     * @author: david
+     */
     public void schiffsetzen() {
         Ship ship = null;
-
-
 
         if (k >= 0 && k <= 4) {
             length = 3;
@@ -168,6 +170,7 @@ public class PlayfieldController {
                 if (coordinates[0].getRotate() == 0) {
                     coordinates[d].setX(f);
                     coordinates[d].setY(coordinates[0].getY());
+
                 } else if (coordinates[0].getRotate() == 1) {
                     coordinates[d].setY(f);
                     coordinates[d].setX(coordinates[0].getY());
