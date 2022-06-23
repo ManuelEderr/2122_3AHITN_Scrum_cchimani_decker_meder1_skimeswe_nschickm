@@ -198,7 +198,6 @@ public class PlayfieldController {
         }
 
 
-
         if (length == 2) {
             System.out.println("2");
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), "U-Boot");
@@ -217,13 +216,38 @@ public class PlayfieldController {
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
         }
 
+        boolean succes = true;
         if (ship[shipcounter - 1] != null) {
             if (current == spieler1) {
-                p1playfield1.placeShip(ship[shipcounter - 1]);
-                togglePlayer();
+                for (int i = 0; i < p1playfield1.feld.length; i++) {
+                    for (int j = 0; j < p1playfield1.feld[i].length; j++) {
+                        if (p1playfield1.feld[i][j] == 2) {
+                            succes = false;
+                            System.out.println("Fehler");
+                        }
+                    }
+                }
+                if (succes) {
+                    p1playfield1.placeShip(ship[shipcounter - 1]);
+                    togglePlayer();
+                } else {
+                    shipcounter++;
+                }
             } else {
-                p2playfield1.placeShip(ship[shipcounter - 1]);
-                togglePlayer();
+                for (int i = 0; i < p2playfield1.feld.length; i++) {
+                    for (int j = 0; j < p2playfield1.feld[i].length; j++) {
+                        if (p2playfield1.feld[i][j] == 2) {
+                            succes = false;
+                            System.out.println("Fehler");
+                        }
+                    }
+                }
+                if (succes) {
+                    p2playfield1.placeShip(ship[shipcounter - 1]);
+                    togglePlayer();
+                } else {
+                    shipcounter++;
+                }
             }
         }
         shipcounter--;
