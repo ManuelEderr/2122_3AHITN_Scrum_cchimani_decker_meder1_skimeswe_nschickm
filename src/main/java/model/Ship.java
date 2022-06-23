@@ -155,5 +155,9 @@ public class Ship {
         //System.out.println(shippoints);
         return shippoints;
     }
+
+    public ArrayList<Coordinate> getCoords() {
+        return coords;
+    }
 }
 

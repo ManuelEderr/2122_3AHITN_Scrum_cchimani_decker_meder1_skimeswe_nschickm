@@ -92,7 +92,6 @@ public class PlayfieldController {
      */
     public void afterSwitch() {
         enterSettings.setText("Settings");
-        togglePlayer();
         setColor(current);
         boardView1.setOnMouseClicked(event -> {
             double x = 0;
@@ -113,6 +112,7 @@ public class PlayfieldController {
                 cd = new Coordinate((int) x, (int) y, 1);
                 schiffsetzen(cd);
             }
+            playfieldView.drawPlayfield(current);
         });
 
     }
@@ -131,18 +131,14 @@ public class PlayfieldController {
      * TogglePlayer-Methode wechselt den aktuellen Spieler und gibt diesen im Label aus.
      */
     public void togglePlayer() {
-        playfieldView = new PlayfieldView(p1playfield1, boardView1);
-        playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
         if (current == spieler1) {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
-            playfieldView.drawPlayfield(current);
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
             setColor(current);
-            playfieldView1.drawPlayfield(current);
         }
     }
 
@@ -172,7 +168,6 @@ public class PlayfieldController {
      * @author: david
      */
     public void schiffsetzen(Coordinate coord) {
-        System.out.println(coord.toString());
         if (shipcounter >= 0 && shipcounter <= 4) {
             length = 2;
         } else if (shipcounter >= 5 && shipcounter <= 7) {
@@ -215,42 +210,31 @@ public class PlayfieldController {
             System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString() + " - " + coordinates.get(3).toString() + " - " + coordinates.get(4).toString() + " end");
             ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
         }
-
-        boolean succes = true;
+        boolean isShip;
         if (ship[shipcounter - 1] != null) {
             if (current == spieler1) {
-                for (int i = 0; i < p1playfield1.feld.length; i++) {
-                    for (int j = 0; j < p1playfield1.feld[i].length; j++) {
-                        if (p1playfield1.feld[i][j] == 2) {
-                            succes = false;
-                            System.out.println("Fehler");
-                        }
-                    }
-                }
-                if (succes) {
+                isShip = p1playfield1.checkShip(ship[shipcounter - 1]);
+                if (isShip) {
                     p1playfield1.placeShip(ship[shipcounter - 1]);
-                    togglePlayer();
                 } else {
+                    System.out.println("Fehler");
                     shipcounter++;
                 }
             } else {
-                for (int i = 0; i < p2playfield1.feld.length; i++) {
-                    for (int j = 0; j < p2playfield1.feld[i].length; j++) {
-                        if (p2playfield1.feld[i][j] == 2) {
-                            succes = false;
-                            System.out.println("Fehler");
-                        }
-                    }
-                }
-                if (succes) {
+                isShip = p2playfield1.checkShip(ship[shipcounter - 1]);
+                if (isShip) {
                     p2playfield1.placeShip(ship[shipcounter - 1]);
-                    togglePlayer();
                 } else {
+                    System.out.println("Fehler");
                     shipcounter++;
                 }
             }
         }
+
         shipcounter--;
+        if (shipcounter == 0) {
+            togglePlayer();
+        }
     }
 
     /**
@@ -319,7 +303,6 @@ public class PlayfieldController {
      * Linksklick auf die Zelle: Rotation = 0
      * Rechtsklick auf die Zelle: Rotation = 1
      * First Click doesn't work
-     * @param mouseEvent
      */
 /*
     public void test(MouseEvent mouseEvent) {
@@ -351,5 +334,8 @@ public class PlayfieldController {
     }
 
  */
-
+    public void initialize() {
+        playfieldView = new PlayfieldView(p1playfield1, boardView1);
+        playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
+    }
 }
