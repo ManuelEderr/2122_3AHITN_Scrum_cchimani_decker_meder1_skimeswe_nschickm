@@ -141,7 +141,6 @@ public class SettingsController {
                     System.out.println(str);
 
 
-
                 }
             }
         });

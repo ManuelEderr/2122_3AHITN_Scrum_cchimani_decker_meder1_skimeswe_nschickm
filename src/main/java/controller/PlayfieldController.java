@@ -118,7 +118,6 @@ public class PlayfieldController {
                 playfieldView1.drawPlayfield(current);
             }
         });
-
     }
 
     /**
@@ -139,10 +138,12 @@ public class PlayfieldController {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
+            playfieldView.disable();
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
             setColor(current);
+            playfieldView1.disable();
         }
     }
 
@@ -212,6 +213,7 @@ public class PlayfieldController {
                 isShip = p1playfield1.checkShip(ship[shipcounter - 1]);
                 if (isShip) {
                     p1playfield1.placeShip(ship[shipcounter - 1]);
+
                 } else {
                     System.out.println("Fehler");
                     shipcounter++;
