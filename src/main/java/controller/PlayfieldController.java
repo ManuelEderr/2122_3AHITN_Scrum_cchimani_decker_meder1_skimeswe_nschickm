@@ -69,7 +69,7 @@ public class PlayfieldController {
 
     private Integer playercounter = 0;
 
-    private Integer boardViewClickable = 0;
+    private Integer boardViewClickable = 1;
     private Integer boardView1Clickable = 1;
 
 
@@ -134,22 +134,25 @@ public class PlayfieldController {
                 }
             });
         }
-        if (boardViewClickable == 1) {
-            boardView.setOnMouseClicked(event -> {
-                double x = 0;
-                double y = 0;
-                Coordinate cd = null;
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    x = (event.getX() / 33.8);
-                    x = Math.floor(x);
-                    y = (event.getY() / 33.8);
-                    y = Math.floor(y);
-                    cd = new Coordinate((int) x, (int) y);
-                    System.out.println(cd);
-                }
-            });
+
+
+
+    }
+
+
+    public void shotzFired(Coordinate cd, Player currentPlayer){
+        if (currentPlayer == spieler1){
+            p2playfield1.placeHit(cd);
+            playfieldView.drawPlayfield(current);
+        } else if (currentPlayer == spieler2) {
+            p1playfield1.placeHit(cd);
+            playfieldView1.drawPlayfield(current);
         }
     }
+
+
+
+
 
     /**
      * @author: skimeswe
@@ -276,6 +279,20 @@ public class PlayfieldController {
                 boardView1Clickable = 0;
                 boardViewClickable = 1;
 
+                boardView.setOnMouseClicked(event -> {
+                    double x = 0;
+                    double y = 0;
+                    Coordinate cd = null;
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        x = (event.getX() / 33.8);
+                        x = Math.floor(x);
+                        y = (event.getY() / 33.8);
+                        y = Math.floor(y);
+                        cd = new Coordinate((int) x, (int) y);
+                        shotzFired(cd, current);
+                        System.out.println(cd);
+                    }
+                });
 
             }
         }

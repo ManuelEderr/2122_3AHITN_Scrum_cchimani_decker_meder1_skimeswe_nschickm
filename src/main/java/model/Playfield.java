@@ -95,15 +95,17 @@ public class Playfield {
     /**
      * Ein Schuss wird platziert.
      *
-     * @author: skimeswe, decker, asoenmez
+     * @author: skimeswe, decker
      */
     public int placeHit(Coordinate coordinate) {
         if (feld[coordinate.getX()][coordinate.getY()] == HITWATER || feld[coordinate.getX()][coordinate.getY()] == HITSHIP) {
             System.out.println("bereits getroffen");
         } else if (feld[coordinate.getX()][coordinate.getY()] == EMPTY) {
+            System.out.println("wasser getroffen");
             feld[coordinate.getX()][coordinate.getY()] = HITWATER;
             System.out.println("Wasser");
         } else {
+            System.out.println("schiff getroffen");
             feld[coordinate.getX()][coordinate.getY()] = HITSHIP;
         }
 

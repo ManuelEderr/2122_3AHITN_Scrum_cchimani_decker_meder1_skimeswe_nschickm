@@ -15,11 +15,20 @@ public class PlayfieldView {
     GridPane gridPane;
     ArrayList<ImageView> arrayList = new ArrayList<>();
 
+    /**
+     *
+     * @param feld
+     * @param gridPane
+     */
     public PlayfieldView(Playfield feld, GridPane gridPane) {
         this.feld = feld;
         this.gridPane = gridPane;
     }
 
+    /**
+     * Die entsprechenden Bilder werden in das Playfield gesetzt.
+     * @param player
+     */
     public void drawPlayfield(Player player) {
         ImageView imageView;
         for (int i = 0; i < feld.feld.length; i++) {
@@ -43,6 +52,10 @@ public class PlayfieldView {
                 }
             }
         }
+    }
+
+    public void drawSecondPlayfield(Playfield pf2){
+
     }
 
 
