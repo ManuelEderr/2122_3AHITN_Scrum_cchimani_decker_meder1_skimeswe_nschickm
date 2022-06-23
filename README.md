@@ -9,14 +9,14 @@
 | Entwickler     | Schickmair Nico     | https://github.com/nschickm      | nschickm@htl-steyr.ac.at          |
 | Entwickler     | Chimani Christian     | https://github.com/christian-42      | cchimani@htl-steyr.ac.at          |
 
-##Potentielle Fehler und Fixes dafür
+## Potentielle Fehler und Fixes dafür
 
-###SoundPlay.jar Fehler
+### SoundPlay.jar Fehler
 
 Project Structure -> Libraries
-![img_2.png](img_2.png)
-![img_3.png](img_3.png) 
-![img_4.png](img_4.png)
+![img_2.png](img_2.png)  
+![img_3.png](img_3.png)   
+![img_4.png](img_4.png)  
 SoundPlay.jar auswählen
 
 
