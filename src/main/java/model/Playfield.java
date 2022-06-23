@@ -16,7 +16,7 @@ public class Playfield {
     final static int MAX_X = 10;
     final static int MAX_Y = 10;
 
-    ArrayList<Ship> flotte = new ArrayList<Ship>();
+     public ArrayList<Ship> flotte = new ArrayList<Ship>();
 
 
     /**
