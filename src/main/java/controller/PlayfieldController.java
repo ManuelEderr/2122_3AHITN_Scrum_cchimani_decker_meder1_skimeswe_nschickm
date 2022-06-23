@@ -1,19 +1,15 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -57,10 +53,11 @@ public class PlayfieldController {
     Player spieler1;
     Player spieler2;
     Player current = spieler1;
-    int k = 10;
-    int length = 3;
+    int shipcounter = 10;
     PlayfieldView playfieldView;
     PlayfieldView playfieldView1;
+    int length = 0;
+    Ship[] ship = new Ship[10];
 
     /**
      * @param spieler1
@@ -100,26 +97,21 @@ public class PlayfieldController {
         boardView1.setOnMouseClicked(event -> {
             double x = 0;
             double y = 0;
-            double rot = 0;
             Coordinate cd = null;
             if (event.getButton() == MouseButton.PRIMARY) {
                 x = (event.getX() / 33.8);
                 x = Math.floor(x);
                 y = (event.getY() / 33.8);
                 y = Math.floor(y);
-                rot = 0;
                 cd = new Coordinate((int) x, (int) y, 0);
                 schiffsetzen(cd);
-                System.out.println(cd.toString());
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 x = (event.getX() / 33.8);
                 x = Math.floor(x);
                 y = (event.getY() / 33.8);
                 y = Math.floor(y);
-                rot = 1;
                 cd = new Coordinate((int) x, (int) y, 1);
                 schiffsetzen(cd);
-                System.out.println(cd.toString());
             }
         });
 
@@ -177,55 +169,64 @@ public class PlayfieldController {
      */
 
     /**
-     * @author: david, (cchimani)
+     * @author: david
      */
     public void schiffsetzen(Coordinate coord) {
-        Ship ship = null;
-        Coordinate coordinate;
-
-        if (k >= 0 && k <= 4) {
+        System.out.println(coord.toString());
+        if (shipcounter >= 0 && shipcounter <= 4) {
+            length = 2;
+        } else if (shipcounter >= 5 && shipcounter <= 7) {
             length = 3;
-        } else if (k >= 5 && k <= 7) {
+        } else if (shipcounter >= 8 && shipcounter <= 9) {
             length = 4;
-        } else if (k >= 8 && k <= 9) {
-            length = 4;
-        } else if (k == 10) {
-            length = 4;
+        } else if (shipcounter == 10) {
+            length = 5;
         }
 
-        for (int f = coord.getX() + 1; f < coord.getX() + 3; f++) {
-            for (int d = 1; d < length; d++) {
-                if (coord.getRotate() == 0) {
-                    coordinate = new Coordinate(f, coord.getY());
-                    coordinates.add(coordinate);
-                } else if (coord.getRotate() == 1) {
-                    coordinate = new Coordinate(coord.getX(), f);
-                    coordinates.add(coordinate);
-                }
+        coordinates.clear();
+        Coordinate[] coordinate = new Coordinate[length];
+        if (coord.getRotate() == 0) {
+            for (int i = 0; i < length; i++) {
+                coordinate[i] = new Coordinate(coord.getX(), coord.getY() + i);
+                coordinates.add(coordinate[i]);
+            }
+        } else if (coord.getRotate() == 1) {
+            for (int i = 0; i < length; i++) {
+                coordinate[i] = new Coordinate(coord.getX() + i, coord.getY());
+                coordinates.add(coordinate[i]);
             }
         }
-        k--;
 
-        switch (length) {
-            case 2:
-                ship = new Ship(coord, coordinates.get(1), "U-Boot");
-            case 3:
-                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), "Zerstoerer");
-            case 4:
-                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), "Kreuzer");
-            case 5:
-                ship = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
+
+
+        if (length == 2) {
+            System.out.println("2");
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), "U-Boot");
+            System.out.println(coord + " - " + coordinates.get(1).toString());
+        } else if (length == 3) {
+            System.out.println("3");
+            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString());
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), "Zerstoerer");
+        } else if (length == 4) {
+            System.out.println("4");
+            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString() + " - " + coordinates.get(3).toString());
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), "Kreuzer");
+        } else if (length == 5) {
+            System.out.println("5");
+            System.out.println(coord + " - " + coordinates.get(1).toString() + " - " + coordinates.get(2).toString() + " - " + coordinates.get(3).toString() + " - " + coordinates.get(4).toString() + " end");
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
         }
 
-        if (ship != null) {
+        if (ship[shipcounter - 1] != null) {
             if (current == spieler1) {
-                p1playfield1.placeShip(ship);
+                p1playfield1.placeShip(ship[shipcounter - 1]);
                 togglePlayer();
             } else {
-                p2playfield1.placeShip(ship);
+                p2playfield1.placeShip(ship[shipcounter - 1]);
                 togglePlayer();
             }
         }
+        shipcounter--;
     }
 
     /**
@@ -323,12 +324,6 @@ public class PlayfieldController {
                 System.out.println(cd.toString());
             }
         });
-
-
-
-
-
-
     }
 
  */

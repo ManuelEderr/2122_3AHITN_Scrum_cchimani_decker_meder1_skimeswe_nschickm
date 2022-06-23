@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * sobald ein Schiff getroffen wird, wird die getroffene Koordinate geloescht
  */
 public class Ship {
-
     private static Coordinate coord1 = null;
     private static Coordinate coord2 = null;
     private static Coordinate coord3 = null;
@@ -26,8 +25,7 @@ public class Ship {
 
     private int shippoints = 0;
 
-    ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
-
+    ArrayList<Coordinate> coords = new ArrayList<>();
 
     /**
      * Schiff mit der größe 2
@@ -138,29 +136,9 @@ public class Ship {
     }
 
     /**
-     * Ueberprueft ob ein Schiff auf den mitgegebenen Zeichen steht
-     *
-     * @param theCoord diese Koordinate wird ueberprueft
-     * @return true -> Schiff steht darauf
-     * false -> Schiff steht nicht darauf
-     */
-    public boolean hasCoordinates(Coordinate theCoord) {
-        for (int i = 0; i < coords.size(); i++) {
-            Coordinate coord = coords.get(i);
-            if (coord == theCoord) {
-                //   System.out.printf("Auf dieser Koordinate befindet sich ein Schiff");
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
      * gibt den Namen des Schiffes zurueck
      *
      * @return Name des Schiffes
-     *
      * @return der Name des Schiffes
      */
     public String getShipname() {

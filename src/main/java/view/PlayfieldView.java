@@ -21,7 +21,6 @@ public class PlayfieldView {
         for (int i = 0; i < feld.feld.length; i++) {
             for (int j = 0; j < feld.feld[i].length; j++) {
                 switch (feld.feld[i][j]) {
-
                     case 0:
                         break;
                     case 1:
