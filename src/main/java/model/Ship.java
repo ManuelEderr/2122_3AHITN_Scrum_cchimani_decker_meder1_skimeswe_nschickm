@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * sobald ein Schiff getroffen wird, wird die getroffene Koordinate geloescht
  */
 public class Ship {
+
     private static Coordinate coord1 = null;
     private static Coordinate coord2 = null;
     private static Coordinate coord3 = null;
@@ -149,7 +150,7 @@ public class Ship {
     /**
      * gibt die Punkte des jeweiligen Schiffes zurueck
      *
-     * @return Punkte daes zerstoerten Schiffes
+     * @return Punkte des zerstoerten Schiffes
      */
     public int getShippoints() {
         //System.out.println(shippoints);
