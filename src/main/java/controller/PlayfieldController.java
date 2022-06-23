@@ -1,14 +1,17 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -32,7 +35,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class PlayfieldController {
@@ -93,20 +95,6 @@ public class PlayfieldController {
         enterSettings.setText("Settings");
         togglePlayer();
         setColor(current);
-        new Thread(() -> {
-            while (true) {
-                boardView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    for (Node node : boardView.getChildren()) {
-                        if (node instanceof Label) {
-                            if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
-                                System.out.println(GridPane.getRowIndex(node) + "/" + GridPane.getColumnIndex(node));
-                            }
-                        }
-                    }
-                });
-            }
-        }).start();
-
     }
 
     /**
@@ -160,8 +148,13 @@ public class PlayfieldController {
      3 Zerstörer (je 3 Kästchen)
     4 U-Boote (je 2 Kästchen)
      */
+
+    /**
+     * @author: david
+     */
     public void schiffsetzen() {
         Ship ship = null;
+
 
 
         if (k >= 0 && k <= 4) {
@@ -179,6 +172,7 @@ public class PlayfieldController {
                 if (coordinates[0].getRotate() == 0) {
                     coordinates[d].setX(f);
                     coordinates[d].setY(coordinates[0].getY());
+
                 } else if (coordinates[0].getRotate() == 1) {
                     coordinates[d].setY(f);
                     coordinates[d].setX(coordinates[0].getY());
@@ -247,6 +241,8 @@ public class PlayfieldController {
 
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
+
+
 
 
     /**
