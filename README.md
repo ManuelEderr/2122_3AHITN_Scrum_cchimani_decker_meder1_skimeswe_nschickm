@@ -14,9 +14,9 @@
 ###SoundPlay.jar Fehler
 
 Project Structure -> Libraries
-![img_2.png](img_2.png)
-![img_3.png](img_3.png) 
-![img_4.png](img_4.png)
+![img_2.png](img_2.png)  
+![img_3.png](img_3.png)   
+![img_4.png](img_4.png)  
 SoundPlay.jar auswählen
 
 
