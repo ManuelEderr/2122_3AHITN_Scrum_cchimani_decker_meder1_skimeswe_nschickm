@@ -15,16 +15,10 @@
 
 ### SoundPlay.jar Fehler
 
-Project Structure -> Libraries
+Project Structure -> Libraries  
 <p align="center">
-  <img src="img_2.png" alt=""/>
-</p>
-<p align="center">
-  <img src="img_3.png" alt=""/>
-</p>
-<p align="center">
-  <img src="img_4.png" alt=""/>
-</p>
+  <img src="https://user-images.githubusercontent.com/83589343/175277016-6992edeb-0623-4084-a715-e359e57fad26.gif" alt=""/>
+</p>  
 SoundPlay.jar auswählen
 
 
