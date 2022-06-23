@@ -15,11 +15,11 @@
 
 ### SoundPlay.jar Fehler
 
-Project Structure -> Libraries  
+Project Structure -> Libraries -> SoundPlay.jar auswählen
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/83589343/175277016-6992edeb-0623-4084-a715-e359e57fad26.gif" alt=""/>
 </p>  
-SoundPlay.jar auswählen
 
 
 
