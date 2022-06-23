@@ -22,10 +22,6 @@ import model.Player;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class SettingsController {
@@ -43,7 +39,6 @@ public class SettingsController {
     private ChoiceBox shipchoicebox;
     private Player player1;
     private Player player2;
-
 
     @FXML
     void okbnclicked(ActionEvent event) throws IOException {
@@ -91,7 +86,6 @@ public class SettingsController {
      */
     public void change_scene() throws IOException {
 
-
         Stage stage = new Stage();
 
         Stage stageclose = (Stage) fnf.getScene().getWindow();
@@ -114,40 +108,6 @@ public class SettingsController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            String s[] = new String[4];
-            Integer x = 0;
-            Integer y = 0;
-            int readCharacters = 0;
-            int rot = 0;
-
-
-            @Override
-            public void handle(KeyEvent keyEvent) {
-
-
-                if (readCharacters < 30 && PlayfieldController.result) {
-                    String str = keyEvent.getCode().toString();
-                    if (str.contains("DIGIT")) {
-                        str = str.substring(5);
-                    }
-                    String ver = "[A-J]|[0-9]";
-                    Pattern pt = Pattern.compile(ver);
-                    Matcher mt = pt.matcher(str);
-
-                    PlayfieldController.result = mt.matches();
-
-
-                    s[readCharacters] = str;
-                    readCharacters++;
-                    System.out.println(str);
-
-
-
-                }
-            }
-        });
-
 
     }
 }

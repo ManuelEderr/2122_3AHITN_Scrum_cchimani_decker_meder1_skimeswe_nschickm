@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,7 +8,6 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
@@ -40,14 +38,12 @@ import java.net.URL;
 
 public class PlayfieldController {
     static Coordinate[] coordinates = new Coordinate[10];
-    public int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
     public VBox vboxPlayfield;
     public AnchorPane apane2;
     public Button enterSettings;
     public Label currentPlayer;
-    public Button input;
     Playfield p1playfield1 = new Playfield();
     Playfield p2playfield1 = new Playfield();
     public GridPane boardView1;
