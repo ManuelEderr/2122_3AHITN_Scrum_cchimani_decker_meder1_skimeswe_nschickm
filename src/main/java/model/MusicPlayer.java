@@ -10,6 +10,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author: skimeswe
+ * Diese Klasse ist für das Spielen- Stoppen und Vorbereiten von Songs zuständig.
+ */
 public class MusicPlayer {
     private AdvancedPlayer player;
 
@@ -17,6 +21,11 @@ public class MusicPlayer {
         player = null;
     }
 
+    /**
+     * @param filename
+     * @author: skimeswe
+     * Diese Methode spielt den zuvor ausgewählten File ab und wird mit einer Exception abgesichert.
+     */
     public void playFile(String filename) {
         try {
             preparePlayer(filename);
@@ -48,6 +57,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * beendet den MusicPlayer
+     */
     public void stop() {
         killPlayer();
     }
