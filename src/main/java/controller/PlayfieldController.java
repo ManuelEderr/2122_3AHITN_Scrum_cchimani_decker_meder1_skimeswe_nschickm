@@ -207,7 +207,7 @@ public class PlayfieldController {
      */
 
     /**
-     * @author: david
+     * @author: david, (*cchimani)
      */
     public void schiffsetzen(Coordinate coord) {
         if (shipcounter >= 0 && shipcounter <= 4) {
@@ -343,6 +343,20 @@ public class PlayfieldController {
                     Pattern pt = Pattern.compile(ver);
                     Matcher mt = pt.matcher(str);
 
+                    if(mt.matches()==false){
+                        System.out.println("Ungueltiges Zeichen");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Ungueltiges Zeichen ");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Ungueltiges Zeichen:\n" +
+                                "Gueltige Zeichen A-J und 1-9");
+
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.showAndWait();
+
+                    }else
+                    {
+
                     PlayfieldController.result = mt.matches();
                     if (readCharacters == 3) {
                         readCharacters = 0;
@@ -390,6 +404,7 @@ public class PlayfieldController {
 
 
                 }
+            }
             }
 
         });
