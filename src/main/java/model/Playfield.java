@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class Playfield {
@@ -103,7 +104,6 @@ public class Playfield {
         } else if (feld[coordinate.getX()][coordinate.getY()] == EMPTY) {
             System.out.println("wasser getroffen");
             feld[coordinate.getX()][coordinate.getY()] = HITWATER;
-            System.out.println("Wasser");
         } else {
             System.out.println("schiff getroffen");
             feld[coordinate.getX()][coordinate.getY()] = HITSHIP;

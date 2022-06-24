@@ -37,7 +37,10 @@ public class PlayfieldView {
                     case 0:
                         break;
                     case 1:
-                        gridPane.add(new ImageView("missed.png"), i, j);
+                        ImageView imageView1 = new ImageView("missed.png");
+                        imageView1.setFitHeight(33.8);
+                        imageView1.setFitWidth(33.8);
+                        gridPane.add(imageView1, i, j);
                         break;
                     case 2:
                         imageView = new ImageView(player.getShip());
@@ -47,7 +50,10 @@ public class PlayfieldView {
                         arrayList.add(imageView);
                         break;
                     case 3:
-                        gridPane.add(new ImageView("Treffer.jpg"), i, j);
+                        ImageView imageView2 = new ImageView("Treffer.jpg");
+                        imageView2.setFitWidth(33.8);
+                        imageView2.setFitHeight(33.8);
+                        gridPane.add(imageView2, i, j);
                         break;
                 }
             }

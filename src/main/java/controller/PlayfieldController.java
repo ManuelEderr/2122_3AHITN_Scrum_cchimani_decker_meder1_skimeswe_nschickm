@@ -142,10 +142,12 @@ public class PlayfieldController {
 
     public void shotzFired(Coordinate cd, Player currentPlayer){
         if (currentPlayer == spieler1){
-            p2playfield1.placeHit(cd);
+            p1playfield1.placeHit(cd);
+            togglePlayer();
             playfieldView.drawPlayfield(current);
         } else if (currentPlayer == spieler2) {
-            p1playfield1.placeHit(cd);
+            p2playfield1.placeHit(cd);
+            togglePlayer();
             playfieldView1.drawPlayfield(current);
         }
     }
@@ -169,6 +171,7 @@ public class PlayfieldController {
      */
     public void togglePlayer() {
         if (current == spieler1) {
+            System.out.println("erster spieler");
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
