@@ -262,7 +262,6 @@ public class PlayfieldController {
                 if (isShip) {
                     p2playfield1.placeShip(ship[shipcounter - 1]);
                 } else {
-
                     shipcounter++;
                 }
             }
@@ -342,7 +341,8 @@ public class PlayfieldController {
                     Pattern pt = Pattern.compile(ver);
                     Matcher mt = pt.matcher(str);
 
-                    if (!mt.matches()) {
+                    if(mt.matches()==false){
+                        System.out.println("Ungueltiges Zeichen");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Ungueltiges Zeichen ");
                         alert.setHeaderText(null);
@@ -447,43 +447,6 @@ public class PlayfieldController {
         alert.showAndWait();
     }
 
-
-    /**
-     * Es werden die x und die y Koordinaten des Gridpanes zurückgegeben wenn diejenige Zelle geclicked wird.
-     * Linksklick auf die Zelle: Rotation = 0
-     * Rechtsklick auf die Zelle: Rotation = 1
-     * First Click doesn't work
-     */
-/*
-    public void test(MouseEvent mouseEvent) {
-
-
-        boardView1.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            double x = 0;
-            double y = 0;
-            double rot = 0;
-            Coordinate cd = null;
-            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                x = (mouseEvent.getX() / 33.8);
-                x = Math.floor(x);
-                y = (mouseEvent.getY() / 33.8);
-                y = Math.floor(y);
-                rot = 0;
-                cd = new Coordinate((int) x, (int) y, 0);
-                System.out.println(cd.toString());
-            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                x = (mouseEvent.getX() / 33.8);
-                x = Math.floor(x);
-                y = (mouseEvent.getY() / 33.8);
-                y = Math.floor(y);
-                rot = 1;
-                cd = new Coordinate((int) x, (int) y, 1);
-                System.out.println(cd.toString());
-            }
-        });
-
-    }
- */
     public void initialize() {
         playfieldView = new PlayfieldView(p1playfield1, boardView1);
         playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
