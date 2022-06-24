@@ -11,14 +11,16 @@ public class Playfield {
     public static final int HITWATER = 1;
     public static final int SHIP = 2;
     public static final int HITSHIP = 3;
-
     public int[][] feld;
 
     final static int MAX_X = 10;
     final static int MAX_Y = 10;
 
-    ArrayList<Ship> flotte = new ArrayList<Ship>();
+     public ArrayList<Ship> flotte = new ArrayList<Ship>();
 
+    public ArrayList<Ship> getFlotte() {
+        return flotte;
+    }
 
     /**
      * Konstruktor
@@ -63,16 +65,17 @@ public class Playfield {
      * diese Methode plaziert die Schiffe mittels der Koordinaten
      */
     public void placeShip(Ship ship) {
-        Iterator<Coordinate> iterator = ship.coords.iterator();
-        while (iterator.hasNext()) {
-            Coordinate place = iterator.next();
-            if (feld[place.getX()][place.getY()] != 0) {
-            } else {
-                feld[place.getX()][place.getY()] = 2;
+
+        for (Coordinate place : ship.coords) {
+            if (feld[place.getX()][place.getY()] == EMPTY) {
+                feld[place.getX()][place.getY()] = SHIP;
             }
         }
         flotte.add(ship);
+
+
     }
+
 
     /**
      * @param coordinate Die zu überprüfende Koordinate
@@ -82,7 +85,7 @@ public class Playfield {
     public boolean checkHit(Coordinate coordinate) {
         boolean rv = false;
         int position = feld[coordinate.getX()][coordinate.getY()];
-        if (position == 0 || position == 2) {
+        if (position == EMPTY || position == SHIP) {
             rv = true;
         }
         return rv;
@@ -92,18 +95,18 @@ public class Playfield {
     /**
      * Ein Schuss wird platziert.
      *
-     * @author: skimeswe
+     * @author: skimeswe, decker
      */
     public int placeHit(Coordinate coordinate) {
-        if (feld[coordinate.getX()][coordinate.getY()] == 1 || feld[coordinate.getX()][coordinate.getY()] == 3) {
+        if (feld[coordinate.getX()][coordinate.getY()] == HITWATER || feld[coordinate.getX()][coordinate.getY()] == HITSHIP) {
             System.out.println("bereits getroffen");
-        } else if (feld[coordinate.getX()][coordinate.getY()] == 0) {
-            feld[coordinate.getX()][coordinate.getY()] = 1;
+        } else if (feld[coordinate.getX()][coordinate.getY()] == EMPTY) {
+            System.out.println("wasser getroffen");
+            feld[coordinate.getX()][coordinate.getY()] = HITWATER;
             System.out.println("Wasser");
-
         } else {
-            feld[coordinate.getX()][coordinate.getY()] = 3;
-
+            System.out.println("schiff getroffen");
+            feld[coordinate.getX()][coordinate.getY()] = HITSHIP;
         }
 
         return 1;

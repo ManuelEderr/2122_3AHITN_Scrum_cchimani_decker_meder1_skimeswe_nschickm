@@ -1,4 +1,6 @@
-# 2122_3AHITN_Scrum_cchimani_decker_meder1_skimeswe_nschickm
+![image](https://user-images.githubusercontent.com/83589343/175273683-5c6cbbe8-ffd8-411f-a8ab-db370ccdd7e0.png)
+
+# Battleship
 
 | Rolle          | Name            | Git-Account                       | E-Mail                          |
 |----------------|-----------------|-----------------------------------|---------------------------------|
@@ -9,15 +11,15 @@
 | Entwickler     | Schickmair Nico     | https://github.com/nschickm      | nschickm@htl-steyr.ac.at          |
 | Entwickler     | Chimani Christian     | https://github.com/christian-42      | cchimani@htl-steyr.ac.at          |
 
-##Potentielle Fehler und Fixes dafür
+## Potentielle Fehler und Fixes dafür
 
-###SoundPlay.jar Fehler
+### SoundPlay.jar Fehler
 
-Project Structure -> Libraries
-![img_2.png](img_2.png)
-![img_3.png](img_3.png) 
-![img_4.png](img_4.png)
-SoundPlay.jar auswählen
+Project Structure -> Libraries -> SoundPlay.jar auswählen
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83589343/175277016-6992edeb-0623-4084-a715-e359e57fad26.gif" alt=""/>
+</p>  
 
 
 

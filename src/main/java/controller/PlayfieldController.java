@@ -3,17 +3,15 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -36,10 +34,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class PlayfieldController {
-    static Coordinate[] coordinates = new Coordinate[10];
+    static ArrayList<Coordinate> coordinates = new ArrayList<>();
     public int readCharacters = 0;
     static boolean result = true;
     public GridPane boardView;
@@ -56,10 +57,21 @@ public class PlayfieldController {
     Player spieler1;
     Player spieler2;
     Player current = spieler1;
-    int k = 10;
-    int length = 3;
+    int shipcounter = 10;
     PlayfieldView playfieldView;
     PlayfieldView playfieldView1;
+    int length = 0;
+    Ship[] ship = new Ship[10];
+    private String s[] = new String[4];
+    private Integer x = 0;
+    private Integer y = 0;
+    private Integer rot = 0;
+
+    private Integer playercounter = 0;
+
+    private Integer boardViewClickable = 1;
+    private Integer boardView1Clickable = 1;
+
 
     /**
      * @param spieler1
@@ -89,38 +101,58 @@ public class PlayfieldController {
     }
 
     /**
-     * @author: skimeswe
+     * @author: skimeswe, meder1
      * Die Methode die nach dem Scene wechseln aufgerufen wird. Ruft die togglePlayer Methode auf und setzt die Farben
      */
     public void afterSwitch() {
         enterSettings.setText("Settings");
-        togglePlayer();
         setColor(current);
-        boardView1.setOnMouseClicked(event -> {
-            double x = 0;
-            double y = 0;
-            double rot = 0;
-            Coordinate cd = null;
-            if (event.getButton() == MouseButton.PRIMARY) {
-                x = (event.getX() / 33.8);
-                x = Math.floor(x);
-                y = (event.getY() / 33.8);
-                y = Math.floor(y);
-                rot = 0;
-                cd = new Coordinate((int) x, (int) y, 0);
-                System.out.println(cd.toString());
-            } else if (event.getButton() == MouseButton.SECONDARY) {
-                x = (event.getX() / 33.8);
-                x = Math.floor(x);
-                y = (event.getY() / 33.8);
-                y = Math.floor(y);
-                rot = 1;
-                cd = new Coordinate((int) x, (int) y, 1);
-                System.out.println(cd.toString());
-            }
-        });
+        if (boardView1Clickable == 1) {
+            boardView1.setOnMouseClicked(event -> {
+                double x = 0;
+                double y = 0;
+                Coordinate cd = null;
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    x = (event.getX() / 33.8);
+                    x = Math.floor(x);
+                    y = (event.getY() / 33.8);
+                    y = Math.floor(y);
+                    cd = new Coordinate((int) x, (int) y, 0);
+                    schiffsetzen(cd);
+                } else if (event.getButton() == MouseButton.SECONDARY) {
+                    x = (event.getX() / 33.8);
+                    x = Math.floor(x);
+                    y = (event.getY() / 33.8);
+                    y = Math.floor(y);
+                    cd = new Coordinate((int) x, (int) y, 1);
+                    schiffsetzen(cd);
+                }
+                if (current == spieler1) {
+                    playfieldView.drawPlayfield(current);
+                } else if (current == spieler2) {
+                    playfieldView1.drawPlayfield(current);
+                }
+            });
+        }
+
+
 
     }
+
+
+    public void shotzFired(Coordinate cd, Player currentPlayer){
+        if (currentPlayer == spieler1){
+            p2playfield1.placeHit(cd);
+            playfieldView.drawPlayfield(current);
+        } else if (currentPlayer == spieler2) {
+            p1playfield1.placeHit(cd);
+            playfieldView1.drawPlayfield(current);
+        }
+    }
+
+
+
+
 
     /**
      * @author: skimeswe
@@ -136,20 +168,20 @@ public class PlayfieldController {
      * TogglePlayer-Methode wechselt den aktuellen Spieler und gibt diesen im Label aus.
      */
     public void togglePlayer() {
-        playfieldView = new PlayfieldView(p1playfield1, boardView1);
-        playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
         if (current == spieler1) {
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
-            playfieldView.drawPlayfield();
+            playfieldView.disable();
         } else if (current == spieler2) {
             currentPlayer.setText(spieler2.getName() + " ist an der Reihe");
             current = spieler1;
             setColor(current);
-            playfieldView1.drawPlayfield();
+            playfieldView1.disable();
         }
+
     }
+
 
     /**
      * @author: skimeswe
@@ -175,55 +207,93 @@ public class PlayfieldController {
      */
 
     /**
-     * @author: david
+     * @author: david, (*cchimani)
      */
-    public void schiffsetzen() {
-        Ship ship = null;
-
-
-
-        if (k >= 0 && k <= 4) {
+    public void schiffsetzen(Coordinate coord) {
+        if (shipcounter >= 0 && shipcounter <= 4) {
+            length = 2;
+        } else if (shipcounter >= 5 && shipcounter <= 7) {
             length = 3;
-        } else if (k >= 5 && k <= 7) {
+        } else if (shipcounter >= 8 && shipcounter <= 9) {
             length = 4;
-        } else if (k >= 8 && k <= 9) {
-            length = 4;
-        } else if (k == 10) {
-            length = 4;
+        } else if (shipcounter == 10) {
+            length = 5;
         }
 
-        for (int f = coordinates[0].getX() + 1; f < coordinates[0].getX() + 3; f++) {
-            for (int d = 1; d < length; d++) {
-                if (coordinates[0].getRotate() == 0) {
-                    coordinates[d].setX(f);
-                    coordinates[d].setY(coordinates[0].getY());
+        coordinates.clear();
+        Coordinate[] coordinate = new Coordinate[length];
+        if (coord.getRotate() == 0) {
+            for (int i = 0; i < length; i++) {
+                coordinate[i] = new Coordinate(coord.getX(), coord.getY() + i);
+                coordinates.add(coordinate[i]);
+            }
+        } else if (coord.getRotate() == 1) {
+            for (int i = 0; i < length; i++) {
+                coordinate[i] = new Coordinate(coord.getX() + i, coord.getY());
+                coordinates.add(coordinate[i]);
+            }
+        }
 
-                } else if (coordinates[0].getRotate() == 1) {
-                    coordinates[d].setY(f);
-                    coordinates[d].setX(coordinates[0].getY());
+        if (length == 2) {
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), "U-Boot");
+        } else if (length == 3) {
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), "Zerstoerer");
+        } else if (length == 4) {
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), "Kreuzer");
+        } else if (length == 5) {
+            ship[shipcounter - 1] = new Ship(coord, coordinates.get(1), coordinates.get(2), coordinates.get(3), coordinates.get(4), "Schlachtschiff");
+        }
+
+        boolean isShip;
+        if (ship[shipcounter - 1] != null) {
+            if (current == spieler1) {
+                isShip = p1playfield1.checkShip(ship[shipcounter - 1]);
+                if (isShip) {
+                    p1playfield1.placeShip(ship[shipcounter - 1]);
+
+                } else {
+                    System.out.println("Fehler");
+                    shipcounter++;
+                }
+            } else {
+                isShip = p2playfield1.checkShip(ship[shipcounter - 1]);
+                if (isShip) {
+                    p2playfield1.placeShip(ship[shipcounter - 1]);
+                } else {
+                    System.out.println("Fehler");
+                    shipcounter++;
                 }
             }
-            k--;
         }
 
-        switch (length) {
-            case 2:
-                ship = new Ship(coordinates[0], coordinates[1], "U-Boot");
-            case 3:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], "Zerstoerer");
-            case 4:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], "Kreuzer");
-            case 5:
-                ship = new Ship(coordinates[0], coordinates[1], coordinates[2], coordinates[3], coordinates[4], "Schlachtschiff");
-        }
+        shipcounter--;
+        if (shipcounter == 0) {
+            shipcounter = 10;
+            playercounter++;
+            togglePlayer();
+            if (playercounter == 2) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Spielbeginn");
+                alert.setHeaderText("Alle Schiffe plaziert, Spiel beginnt");
+                alert.showAndWait();
+                boardView1Clickable = 0;
+                boardViewClickable = 1;
 
-        if (ship != null) {
-            if (current == spieler1) {
-                p1playfield1.placeShip(ship);
-                togglePlayer();
-            } else {
-                p2playfield1.placeShip(ship);
-                togglePlayer();
+                boardView.setOnMouseClicked(event -> {
+                    double x = 0;
+                    double y = 0;
+                    Coordinate cd = null;
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        x = (event.getX() / 33.8);
+                        x = Math.floor(x);
+                        y = (event.getY() / 33.8);
+                        y = Math.floor(y);
+                        cd = new Coordinate((int) x, (int) y);
+                        shotzFired(cd, current);
+                        System.out.println(cd);
+                    }
+                });
+
             }
         }
     }
@@ -250,6 +320,97 @@ public class PlayfieldController {
         stage.show();
     }
 
+
+    /**
+     * @param scene Die Scene wird vom Settings Controller in die methode tastatureingabe uebergeben, auf alle KeyEvents(Tastatur eingabe) wird solange die scene aktiv ist (geoeffnet ist) reagiert
+     *              Alle key events werden im String str gespeichert
+     *              Durch regular Expression werden nur gueltige Zeichen im string aktzeptiert
+     *              Die zeichen werden in x,y,rotate aufgeteilt und mit einer Coordinate der methode schiffsetzen uebergeben
+     * @author: cchimani
+     */
+    public void tastatureingabe(Scene scene) {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if (PlayfieldController.result) {
+                    String str = keyEvent.getCode().toString();
+                    if (str.contains("DIGIT")) {
+                        str = str.substring(5);
+                    }
+                    String ver = "[A-J]|[0-9]";
+                    Pattern pt = Pattern.compile(ver);
+                    Matcher mt = pt.matcher(str);
+
+                    if(mt.matches()==false){
+                        System.out.println("Ungueltiges Zeichen");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Ungueltiges Zeichen ");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Ungueltiges Zeichen:\n" +
+                                "Gueltige Zeichen A-J und 1-9");
+
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.showAndWait();
+
+                    }else
+                    {
+
+                    PlayfieldController.result = mt.matches();
+                    if (readCharacters == 3) {
+                        readCharacters = 0;
+                    }
+
+
+                    System.out.println(str);
+                    s[readCharacters] = str;
+
+
+                    if (s[0] != null) {
+                        char[] a = s[0].toCharArray();
+                        x = (int) a[0] - 65;
+                        s[0] = null;
+                    }
+
+
+                    if (s[1] != null) {
+                        //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
+                        y = Integer.valueOf(s[1]) - 1;
+                        s[1] = null;
+                    }
+
+
+                    if (s[2] != null) {
+                        //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
+                        rot = Integer.valueOf(s[2]);
+                        s[2] = null;
+
+                    }
+                    Coordinate c = null;
+
+                    if (readCharacters == 2) {
+                        c = new Coordinate(x, y, rot);
+                        schiffsetzen(c);
+
+
+                    }
+                    readCharacters++;
+                    if (current == spieler1) {
+                        playfieldView.drawPlayfield(current);
+                    } else if (current == spieler2) {
+                        playfieldView1.drawPlayfield(current);
+                    }
+
+
+                }
+            }
+            }
+
+        });
+
+    }
+
     /**
      * @author: skimeswe, nschickm
      * Macht ein Bild von aktuellem Spielfeld
@@ -268,23 +429,32 @@ public class PlayfieldController {
     }
 
 
-
-
     /**
      * @param actionEvent
      * @author: nschickm
      * Ein Help-PopUp Fenster oeffnet sich und erklaert das Spiel
+     * -> wie Schiffe platziert werden
+     * -> welche Groeße die Schiffe haben
+     * -> wie auf Schiffe geschossen werden kann
      */
     public void helper(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Help Dialog ");
         alert.setHeaderText(null);
-        alert.setContentText("A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" + "-> battleship is 5 boxes long, count: 1.\n" + "-> cruiser is 4 boxes long, count: 2.\n" + "-> destroyer is 3 squares long, count: 3.\n" + "-> submarine is 2 boxes long, count: 4.\n" + "A ship can be shot at using console input or even clicking the field. " + "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " + "The game is over only when all ships of a player are destroyed.");
-
-        /* "Auf ein Schiff kann mittels Konsolenaufgabe oder auch Klicken des Feldes geschossen werden." +
-           "Erst wenn ein Schiff vollständig zerstört ist bekommt man die jeweiligen Punkte dafür (je größer das Schiff desto mehr Punkte bekommt man)." +
-           "Das Spiel ist erst zu Ende wenn von einem Spieler alle Schiffe zerstört sind");
-         */
+        alert.setContentText("Place ships:\n" +
+                "A ship is set with a coordinate ( e.g. \"A\" and \"1\") and with \"0\" = horizontal or \"1\" = vertical.\n" +
+                "A ship can be placed with a mouse click. \n" +
+                "-> right mouse click => vertical\n" +
+                "-> left mouse click => horizontal\n" +
+                "Ships:\n" +
+                "-> battleship is 5 boxes long, count: 1.\n" +
+                "-> cruiser is 4 boxes long, count: 2.\n" +
+                "-> destroyer is 3 boxes long, count: 3.\n" +
+                "-> submarine is 2 boxes long, count: 4.\n" +
+                "Shoot ships:\n" +
+                "A ship can be shot at using console input or even clicking the field. " +
+                "Only when a ship is completely destroyed you get the respective points for it (the bigger the ship the more points you get). " +
+                "The game is over only when all ships of a player are destroyed.");
 
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();
@@ -296,7 +466,6 @@ public class PlayfieldController {
      * Linksklick auf die Zelle: Rotation = 0
      * Rechtsklick auf die Zelle: Rotation = 1
      * First Click doesn't work
-     * @param mouseEvent
      */
 /*
     public void test(MouseEvent mouseEvent) {
@@ -326,13 +495,28 @@ public class PlayfieldController {
             }
         });
 
-
-
-
-
-
+    }
+ */
+    public void initialize() {
+        playfieldView = new PlayfieldView(p1playfield1, boardView1);
+        playfieldView1 = new PlayfieldView(p2playfield1, boardView1);
     }
 
- */
+    /**
+     * @author: nschickm
+     * Checkt ob alle Schiffe zerstoert sind
+     * <p>
+     * allDestroyed = false wenn noch Schiffe uebrig sind
+     * allDestroyed = true wenn alle Schiffe zerstoert sind
+     */
+    public void checkifWon() {
+        ArrayList<Ship> flotte = p1playfield1.flotte;
+        boolean allDestroyed = true;
 
+        for (Ship s : flotte) {
+            if (s.areShipsLeft()) {
+                allDestroyed = false;
+            }
+        }
+    }
 }

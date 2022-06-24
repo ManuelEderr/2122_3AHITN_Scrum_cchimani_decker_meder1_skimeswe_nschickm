@@ -2,9 +2,14 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * @author: cchimani
+ * Die ueber Tastatur oder klick eingelesenen Events werden über den Konstruktor gesetzt und können so in anderen methoden weiter verwendet werden (x,y,rotate)
+ *
+ */
 public class Coordinate {
-     private Integer x;
-     private Integer y;
+    private Integer x;
+    private Integer y;
 
     public Integer getX() {
         return x;
@@ -33,6 +38,23 @@ public class Coordinate {
     private Integer rotate;
 
 
+
+
+
+    public Coordinate(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Ein X-, Y-Wert und eine rotation werden gespeichert
+     * für rotate gilt: 1 - horizontal
+     * 2 - vertikal
+     *
+     * @param x -> x-Wert in einem Koordinatensystem
+     * @param y -> y-Wert in einem Koordinatensystem
+     */
+
     public Coordinate(Integer x, Integer y, Integer rotate) {
         this.x = x;
         this.y = y;
@@ -59,18 +81,5 @@ public class Coordinate {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    /**
-     * Ein X-, Y-Wert und eine rotation werden gespeichert
-     * für rotate gilt: 1 - horizontal
-     * 2 - vertikal
-     *
-     * @param x -> x-Wert in einem Koordinatensystem
-     * @param y -> y-Wert in einem Koordinatensystem
-     */
-    public Coordinate(Integer x, Integer y) {
-        this.x = x;
-        this.y = y;
     }
 }

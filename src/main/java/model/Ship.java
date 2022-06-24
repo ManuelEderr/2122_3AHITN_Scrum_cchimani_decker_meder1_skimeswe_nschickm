@@ -26,8 +26,7 @@ public class Ship {
 
     private int shippoints = 0;
 
-    ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
-
+    ArrayList<Coordinate> coords = new ArrayList<>();
 
     /**
      * Schiff mit der größe 2
@@ -138,29 +137,9 @@ public class Ship {
     }
 
     /**
-     * Ueberprueft ob ein Schiff auf den mitgegebenen Zeichen steht
-     *
-     * @param theCoord diese Koordinate wird ueberprueft
-     * @return true -> Schiff steht darauf
-     * false -> Schiff steht nicht darauf
-     */
-    public boolean hasCoordinates(Coordinate theCoord) {
-        for (int i = 0; i < coords.size(); i++) {
-            Coordinate coord = coords.get(i);
-            if (coord == theCoord) {
-                //   System.out.printf("Auf dieser Koordinate befindet sich ein Schiff");
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
      * gibt den Namen des Schiffes zurueck
      *
      * @return Name des Schiffes
-     *
      * @return der Name des Schiffes
      */
     public String getShipname() {
@@ -171,11 +150,15 @@ public class Ship {
     /**
      * gibt die Punkte des jeweiligen Schiffes zurueck
      *
-     * @return Punkte daes zerstoerten Schiffes
+     * @return Punkte des zerstoerten Schiffes
      */
     public int getShippoints() {
         //System.out.println(shippoints);
         return shippoints;
+    }
+
+    public ArrayList<Coordinate> getCoords() {
+        return coords;
     }
 }
 
