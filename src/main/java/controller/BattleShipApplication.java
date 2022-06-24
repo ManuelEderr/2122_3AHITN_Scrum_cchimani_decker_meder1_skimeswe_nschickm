@@ -10,6 +10,7 @@ import javafx.stage.StageStyle;
 import model.ThreadClass1;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class BattleShipApplication extends Application {
@@ -20,12 +21,11 @@ public class BattleShipApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(BattleShipApplication.class.getResource("/FXML/Splash-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
       */
-        Parent pane = FXMLLoader.load(getClass().getResource("/FXML/Splash-view.fxml"));
+        Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/Splash-view.fxml")));
         Scene scene = new Scene(pane);
 
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
-
 
         stage.setTitle("Schiffe versenken");
         stage.setScene(scene);

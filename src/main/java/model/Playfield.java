@@ -1,5 +1,8 @@
 package model;
 
+import javafx.scene.control.Alert;
+import javafx.scene.layout.Region;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,10 +17,11 @@ public class Playfield {
     public static final int HITSHIP = 3;
     public int[][] feld;
 
+
     final static int MAX_X = 10;
     final static int MAX_Y = 10;
 
-     public ArrayList<Ship> flotte = new ArrayList<Ship>();
+    public ArrayList<Ship> flotte = new ArrayList<Ship>();
 
     public ArrayList<Ship> getFlotte() {
         return flotte;
@@ -39,22 +43,37 @@ public class Playfield {
     }
 
     /**
-     * Diese Methode prüft, ob sich auf der gewählten Position ein Schiff befindet.
+     * Diese Methode prüft, ob sich auf der gewaehlten Position ein Schiff befindet und
+     * ob das Schiff am Feld plaziert wurde
+     * Falls das schiff ungueltig plaziert ist, wird es geloescht
      *
      * @param ship
-     * @author: skimeswe
+     * @author: skimeswe, cchimani
+     *
+     *
      */
     public boolean checkShip(Ship ship) {
         boolean rv = true;
         Iterator<Coordinate> iterator = ship.coords.iterator();
         while (iterator.hasNext()) {
             Coordinate field = iterator.next();
-            if (field.getX() >= MAX_X || field.getY() >= MAX_Y) {
-                rv = false;
+           if (field.getX() >= MAX_X || field.getY() >= MAX_Y||feld[field.getX()][field.getY()] != 0) {
+               field.setX(null);
+               field.setY(null);
+               field.setRotate(null);
+                    rv=false;
             }
-            if (feld[field.getX()][field.getY()] != 0) { //Falls sich etwas anderes als Wasser auf der Position befindet.
-                rv = false;
-            }
+
+        }
+        if (rv==false){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fehler ");
+            alert.setHeaderText(null);
+            alert.setContentText("Schiff muss im Feld plaziert werden\n");
+
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+
         }
         return rv;
 
@@ -74,24 +93,8 @@ public class Playfield {
         }
         flotte.add(ship);
 
-
     }
 
-
-    /**
-     * @param coordinate Die zu überprüfende Koordinate
-     * @return Falls die Koordinate EMPTY oder SCHIFF aufweist, returnt diese Funktion true, ansonsten false
-     * @author: skimeswe
-     */
-    public boolean checkHit(Coordinate coordinate) {
-        boolean rv = false;
-        int position = feld[coordinate.getX()][coordinate.getY()];
-        if (position == EMPTY || position == SHIP) {
-            rv = true;
-        }
-        return rv;
-
-    }
 
     /**
      * Ein Schuss wird platziert.
