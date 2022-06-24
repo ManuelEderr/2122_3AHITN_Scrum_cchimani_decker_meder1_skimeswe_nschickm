@@ -149,10 +149,16 @@ public class PlayfieldController {
             thread2.start();
 
             togglePlayer();
+            for (Ship ship : p1playfield1.flotte){
+                System.out.println(ship.getShipname());
+            }
             playfieldView.drawPlayfield(current);
         } else if (currentPlayer == spieler2) {
             p2playfield1.placeHit(cd);
             togglePlayer();
+            for (Ship ship : p2playfield1.flotte){
+                System.out.println(ship.getShipname());
+            }
             playfieldView1.drawPlayfield(current);
         }
     }
@@ -432,7 +438,6 @@ public class PlayfieldController {
         ImageView imageViewAdjusted = new ImageView(snapshot);
         File outputFile = new File(outputfile.getAbsolutePath() + "\\Pictures\\pictures.png");
         BufferedImage bufferedIMage = (BufferedImage) fromFXImage(imageViewAdjusted.snapshot(null, null), null);
-
         ImageIO.write((RenderedImage) bufferedIMage, "png", outputFile);
     }
 
@@ -515,7 +520,7 @@ public class PlayfieldController {
      * Checkt ob alle Schiffe zerstoert sind
      * <p>
      * allDestroyed = false wenn noch Schiffe uebrig sind
-     * allDestroyed = true wenn alle Schiffe zerstoert sind
+     * allDestroyed = true, wenn alle Schiffe zerstoert sind
      */
     public void checkifWon() {
         ArrayList<Ship> flotte = p1playfield1.flotte;
