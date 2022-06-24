@@ -143,6 +143,11 @@ public class PlayfieldController {
     public void shotzFired(Coordinate cd, Player currentPlayer){
         if (currentPlayer == spieler1){
             p1playfield1.placeHit(cd);
+
+            ThreadClass1 thread = new ThreadClass1("musicfiles\\bombsound.mp3");
+            Thread thread2 = new Thread(thread);
+            thread2.start();
+
             togglePlayer();
             playfieldView.drawPlayfield(current);
         } else if (currentPlayer == spieler2) {
