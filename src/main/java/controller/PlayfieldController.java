@@ -254,12 +254,7 @@ public class PlayfieldController {
                     p1playfield1.placeShip(ship[shipcounter - 1]);
 
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("!!!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("An dieser Stelle befindet sich bereits ein Schiff");
-                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                    alert.showAndWait();
+
                     shipcounter++;
                 }
             } else {
@@ -267,12 +262,7 @@ public class PlayfieldController {
                 if (isShip) {
                     p2playfield1.placeShip(ship[shipcounter - 1]);
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("!!!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("An dieser Stelle befindet sich bereits ein Schiff");
-                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                    alert.showAndWait();
+
                     shipcounter++;
                 }
             }
