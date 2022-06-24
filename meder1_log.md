@@ -5,6 +5,6 @@
 | 3   | 02.06.2022 | 1.2     | geholfen, Aufgaben erklärt | geholfen, Aufgaben erklärt                | Eder Manuel | fg     |
 | 4   | 03.06.2022 | 1.3     | Scrum-Meeting, geholfen    | Scrum-Meeting, geholfen                   | Eder Manuel | fg     |
 | 5   | 09.06.2022 | 1.4     | Playfield                  | Scrum-Meeting, in Playfield geholfen      | Eder Manuel | fg     |
-| 6   | 10.06.2022 | 1.5     | Scrum-Meeting,             | Tastertur einlesen geholfen               | Eder Manuel | fg     |
+| 6   | 10.06.2022 | 1.5     | Scrum-Meeting              | Tastertur einlesen geholfen               | Eder Manuel | fg     |
 | 7   | 24.06.2022 | 1.6     | PlayfieldController        | placeHit, schiffsetzen, einlesen von Maus | Eder Manuel | fg     |
 | 8   | 25.06.2022 | 1.7     | PlayfieldController        | shotzfired                                | Eder Manuel | fg     |
