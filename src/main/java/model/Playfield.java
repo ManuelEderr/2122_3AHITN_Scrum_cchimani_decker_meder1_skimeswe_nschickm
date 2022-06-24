@@ -17,7 +17,7 @@ public class Playfield {
     final static int MAX_X = 10;
     final static int MAX_Y = 10;
 
-     public ArrayList<Ship> flotte = new ArrayList<Ship>();
+    public ArrayList<Ship> flotte = new ArrayList<Ship>();
 
     public ArrayList<Ship> getFlotte() {
         return flotte;
@@ -74,24 +74,8 @@ public class Playfield {
         }
         flotte.add(ship);
 
-
     }
 
-
-    /**
-     * @param coordinate Die zu überprüfende Koordinate
-     * @return Falls die Koordinate EMPTY oder SCHIFF aufweist, returnt diese Funktion true, ansonsten false
-     * @author: skimeswe
-     */
-    public boolean checkHit(Coordinate coordinate) {
-        boolean rv = false;
-        int position = feld[coordinate.getX()][coordinate.getY()];
-        if (position == EMPTY || position == SHIP) {
-            rv = true;
-        }
-        return rv;
-
-    }
 
     /**
      * Ein Schuss wird platziert.

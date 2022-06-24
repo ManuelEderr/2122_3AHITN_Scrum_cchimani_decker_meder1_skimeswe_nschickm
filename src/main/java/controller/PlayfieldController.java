@@ -48,7 +48,6 @@ public class PlayfieldController {
     public AnchorPane apane2;
     public Button enterSettings;
     public Label currentPlayer;
-    public Button input;
     Playfield p1playfield1 = new Playfield();
     Playfield p2playfield1 = new Playfield();
     public GridPane boardView1;
@@ -62,14 +61,13 @@ public class PlayfieldController {
     PlayfieldView playfieldView1;
     int length = 0;
     Ship[] ship = new Ship[10];
-    private String s[] = new String[4];
+    private final String[] s = new String[4];
     private Integer x = 0;
     private Integer y = 0;
     private Integer rot = 0;
 
     private Integer playercounter = 0;
 
-    private Integer boardViewClickable = 1;
     private Integer boardView1Clickable = 1;
 
 
@@ -88,7 +86,6 @@ public class PlayfieldController {
      * parameterloser Konstruktor ist fürs Laden des FXMLs notwenig
      */
     public PlayfieldController() {
-
     }
 
     public void setUser1(Player player) {
@@ -134,14 +131,10 @@ public class PlayfieldController {
                 }
             });
         }
-
-
-
     }
 
-
-    public void shotzFired(Coordinate cd, Player currentPlayer){
-        if (currentPlayer == spieler1){
+    public void shotzFired(Coordinate cd, Player currentPlayer) {
+        if (currentPlayer == spieler1) {
             p1playfield1.placeHit(cd);
 
             ThreadClass1 thread = new ThreadClass1("musicfiles\\bombsound.mp3");
@@ -149,14 +142,14 @@ public class PlayfieldController {
             thread2.start();
 
             togglePlayer();
-            for (Ship ship : p1playfield1.flotte){
+            for (Ship ship : p1playfield1.flotte) {
                 System.out.println(ship.getShipname());
             }
             playfieldView.drawPlayfield(current);
         } else if (currentPlayer == spieler2) {
             p2playfield1.placeHit(cd);
             togglePlayer();
-            for (Ship ship : p2playfield1.flotte){
+            for (Ship ship : p2playfield1.flotte) {
                 System.out.println(ship.getShipname());
             }
             playfieldView1.drawPlayfield(current);
@@ -164,14 +157,13 @@ public class PlayfieldController {
     }
 
 
-
     /**
      * @author: skimeswe
      * die Farbe des Spieler wird gesetzt. das # ist notwendig um einen gültigen CSS-RGB code zu haben
      */
     public void setColor(Player player) {
-        boardView.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
-        boardView1.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
+        boardView.setStyle("-fx-background-color: # " + toRGBCode(player.getColor()));
+        boardView1.setStyle("-fx-background-color: # " + toRGBCode(player.getColor()));
     }
 
     /**
@@ -180,7 +172,6 @@ public class PlayfieldController {
      */
     public void togglePlayer() {
         if (current == spieler1) {
-            System.out.println("erster spieler");
             currentPlayer.setText(spieler1.getName() + " ist an der Reihe");
             current = spieler2;
             setColor(current);
@@ -191,7 +182,6 @@ public class PlayfieldController {
             setColor(current);
             playfieldView1.disable();
         }
-
     }
 
 
@@ -264,7 +254,12 @@ public class PlayfieldController {
                     p1playfield1.placeShip(ship[shipcounter - 1]);
 
                 } else {
-                    System.out.println("Fehler");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("!!!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("An dieser Stelle befindet sich bereits ein Schiff");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.showAndWait();
                     shipcounter++;
                 }
             } else {
@@ -272,7 +267,12 @@ public class PlayfieldController {
                 if (isShip) {
                     p2playfield1.placeShip(ship[shipcounter - 1]);
                 } else {
-                    System.out.println("Fehler");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("!!!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("An dieser Stelle befindet sich bereits ein Schiff");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.showAndWait();
                     shipcounter++;
                 }
             }
@@ -289,12 +289,11 @@ public class PlayfieldController {
                 alert.setHeaderText("Alle Schiffe plaziert, Spiel beginnt");
                 alert.showAndWait();
                 boardView1Clickable = 0;
-                boardViewClickable = 1;
 
                 boardView.setOnMouseClicked(event -> {
-                    double x = 0;
-                    double y = 0;
-                    Coordinate cd = null;
+                    double x;
+                    double y;
+                    Coordinate cd;
                     if (event.getButton() == MouseButton.PRIMARY) {
                         x = (event.getX() / 33.8);
                         x = Math.floor(x);
@@ -302,7 +301,6 @@ public class PlayfieldController {
                         y = Math.floor(y);
                         cd = new Coordinate((int) x, (int) y);
                         shotzFired(cd, current);
-                        System.out.println(cd);
                     }
                 });
 
@@ -355,8 +353,7 @@ public class PlayfieldController {
                     Pattern pt = Pattern.compile(ver);
                     Matcher mt = pt.matcher(str);
 
-                    if(mt.matches()==false){
-                        System.out.println("Ungueltiges Zeichen");
+                    if (!mt.matches()) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Ungueltiges Zeichen ");
                         alert.setHeaderText(null);
@@ -366,59 +363,49 @@ public class PlayfieldController {
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.showAndWait();
 
-                    }else
-                    {
+                    } else {
 
-                    PlayfieldController.result = mt.matches();
-                    if (readCharacters == 3) {
-                        readCharacters = 0;
+                        PlayfieldController.result = mt.matches();
+                        if (readCharacters == 3) {
+                            readCharacters = 0;
+                        }
+
+                        s[readCharacters] = str;
+
+
+                        if (s[0] != null) {
+                            char[] a = s[0].toCharArray();
+                            x = (int) a[0] - 65;
+                            s[0] = null;
+                        }
+
+
+                        if (s[1] != null) {
+                            y = Integer.parseInt(s[1]) - 1;
+                            s[1] = null;
+                        }
+
+
+                        if (s[2] != null) {
+                            rot = Integer.valueOf(s[2]);
+                            s[2] = null;
+                        }
+                        Coordinate c;
+
+                        if (readCharacters == 2) {
+                            c = new Coordinate(x, y, rot);
+                            schiffsetzen(c);
+                        }
+                        readCharacters++;
+                        if (current == spieler1) {
+                            playfieldView.drawPlayfield(current);
+                        } else if (current == spieler2) {
+                            playfieldView1.drawPlayfield(current);
+                        }
+
                     }
-
-
-                    System.out.println(str);
-                    s[readCharacters] = str;
-
-
-                    if (s[0] != null) {
-                        char[] a = s[0].toCharArray();
-                        x = (int) a[0] - 65;
-                        s[0] = null;
-                    }
-
-
-                    if (s[1] != null) {
-                        //coordinates[readCharacters].setY(Integer.valueOf(s[readCharacters]));
-                        y = Integer.valueOf(s[1]) - 1;
-                        s[1] = null;
-                    }
-
-
-                    if (s[2] != null) {
-                        //coordinates[readCharacters].setRotate(Integer.valueOf(s[readCharacters]));
-                        rot = Integer.valueOf(s[2]);
-                        s[2] = null;
-
-                    }
-                    Coordinate c = null;
-
-                    if (readCharacters == 2) {
-                        c = new Coordinate(x, y, rot);
-                        schiffsetzen(c);
-
-
-                    }
-                    readCharacters++;
-                    if (current == spieler1) {
-                        playfieldView.drawPlayfield(current);
-                    } else if (current == spieler2) {
-                        playfieldView1.drawPlayfield(current);
-                    }
-
-
                 }
             }
-            }
-
         });
 
     }

@@ -1,8 +1,6 @@
 package view;
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.Player;
@@ -16,7 +14,6 @@ public class PlayfieldView {
     ArrayList<ImageView> arrayList = new ArrayList<>();
 
     /**
-     *
      * @param feld
      * @param gridPane
      */
@@ -27,6 +24,7 @@ public class PlayfieldView {
 
     /**
      * Die entsprechenden Bilder werden in das Playfield gesetzt.
+     *
      * @param player
      */
     public void drawPlayfield(Player player) {
@@ -60,7 +58,7 @@ public class PlayfieldView {
         }
     }
 
-    public void drawSecondPlayfield(Playfield pf2){
+    public void drawSecondPlayfield(Playfield pf2) {
 
     }
 
