@@ -165,8 +165,6 @@ public class PlayfieldController {
 
 
 
-
-
     /**
      * @author: skimeswe
      * die Farbe des Spieler wird gesetzt. das # ist notwendig um einen gültigen CSS-RGB code zu haben
