@@ -162,8 +162,8 @@ public class PlayfieldController {
      * die Farbe des Spieler wird gesetzt. das # ist notwendig um einen gültigen CSS-RGB code zu haben
      */
     public void setColor(Player player) {
-        boardView.setStyle("-fx-background-color: # " + toRGBCode(player.getColor()));
-        boardView1.setStyle("-fx-background-color: # " + toRGBCode(player.getColor()));
+        boardView.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
+        boardView1.setStyle("-fx-background-color: #" + toRGBCode(player.getColor()));
     }
 
     /**
